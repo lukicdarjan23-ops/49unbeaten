@@ -2,13 +2,19 @@
 
 Static homepage built to the supplied design: sticky header with centred
 wordmark, full-bleed hero, a hairline-ruled "Top Sellers" grid, and a black
-footer with the circular seal.
+footer with the circular seal. Content (hero image, footer text, product
+list) is editable through a CMS at `/admin` — no code editing required for
+day-to-day updates. See [Editing content](#editing-content-cms) below.
 
-No build step and no dependencies — open `index.html`, or serve the folder:
+No build step and no dependencies. To preview locally, the content files are
+loaded with `fetch()`, which browsers block on a plain `file://` page, so
+serve the folder instead of double-clicking `index.html`:
 
 ```sh
 python3 -m http.server 8000
 ```
+
+Then open `http://localhost:8000`.
 
 ## Files
 
@@ -16,32 +22,53 @@ python3 -m http.server 8000
 | --- | --- |
 | `index.html` | Page structure — header, hero, section, footer |
 | `styles.css` | All styling, design tokens at the top of the file |
-| `script.js` | Product data, grid rendering, cart, mobile menu |
+| `script.js` | Fetches `content/*.json`, renders the grid, cart, mobile menu |
+| `content/settings.json` | Hero image/link, section heading, social links, footer notice |
+| `content/products.json` | The "Top Sellers" product list |
+| `admin/` | The Decap CMS admin panel (`/admin`) — see below |
+| `netlify.toml` | Tells Netlify to serve the repo root as-is (no build step) |
 
-## Swapping in real content
+## Editing content (CMS)
 
-**Products.** Edit the `PRODUCTS` array in `script.js`. Add an `image` (and an
-`alt`) to any entry and the card renders a real lazy-loaded `<img>` instead of
-the grey `img` placeholder:
+The site is wired to [Decap CMS](https://decapcms.org/) (formerly Netlify
+CMS), hosted at `/admin` on the live site. It gives you a login-protected
+page with real forms — text fields, an image picker/uploader, add/remove
+buttons for products — no GitHub or code knowledge needed. Saving in the CMS
+commits the change straight to this repo, which redeploys the site
+automatically.
 
-```js
-{
-  id: "statue-01",
-  title: "The Statue",
-  type: "Print",
-  price: 89,
-  href: "/prints/the-statue",
-  image: "/img/the-statue.jpg",
-  alt: "The Statue, monochrome print"
-}
-```
+**One-time setup (do this once, in your own Netlify account):**
 
-**Hero.** Replace `<span class="ph ph--hero">img</span>` in `index.html` with an
-`<img>`. Its aspect ratio (`1200 / 310`) lives on `.ph--hero` in `styles.css`.
+1. Sign in at [netlify.com](https://app.netlify.com) (free), **Add new site
+   → Import an existing project**, and connect it to this GitHub repo.
+   Leave the build command blank and publish directory as `.` — `netlify.toml`
+   already sets this.
+2. In the new site's dashboard: **Site configuration → Identity → Enable
+   Identity**.
+3. Still under Identity → **Registration**, set it to **Invite only** (so
+   random people can't self-register as editors).
+4. Under Identity → **Services**, enable **Git Gateway**. This is what lets
+   the CMS commit to GitHub on your behalf without you creating a GitHub
+   token.
+5. Back in Identity, **Invite users** and send yourself an invite to the
+   email you want to log in with. Accept it from the email you receive —
+   it'll ask you to set a password.
+6. Visit `https://<your-site>.netlify.app/admin` and log in. You'll see
+   **Site Settings** and **Products** in the sidebar.
 
-**Logo.** The header wordmark and the footer seal are set in type as a stand-in.
-Drop in the real logo artwork when it's available — the header mark is
-`.logo` in `index.html`, the seal is the inline `<svg class="seal">`.
+After that, editing is just: go to `/admin`, log in, change the field,
+**Publish**. The live site updates within a minute or two.
+
+**If you rename the branch** this repo deploys from (currently
+`claude/homepage-build-h289yn`), update the `branch:` value in
+`admin/config.yml` to match — the CMS commits to whatever branch is set
+there.
+
+**Editing without the CMS** still works if you'd rather not set up Netlify —
+open `content/settings.json` or `content/products.json` directly on
+GitHub.com (pencil icon → edit → commit) or send me the change and I'll push
+it. Both files are validated at read time, so a mistake there just falls back
+to the site's built-in defaults instead of breaking the page.
 
 ## Notes
 
@@ -53,6 +80,9 @@ Drop in the real logo artwork when it's available — the header mark is
 - **Cart.** Client-side only, persisted to `localStorage` under `fnu.cart`, so
   the header count survives a reload. It is a front-end placeholder — wire
   `addToCart` in `script.js` to your storefront/checkout API for real orders.
+  Product IDs are index-based (assigned by position in `content/products.json`),
+  so reordering or adding/removing products in the CMS can reset an
+  in-progress cart — acceptable for this placeholder, but worth knowing.
 - **Type.** Poppins from Google Fonts, with a Helvetica/Arial fallback stack if
   the font fails to load.
 - **Accessibility.** Skip link, labelled nav landmarks, visible focus rings,

@@ -101,6 +101,17 @@ button {
   font-size: clamp(28px, 3.2vw, 44px);
 }
 
+/* Real photos swapped in by the CMS reuse the placeholder's sizing
+   classes but render as <img>, so crop them to fit instead of
+   stretching. */
+img.ph--hero,
+img.ph--card {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--ph);
+}
+
 /* Header
    ========================================================================== */
 

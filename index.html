@@ -54,15 +54,15 @@
 <main id="main">
 
   <section class="hero" aria-label="Featured artwork">
-    <a class="hero__link" href="/originals-on-canvas">
-      <span class="ph ph--hero" aria-hidden="true">img</span>
+    <a class="hero__link" href="/originals-on-canvas" data-hero-link>
+      <span class="ph ph--hero" data-hero-media aria-hidden="true">img</span>
     </a>
   </section>
 
   <section class="section" aria-labelledby="top-sellers">
     <div class="section__head">
-      <h2 class="section__title" id="top-sellers">Top Sellers</h2>
-      <a class="section__link" href="/prints">View All</a>
+      <h2 class="section__title" id="top-sellers" data-top-sellers-title>Top Sellers</h2>
+      <a class="section__link" href="/prints" data-view-all-link>View All</a>
     </div>
     <div class="grid" data-grid></div>
   </section>
@@ -90,14 +90,14 @@
       <a href="/">Home</a>
       <a href="/contact">Contact</a>
       <div class="social">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/>
             <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
             <circle cx="17.4" cy="6.7" r="1.3"/>
           </svg>
         </a>
-        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-social="whatsapp">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M12 3a9 9 0 0 0-7.7 13.7L3.1 21l4.4-1.2A9 9 0 1 0 12 3Z"
                   fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
@@ -121,7 +121,7 @@
   </div>
 
   <div class="footer__bar">
-    <p>All sales final. No returns. Refund only in the event item not delivered or delivered damaged.</p>
+    <p data-sales-notice>All sales final. No returns. Refund only in the event item not delivered or delivered damaged.</p>
   </div>
 </footer>
 

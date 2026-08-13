@@ -1,36 +1,94 @@
-/* Forty Nine Unbeaten — homepage behaviour */
+/* Forty Nine Unbeaten — homepage behaviour
+   Content (hero image, footer text, product list) loads at runtime from
+   content/settings.json and content/products.json — both edited through
+   the CMS at /admin. The DEFAULT_* values below are a fallback so the
+   page still renders if those files are missing or can't be fetched
+   (e.g. opening index.html directly as a file:// URL blocks fetch —
+   serve the folder over http, or view the hosted site, to see live
+   CMS content). */
 (function () {
   "use strict";
 
-  /* ------------------------------------------------------------------
-     Product data
-     Placeholder catalogue. Give an item an `image` (and `alt`) and the
-     card renders a real <img> instead of the grey "img" block.
-     ------------------------------------------------------------------ */
+  var DEFAULT_SETTINGS = {
+    hero_image: "",
+    hero_alt: "Featured artwork",
+    hero_link: "/originals-on-canvas",
+    top_sellers_title: "Top Sellers",
+    view_all_text: "View All",
+    view_all_link: "/prints",
+    instagram_url: "https://instagram.com",
+    whatsapp_url: "https://wa.me/",
+    sales_notice: "All sales final. No returns. Refund only in the event item not delivered or delivered damaged."
+  };
 
-  var PRODUCTS = [
-    { id: "statue-01", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-02", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-03", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-04", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-05", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-06", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-07", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-08", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-09", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-10", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-11", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" },
-    { id: "statue-12", title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue" }
-  ];
+  var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
+    return { title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue", image: "", alt: "" };
+  });
 
   var money = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD"
   });
 
+  function fetchJson(path) {
+    return fetch(path, { cache: "no-cache" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .catch(function () {
+        return null; /* missing file, offline, or blocked fetch — caller falls back to defaults */
+      });
+  }
+
+  /* ------------------------------------------------------------------
+     Settings — hero, section head, footer
+     ------------------------------------------------------------------ */
+
+  function applySettings(raw) {
+    var settings = Object.assign({}, DEFAULT_SETTINGS, raw || {});
+
+    var heroLink = document.querySelector("[data-hero-link]");
+    var heroMedia = document.querySelector("[data-hero-media]");
+    if (heroLink) heroLink.href = settings.hero_link;
+    if (heroMedia) {
+      if (settings.hero_image) {
+        var img = document.createElement("img");
+        img.className = "ph--hero";
+        img.src = settings.hero_image;
+        img.alt = settings.hero_alt || "";
+        img.loading = "eager";
+        img.decoding = "async";
+        heroMedia.replaceWith(img);
+      } else {
+        heroMedia.textContent = "img";
+      }
+    }
+
+    var title = document.querySelector("[data-top-sellers-title]");
+    if (title) title.textContent = settings.top_sellers_title;
+
+    var viewAll = document.querySelector("[data-view-all-link]");
+    if (viewAll) {
+      viewAll.textContent = settings.view_all_text;
+      viewAll.href = settings.view_all_link;
+    }
+
+    var instagram = document.querySelector('[data-social="instagram"]');
+    if (instagram && settings.instagram_url) instagram.href = settings.instagram_url;
+
+    var whatsapp = document.querySelector('[data-social="whatsapp"]');
+    if (whatsapp && settings.whatsapp_url) whatsapp.href = settings.whatsapp_url;
+
+    var notice = document.querySelector("[data-sales-notice]");
+    if (notice) notice.textContent = settings.sales_notice;
+  }
+
   /* ------------------------------------------------------------------
      Product grid
      ------------------------------------------------------------------ */
+
+  var PRODUCTS = [];
 
   function buildMedia(product) {
     var link = document.createElement("a");
@@ -114,6 +172,27 @@
 
     grid.textContent = "";
     grid.appendChild(frag);
+  }
+
+  function applyProducts(raw) {
+    var items = raw && Array.isArray(raw.items) && raw.items.length ? raw.items : DEFAULT_PRODUCTS;
+
+    /* ids are index-based since the CMS stores a plain list — reordering
+       or adding/removing items in the CMS resets any in-progress cart,
+       which is fine for this front-end-only cart placeholder. */
+    PRODUCTS = items.map(function (item, index) {
+      return {
+        id: "product-" + index,
+        title: item.title || "Untitled",
+        type: item.type || "Print",
+        price: Number(item.price) || 0,
+        href: item.href || "#",
+        image: item.image || "",
+        alt: item.alt || ""
+      };
+    });
+
+    renderGrid();
   }
 
   /* ------------------------------------------------------------------
@@ -210,8 +289,6 @@
   }
 
   function initGrid() {
-    renderGrid();
-
     var grid = document.querySelector("[data-grid]");
     if (!grid) return;
 
@@ -223,9 +300,17 @@
   }
 
   function init() {
-    initGrid();
     initMenu();
-    paintCart(false);
+    initGrid();
+
+    Promise.all([
+      fetchJson("content/settings.json"),
+      fetchJson("content/products.json")
+    ]).then(function (results) {
+      applySettings(results[0]);
+      applyProducts(results[1]);
+      paintCart(false);
+    });
   }
 
   if (document.readyState === "loading") {

@@ -1,0 +1,86 @@
+backend:
+  name: git-gateway
+  branch: claude/homepage-build-h289yn
+
+# Where uploaded images are stored in the repo, and the URL path the
+# site serves them from.
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "General"
+        file: "content/settings.json"
+        fields:
+          - label: "Hero Image"
+            name: "hero_image"
+            widget: "image"
+            required: false
+            hint: "Shown at the top of the homepage. Leave blank to keep the grey placeholder."
+          - label: "Hero Image Alt Text"
+            name: "hero_alt"
+            widget: "string"
+            required: false
+          - label: "Hero Link"
+            name: "hero_link"
+            widget: "string"
+          - label: "\"Top Sellers\" Heading"
+            name: "top_sellers_title"
+            widget: "string"
+          - label: "\"View All\" Link Text"
+            name: "view_all_text"
+            widget: "string"
+          - label: "\"View All\" Link URL"
+            name: "view_all_link"
+            widget: "string"
+          - label: "Instagram URL"
+            name: "instagram_url"
+            widget: "string"
+            required: false
+          - label: "WhatsApp URL"
+            name: "whatsapp_url"
+            widget: "string"
+            required: false
+          - label: "Footer Notice Text"
+            name: "sales_notice"
+            widget: "text"
+
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "products"
+        label: "Top Sellers Grid"
+        file: "content/products.json"
+        fields:
+          - name: "items"
+            label: "Products"
+            widget: "list"
+            summary: "{{title}} — {{price}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Type"
+                name: "type"
+                widget: "string"
+                default: "Print"
+              - label: "Price (USD)"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+                min: 0
+              - label: "Product Link"
+                name: "href"
+                widget: "string"
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "Leave blank to show the grey placeholder."
+              - label: "Image Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
