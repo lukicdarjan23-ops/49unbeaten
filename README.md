@@ -23,11 +23,13 @@ Then open `http://localhost:8000`.
 | --- | --- |
 | `index.html` | Homepage — header, hero, product grid, footer |
 | `product.html` | Product page — image, variants, quantity, add to cart |
+| `cart.html` | Cart page — lines, quantities, subtotal, checkout |
 | `contact.html` | Contact — email and WhatsApp |
 | `privacy.html`, `terms.html` | Legal pages, rendered from JSON |
 | `styles.css` | All styling for both pages, design tokens at the top |
 | `script.js` | Shared: cart store, header cart readout, mobile menu, homepage grid |
 | `product.js` | Product page only: variants, quantity, add to cart |
+| `cart.js` | Cart drawer (injected on every page) and the cart page |
 | `page.js` | Contact and legal pages (picks its file from `data-page` on `<body>`) |
 | `content/settings.json` | Hero image/link, section heading, social links, footer notice |
 | `content/products.json` | The "Top Sellers" product list |
@@ -92,11 +94,19 @@ to the site's built-in defaults instead of breaking the page.
   own note (framed / not framed), and exactly one is marked `selected` as the
   default the page opens on.
 - **Cart.** Client-side only, persisted to `localStorage` under `fnu.cart.v2`,
-  so the header count survives a reload and is shared across both pages. It is
-  a front-end placeholder — wire `FNU.cart.add` in `script.js` to your
-  storefront/checkout API for real orders. Each line stores its own price at
-  the time it was added, so the header total never depends on looking a
-  product back up.
+  so it survives a reload and is shared by every page. Each line stores its
+  own price, title, variant and image at the time it was added, so nothing
+  has to be looked back up. The store is `window.FNU.cart`
+  (`add`, `items`, `setQty`, `remove`, `totals`, `onChange`).
+- **Drawer and cart page.** `cart.js` injects the drawer into every page and
+  upgrades the header cart link to open it; the link still points at
+  `cart.html`, so middle-click and no-JS both still work. Both surfaces render
+  the same line component and re-render from `cart.onChange`.
+- **Checkout is not connected.** The button is real but `startCheckout()` in
+  `cart.js` only explains that no payment provider is wired up. A static site
+  cannot take card details itself — point it at Stripe Checkout, Snipcart or
+  similar. Until then the cart cannot produce an order, and nothing tracks
+  stock, shipping cost or tax.
 - **Product images follow the material.** `content/product.json` holds one
   image per group (Print, Canvas) and each variant names its group, so both
   sizes of a material share one photo and switching material swaps it. The

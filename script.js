@@ -32,6 +32,10 @@
 
   var STORAGE_KEY = "fnu.cart.v2";
   var lines = {};
+  var listeners = [];
+
+  function onChange(fn) { listeners.push(fn); }
+  function emit() { listeners.forEach(function (fn) { fn(); }); }
 
   function load() {
     try {
@@ -86,6 +90,45 @@
     });
   }
 
+  /* Insertion order is preserved for string keys, so the cart lists in
+     the order things were added. */
+  function items() {
+    return Object.keys(lines).map(function (key) {
+      var line = lines[key] || {};
+      return {
+        key: key,
+        qty: Number(line.qty) || 0,
+        price: Number(line.price) || 0,
+        title: line.title || "",
+        variant: line.variant || "",
+        image: line.image || ""
+      };
+    }).filter(function (line) { return line.qty > 0; });
+  }
+
+  function setQty(key, qty) {
+    if (!lines[key]) return;
+    var next = Math.round(Number(qty) || 0);
+
+    if (next < 1) {
+      delete lines[key];
+    } else {
+      lines[key].qty = Math.min(99, next);
+    }
+
+    save();
+    paintCart(false);
+    emit();
+  }
+
+  function removeLine(key) {
+    if (!lines[key]) return;
+    delete lines[key];
+    save();
+    paintCart(false);
+    emit();
+  }
+
   function addLine(item) {
     if (!item || !item.key) return;
 
@@ -93,14 +136,16 @@
     var existing = lines[item.key];
 
     lines[item.key] = {
-      qty: (existing ? Number(existing.qty) || 0 : 0) + qty,
+      qty: Math.min(99, (existing ? Number(existing.qty) || 0 : 0) + qty),
       price: Number(item.price) || 0,
       title: item.title || "",
-      variant: item.variant || ""
+      variant: item.variant || "",
+      image: item.image || ""
     };
 
     save();
     paintCart(true);
+    emit();
   }
 
   lines = load();
@@ -108,7 +153,15 @@
   window.FNU = {
     money: money,
     fetchJson: fetchJson,
-    cart: { add: addLine, totals: totals, paint: paintCart }
+    cart: {
+      add: addLine,
+      items: items,
+      setQty: setQty,
+      remove: removeLine,
+      totals: totals,
+      paint: paintCart,
+      onChange: onChange
+    }
   };
 
   /* ------------------------------------------------------------------
