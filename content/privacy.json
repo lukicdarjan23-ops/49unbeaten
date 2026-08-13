@@ -1,0 +1,43 @@
+{
+  "title": "Privacy Policy",
+  "updated": "Last updated: [DATE]",
+  "intro": "This explains what we collect when you buy from us or get in touch, why we hold it, and what you can ask us to do with it.",
+  "sections": [
+    {
+      "heading": "Who is responsible",
+      "body": "[YOUR REGISTERED BUSINESS NAME], [BUSINESS ADDRESS], is the data controller for the information described here.\n\nFor anything in this policy, contact [YOUR EMAIL]."
+    },
+    {
+      "heading": "What we collect",
+      "body": "When you order: your name, email address, delivery address, phone number if you give one, and the contents of your order. Payment card details go directly to our payment provider — they do not reach our servers.\n\nWhen you contact us: your name, your email address or WhatsApp number, and whatever you write to us.\n\nWhen you browse: your cart is stored in your own browser and is not sent to us until you check out."
+    },
+    {
+      "heading": "Why we use it",
+      "body": "To take payment, produce your order and get it delivered. To send order and delivery updates. To answer your questions. To keep records we are required by law to keep, such as tax records.\n\nOur legal bases are performing the contract with you, complying with legal obligations, and our legitimate interest in running and securing the shop."
+    },
+    {
+      "heading": "Who else sees it",
+      "body": "Only the companies that make the shop work, and only what each needs:\n\n[PAYMENT PROVIDER] processes payments. [PRINT AND FULFILMENT PARTNER] receives your name, address and order so it can be made and shipped. [SHIPPING CARRIER] receives delivery details. [HOSTING PROVIDER] hosts the site. [EMAIL PROVIDER] sends order email.\n\nWe do not sell your personal data, and we do not share it for anyone else's advertising."
+    },
+    {
+      "heading": "Cookies and analytics",
+      "body": "This site stores your cart in your browser's local storage. That is required for the shop to work and is not used to track you.\n\n[If you add analytics or advertising tools, list them here with what they collect and how visitors can opt out. Delete this bracket once you have decided.]"
+    },
+    {
+      "heading": "How long we keep it",
+      "body": "Order and transaction records are kept for [NUMBER] years, as required for tax and accounting. Messages you send us are kept for [NUMBER] years so we have context if you get back in touch. After that we delete or anonymise them."
+    },
+    {
+      "heading": "International transfers",
+      "body": "We ship worldwide, so your details may be handled by providers outside your own country. Where that happens we rely on the safeguards those providers have in place, such as standard contractual clauses."
+    },
+    {
+      "heading": "Your rights",
+      "body": "You can ask for a copy of the data we hold about you, ask us to correct it, ask us to delete it, or object to how we use it. Depending on where you live you may also be able to ask us to restrict processing or to send your data elsewhere.\n\nEmail [YOUR EMAIL] and we'll respond within [NUMBER] days. If you are unhappy with the outcome you can complain to your local data protection authority."
+    },
+    {
+      "heading": "Changes",
+      "body": "If this policy changes we'll update the date at the top of this page."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Terms & Conditions",
+  "updated": "Last updated: [DATE]",
+  "intro": "These terms apply to every order placed through this site. Placing an order means you accept them.",
+  "sections": [
+    {
+      "heading": "Who we are",
+      "body": "This site is operated by [YOUR REGISTERED BUSINESS NAME], [BUSINESS ADDRESS], registered in [COUNTRY] under company number [NUMBER].\n\nYou can reach us at [YOUR EMAIL]."
+    },
+    {
+      "heading": "Orders",
+      "body": "Placing an order is an offer to buy. A contract forms when we send you an order confirmation. If we can't fulfil an order — a listing error, a payment we can't verify, or a delivery address we can't ship to — we'll tell you and refund you in full.\n\nWe may cancel an order priced incorrectly through an obvious mistake, even after confirmation, and will refund you in full if we do."
+    },
+    {
+      "heading": "Prices and payment",
+      "body": "Prices are shown in US dollars and include the item only. Shipping is calculated at checkout.\n\nImport duties and local taxes are not included. If your country charges them on delivery, they are your responsibility as the importer.\n\nPayment is taken at checkout by our payment provider, [PAYMENT PROVIDER]. We never see or store your full card details."
+    },
+    {
+      "heading": "Made to order",
+      "body": "Every piece is printed and finished after you order it. Nothing is held in stock, which is why we can't accept change-of-mind returns.\n\nWe aim to dispatch within 2 business days. Delivery time after that depends on your destination and the carrier."
+    },
+    {
+      "heading": "Returns and refunds",
+      "body": "All sales are final. Because each item is made to order, we do not accept returns or exchanges for change of mind, or because a size turned out different to what you pictured.\n\nWe will refund you in full if your order does not arrive, or if it arrives damaged or faulty. Contact us within [NUMBER] days of delivery — or of the expected delivery date if nothing arrived — with your order number and photographs of any damage.\n\nThis does not affect any statutory rights you have under the consumer law of your own country."
+    },
+    {
+      "heading": "How the artwork may differ",
+      "body": "Screens vary, and colour on a print will not match a backlit display exactly. Prints are trimmed by hand, so small variations in border and position are normal and are not treated as faults.\n\nSizes are given in inches and describe the paper or canvas, not any frame."
+    },
+    {
+      "heading": "Intellectual property",
+      "body": "All artwork, photography and text on this site belongs to [YOUR BUSINESS NAME] or is used with permission. Buying a print buys the physical object, not the rights to the image.\n\nYou may not reproduce, resell or use the artwork commercially without written permission."
+    },
+    {
+      "heading": "Liability",
+      "body": "We are responsible for loss you suffer as a foreseeable result of us breaking these terms or failing to use reasonable care. We are not liable for business losses, or for delays caused by events outside our reasonable control.\n\nNothing here limits liability that cannot be limited by law."
+    },
+    {
+      "heading": "Governing law",
+      "body": "These terms are governed by the law of [JURISDICTION], and disputes fall to the courts of [JURISDICTION]."
+    },
+    {
+      "heading": "Changes",
+      "body": "We may update these terms. The version that applies to your order is the one published when you placed it."
+    }
+  ]
+}

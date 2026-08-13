@@ -85,6 +85,7 @@ collections:
                 name: "alt"
                 widget: "string"
                 required: false
+
   - name: "product"
     label: "Product Page"
     files:
@@ -93,12 +94,18 @@ collections:
         file: "content/product.json"
         fields:
           - { label: "Title", name: "title", widget: "string" }
-          - label: "Main Image"
-            name: "image"
-            widget: "image"
-            required: false
-            hint: "Shown on the left. Leave blank for the grey placeholder."
-          - { label: "Main Image Alt Text", name: "alt", widget: "string", required: false }
+          - label: "Images by Material"
+            name: "media"
+            widget: "list"
+            summary: "{{fields.group}}"
+            hint: "One image per material, shared by every size of it. The Group name must match the Group set on the options below — that is how the page knows which image to show."
+            fields:
+              - label: "Group"
+                name: "group"
+                widget: "string"
+                hint: "e.g. Print or Canvas"
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Image Alt Text", name: "alt", widget: "string", required: false }
           - label: "Line Under the Price"
             name: "ship_note"
             widget: "string"
@@ -122,6 +129,10 @@ collections:
                 widget: "number"
                 value_type: "float"
                 min: 0
+              - label: "Group"
+                name: "group"
+                widget: "string"
+                hint: "Which image this option shows — must match a Group in \"Images by Material\" above."
               - label: "Note"
                 name: "note"
                 widget: "string"
@@ -146,3 +157,44 @@ collections:
             widget: "image"
             required: false
           - { label: "Wide Image Alt Text", name: "showcase_alt", widget: "string", required: false }
+
+  - name: "contact"
+    label: "Contact Page"
+    files:
+      - name: "contact"
+        label: "Contact"
+        file: "content/contact.json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Intro", name: "intro", widget: "text", required: false }
+          - label: "Email Address"
+            name: "email"
+            widget: "string"
+            hint: "Shown as a clickable mailto link."
+          - label: "WhatsApp Number"
+            name: "whatsapp"
+            widget: "string"
+            hint: "Include the country code, e.g. +381 60 123 4567. Spaces and dashes are stripped for the wa.me link."
+
+  - name: "legal"
+    label: "Legal Pages"
+    files:
+      - name: "privacy"
+        label: "Privacy Policy"
+        file: "content/privacy.json"
+        fields: &legal_fields
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Last Updated", name: "updated", widget: "string", required: false }
+          - { label: "Intro", name: "intro", widget: "text", required: false }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            summary: "{{fields.heading}}"
+            hint: "DRAFT TEXT — anything in [SQUARE BRACKETS] must be replaced with your real details, and the whole page should be checked by someone qualified before you take orders. Leave a blank line between paragraphs."
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+      - name: "terms"
+        label: "Terms & Conditions"
+        file: "content/terms.json"
+        fields: *legal_fields

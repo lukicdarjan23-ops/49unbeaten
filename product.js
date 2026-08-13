@@ -10,19 +10,23 @@
 
   var DEFAULTS = {
     title: "The Statue",
-    image: "",
-    alt: "",
     ship_note: "Ships worldwide",
+    /* One image per material, shared by every size of that material. A
+       variant points at one of these by its group name. */
+    media: [
+      { group: "Print", image: "", alt: "" },
+      { group: "Canvas", image: "", alt: "" }
+    ],
     crumbs: [
       { label: "Home", href: "index.html" },
       { label: "Art", href: "/art" },
       { label: "Prints", href: "/prints" }
     ],
     variants: [
-      { label: "Print 8x10", price: 49, note: "Printed on thick matte paper. Frame not included." },
-      { label: "Print 16x20", price: 89, note: "Printed on thick matte paper. Frame not included." },
-      { label: "Canvas 8x10", price: 89, note: "Stretched over a wood frame, ready to hang, no framing needed.", selected: true },
-      { label: "Canvas 16x20", price: 149, note: "Stretched over a wood frame, ready to hang, no framing needed." }
+      { label: "Print 8x10", price: 49, group: "Print", note: "Printed on thick matte paper. Frame not included." },
+      { label: "Print 16x20", price: 89, group: "Print", note: "Printed on thick matte paper. Frame not included." },
+      { label: "Canvas 8x10", price: 89, group: "Canvas", note: "Stretched over a wood frame, ready to hang, no framing needed.", selected: true },
+      { label: "Canvas 16x20", price: 149, group: "Canvas", note: "Stretched over a wood frame, ready to hang, no framing needed." }
     ],
     notes: [
       "Ships in 2 business days",
@@ -68,21 +72,37 @@
     });
   }
 
+  /* Fills a container rather than replacing it, so the same slot can be
+     re-rendered each time the selected variant changes material. */
   function renderMedia(hook, image, alt, className, fallbackText) {
-    var el = document.querySelector(hook);
-    if (!el) return;
+    var slot = document.querySelector(hook);
+    if (!slot) return;
 
-    if (!image) {
-      el.textContent = fallbackText;
+    slot.textContent = "";
+
+    if (image) {
+      var img = document.createElement("img");
+      img.className = className;
+      img.src = image;
+      img.alt = alt || "";
+      img.decoding = "async";
+      slot.appendChild(img);
       return;
     }
 
-    var img = document.createElement("img");
-    img.className = className;
-    img.src = image;
-    img.alt = alt || "";
-    img.decoding = "async";
-    el.replaceWith(img);
+    var box = document.createElement("span");
+    box.className = "ph " + className;
+    box.setAttribute("aria-hidden", "true");
+    box.textContent = fallbackText;
+    slot.appendChild(box);
+  }
+
+  function mediaFor(variant) {
+    var group = (variant && variant.group) || "";
+    var match = product.media.filter(function (entry) {
+      return entry.group && group && entry.group.toLowerCase() === group.toLowerCase();
+    })[0];
+    return match || product.media[0] || { image: "", alt: "", group: "" };
   }
 
   function renderVariants() {
@@ -166,6 +186,14 @@
       note.textContent = variant.note || "";
       note.hidden = !variant.note;
     }
+
+    var media = mediaFor(variant);
+    renderMedia(
+      "[data-product-media]", media.image, media.alt, "ph--product",
+      /* Name the group while the real photo is still a placeholder, so
+         the swap is visible before any image is uploaded. */
+      media.group ? media.group.toLowerCase() + " img" : "img"
+    );
   }
 
   function quantity() {
@@ -256,12 +284,16 @@
     }
     if (!Array.isArray(product.notes)) product.notes = [];
     if (!Array.isArray(product.panels)) product.panels = [];
+    if (!Array.isArray(product.media) || !product.media.length) {
+      product.media = DEFAULTS.media;
+    }
 
     variants = (Array.isArray(product.variants) ? product.variants : [])
       .map(function (variant) {
         return {
           label: String(variant.label || "").trim(),
           price: Number(variant.price) || 0,
+          group: variant.group || "",
           note: variant.note || "",
           selected: !!variant.selected
         };
@@ -281,7 +313,6 @@
     }
 
     renderCrumbs();
-    renderMedia("[data-product-media]", product.image, product.alt, "ph--product", "img");
     renderMedia("[data-showcase-media]", product.showcase_image, product.showcase_alt, "ph--showcase", "img");
     renderVariants();
     renderNotes();

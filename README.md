@@ -23,12 +23,17 @@ Then open `http://localhost:8000`.
 | --- | --- |
 | `index.html` | Homepage — header, hero, product grid, footer |
 | `product.html` | Product page — image, variants, quantity, add to cart |
+| `contact.html` | Contact — email and WhatsApp |
+| `privacy.html`, `terms.html` | Legal pages, rendered from JSON |
 | `styles.css` | All styling for both pages, design tokens at the top |
 | `script.js` | Shared: cart store, header cart readout, mobile menu, homepage grid |
 | `product.js` | Product page only: variants, quantity, add to cart |
+| `page.js` | Contact and legal pages (picks its file from `data-page` on `<body>`) |
 | `content/settings.json` | Hero image/link, section heading, social links, footer notice |
 | `content/products.json` | The "Top Sellers" product list |
-| `content/product.json` | The product page — variants, prices, notes, panels |
+| `content/product.json` | The product page — images per material, variants, prices, panels |
+| `content/contact.json` | Contact email and WhatsApp number |
+| `content/privacy.json`, `content/terms.json` | Legal page copy |
 | `admin/` | The Decap CMS admin panel (`/admin`) — see below |
 | `netlify.toml` | Tells Netlify to serve the repo root as-is (no build step) |
 
@@ -92,6 +97,19 @@ to the site's built-in defaults instead of breaking the page.
   storefront/checkout API for real orders. Each line stores its own price at
   the time it was added, so the header total never depends on looking a
   product back up.
+- **Product images follow the material.** `content/product.json` holds one
+  image per group (Print, Canvas) and each variant names its group, so both
+  sizes of a material share one photo and switching material swaps it. The
+  image sits in a fixed 540px square box with `object-fit: contain`, so
+  switching never shifts the layout. While a group's image is still empty the
+  placeholder reads "print img" / "canvas img" so the swap is visible before
+  any upload.
+- **The legal pages are drafts, not legal advice.** `content/privacy.json`
+  and `content/terms.json` are written around what this shop actually does
+  (made to order, ships worldwide, all sales final) but every `[SQUARE
+  BRACKET]` is a real detail only you can supply — business name, address,
+  jurisdiction, payment and fulfilment providers, retention periods. Fill
+  those in and have someone qualified review both pages before taking money.
 - **One product page.** `product.html` renders whichever product is in
   `content/product.json`. A real catalogue needs either one folder per product
   (`prints/the-statue/index.html`) or a small build step — worth deciding
