@@ -77,12 +77,22 @@ to the site's built-in defaults instead of breaking the page.
   design. Grid steps 4 → 3 → 2 columns at 1000px and 760px, and the cell
   hairlines are recalculated at each breakpoint so no stray rules appear on the
   last column or last row.
+- **Sizes and pricing.** Each product carries a list of sizes, and each size
+  sets its own price. Clicking `+` opens the size boxes; nothing is added
+  until a size is chosen. At rest the card shows the cheapest size, prefixed
+  with "from" only when the sizes differ in price, and hovering or focusing a
+  size previews that size's exact price. A product with an empty size list
+  falls back to one-click add at its base price.
 - **Cart.** Client-side only, persisted to `localStorage` under `fnu.cart`, so
   the header count survives a reload. It is a front-end placeholder — wire
   `addToCart` in `script.js` to your storefront/checkout API for real orders.
-  Product IDs are index-based (assigned by position in `content/products.json`),
-  so reordering or adding/removing products in the CMS can reset an
-  in-progress cart — acceptable for this placeholder, but worth knowing.
+  Keys are `<product id>::<size>`, so the same print in two sizes is two line
+  items charged at their own prices. Product IDs are index-based (assigned by
+  position in `content/products.json`), so reordering or adding/removing
+  products in the CMS can reset an in-progress cart — acceptable for this
+  placeholder, but worth knowing. A saved line whose size was later renamed or
+  deleted in the CMS falls back to the product's base price rather than
+  disappearing from the total.
 - **Type.** Poppins from Google Fonts, with a Helvetica/Arial fallback stack if
   the font fails to load.
 - **Accessibility.** Skip link, labelled nav landmarks, visible focus rings,

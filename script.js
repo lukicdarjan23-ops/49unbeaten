@@ -24,7 +24,8 @@
   var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
     return {
       title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue",
-      image: "", alt: "", sizes: ["S", "L"]
+      image: "", alt: "",
+      sizes: [{ label: "S", price: 89 }, { label: "L", price: 129 }]
     };
   });
 
@@ -118,6 +119,30 @@
     return link;
   }
 
+  /* Price display. The resting value is stashed on the element so
+     hovering a size can preview that size's price and restore after,
+     without re-deriving it from the product list. */
+
+  function paintRestingPrice(priceEl) {
+    priceEl.textContent = "";
+    if (priceEl.dataset.restFrom === "1") {
+      var from = document.createElement("span");
+      from.className = "card__price-from";
+      from.textContent = "from ";
+      priceEl.appendChild(from);
+    }
+    priceEl.appendChild(document.createTextNode(priceEl.dataset.restPrice));
+  }
+
+  function previewPrice(priceEl, amount) {
+    priceEl.textContent = money.format(amount);
+  }
+
+  function resetPrices(root) {
+    (root || document).querySelectorAll(".card__price[data-rest-price]")
+      .forEach(paintRestingPrice);
+  }
+
   /* The add button reveals a row of size boxes to its left; nothing
      reaches the cart until one of them is chosen. A product with no
      sizes configured keeps the plain one-click add. */
@@ -152,10 +177,17 @@
       var opt = document.createElement("button");
       opt.className = "sizes__opt";
       opt.type = "button";
-      opt.textContent = size;
+      opt.textContent = size.label;
       opt.dataset.add = product.id;
-      opt.dataset.size = size;
-      opt.setAttribute("aria-label", "Add " + product.title + ", size " + size + ", to cart");
+      opt.dataset.size = size.label;
+      opt.dataset.price = String(size.price);
+      /* The price is only shown visually on hover, so the label has to
+         carry it for anyone not using a pointer. */
+      opt.setAttribute(
+        "aria-label",
+        "Add " + product.title + ", size " + size.label +
+        ", " + money.format(size.price) + ", to cart"
+      );
       options.appendChild(opt);
     });
 
@@ -175,6 +207,7 @@
       var options = btn.parentNode.querySelector(".sizes__options");
       if (options) options.hidden = true;
     });
+    resetPrices();
   }
 
   function togglePicker(button) {
@@ -217,7 +250,9 @@
 
     var price = document.createElement("span");
     price.className = "card__price";
-    price.textContent = money.format(product.price);
+    price.dataset.restPrice = money.format(product.displayPrice);
+    price.dataset.restFrom = product.hasRange ? "1" : "0";
+    paintRestingPrice(price);
 
     foot.appendChild(price);
     foot.appendChild(buildSizePicker(product));
@@ -252,24 +287,41 @@
        or adding/removing items in the CMS resets any in-progress cart,
        which is fine for this front-end-only cart placeholder. */
     PRODUCTS = items.map(function (item, index) {
-      /* The CMS list widget stores sizes as plain strings; tolerate
-         objects too in case the field is ever given sub-fields. */
+      var base = Number(item.price) || 0;
+
+      /* Sizes carry their own price. A bare string (the earlier content
+         format) inherits the product's base price. */
       var sizes = (Array.isArray(item.sizes) ? item.sizes : [])
         .map(function (size) {
-          if (typeof size === "string") return size.trim();
-          return size && size.size ? String(size.size).trim() : "";
+          if (typeof size === "string") {
+            var text = size.trim();
+            return text ? { label: text, price: base } : null;
+          }
+          if (!size) return null;
+          var label = String(size.label || size.size || "").trim();
+          if (!label) return null;
+          var price = Number(size.price);
+          return { label: label, price: price > 0 ? price : base };
         })
         .filter(Boolean);
+
+      /* At rest a card shows the cheapest size, prefixed with "from"
+         only when the sizes actually differ in price. */
+      var prices = sizes.map(function (s) { return s.price; });
+      var low = prices.length ? Math.min.apply(null, prices) : base;
+      var high = prices.length ? Math.max.apply(null, prices) : base;
 
       return {
         id: "product-" + index,
         title: item.title || "Untitled",
         type: item.type || "Print",
-        price: Number(item.price) || 0,
+        price: base,
         href: item.href || "#",
         image: item.image || "",
         alt: item.alt || "",
-        sizes: sizes
+        sizes: sizes,
+        displayPrice: low,
+        hasRange: high > low
       };
     });
 
@@ -307,17 +359,33 @@
      is two line items. Sizeless products keep a bare product id. */
   var KEY_SEP = "::";
 
+  /* Price for one unit of a cart line. A line whose size no longer
+     exists (the size was renamed or removed in the CMS after it was
+     added) falls back to the product's base price rather than
+     vanishing from the total. */
+  function unitPrice(id, label) {
+    var product = PRODUCTS.filter(function (p) { return p.id === id; })[0];
+    if (!product) return null;
+    if (!label) return product.price;
+
+    var size = product.sizes.filter(function (s) { return s.label === label; })[0];
+    return size ? size.price : product.price;
+  }
+
   function totals() {
     var count = 0;
     var value = 0;
 
     Object.keys(cart).forEach(function (key) {
       var qty = cart[key];
-      var id = key.split(KEY_SEP)[0];
-      var product = PRODUCTS.filter(function (p) { return p.id === id; })[0];
-      if (!product || !qty) return;
+      if (!qty) return;
+
+      var parts = key.split(KEY_SEP);
+      var price = unitPrice(parts[0], parts[1]);
+      if (price === null) return;
+
       count += qty;
-      value += qty * product.price;
+      value += qty * price;
     });
 
     return { count: count, value: value };
@@ -391,6 +459,24 @@
 
       addToCart(button.dataset.add, button.dataset.size);
       closePickers();
+    });
+
+    /* Preview a size's price in place of the resting "from" figure. */
+    function previewFrom(target) {
+      var opt = target.closest && target.closest(".sizes__opt");
+      if (!opt) return;
+      var priceEl = opt.closest(".card").querySelector(".card__price");
+      if (priceEl) previewPrice(priceEl, Number(opt.dataset.price));
+    }
+
+    grid.addEventListener("mouseover", function (e) { previewFrom(e.target); });
+    grid.addEventListener("focusin", function (e) { previewFrom(e.target); });
+
+    grid.addEventListener("mouseout", function (e) {
+      if (e.target.closest && e.target.closest(".sizes__opt")) resetPrices();
+    });
+    grid.addEventListener("focusout", function (e) {
+      if (e.target.closest && e.target.closest(".sizes__opt")) resetPrices();
     });
 
     /* Dismiss an open picker on outside click or Escape. */

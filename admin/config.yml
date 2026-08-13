@@ -67,11 +67,12 @@ collections:
                 name: "type"
                 widget: "string"
                 default: "Print"
-              - label: "Price (USD)"
+              - label: "Base Price (USD)"
                 name: "price"
                 widget: "number"
                 value_type: "float"
                 min: 0
+                hint: "Used only when the product has no sizes listed below. With sizes, each size sets its own price."
               - label: "Product Link"
                 name: "href"
                 widget: "string"
@@ -84,10 +85,16 @@ collections:
                 name: "alt"
                 widget: "string"
                 required: false
-              - label: "Sizes"
+              - label: "Sizes & Prices"
                 name: "sizes"
                 widget: "list"
                 required: false
-                default: ["S", "L"]
-                field: { label: "Size", name: "size", widget: "string" }
-                hint: "Shown when the + button is clicked. The item is only added to the cart once a size is picked. Leave the list empty to add straight to the cart with no size step."
+                summary: "{{fields.label}} — {{fields.price}}"
+                hint: "Shown when the + button is clicked; the item is only added to the cart once a size is picked. The card shows the cheapest size, prefixed with \"from\" when the prices differ. Leave empty to add straight to the cart at the base price."
+                fields:
+                  - { label: "Size", name: "label", widget: "string" }
+                  - label: "Price (USD)"
+                    name: "price"
+                    widget: "number"
+                    value_type: "float"
+                    min: 0

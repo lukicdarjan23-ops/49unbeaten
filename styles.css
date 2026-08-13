@@ -342,6 +342,14 @@ img.ph--card {
   line-height: var(--lh-price);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Only present when a product's sizes differ in price. */
+.card__price-from {
+  font-size: var(--fs-type);
+  font-weight: 400;
+  color: var(--muted);
 }
 
 /* Size picker — the add button sits at the right of the card foot and
