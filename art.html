@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Statue — Forty Nine Unbeaten</title>
-<meta name="description" content="Museum-quality poster and canvas prints, made to order and shipped worldwide.">
+<title>Art — Forty Nine Unbeaten</title>
+<meta name="description" content="Art from Forty Nine Unbeaten.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-category="Art">
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -52,49 +52,19 @@
 </header>
 
 <main id="main">
+  <section class="hero hero--sm" aria-label="Art">
+    <a class="hero__link" href="#" data-hero-link>
+      <span class="ph ph--hero-sm" data-hero-media aria-hidden="true">img</span>
+    </a>
+  </section>
 
-  <div class="product">
-
-    <div class="product__media">
-      <div class="product__figure" data-product-media></div>
+  <section class="section" aria-labelledby="cat-title">
+    <div class="section__head">
+      <h1 class="section__title" id="cat-title" data-category-title>Art</h1>
     </div>
-
-    <div class="product__panel">
-      <div class="product__inner">
-
-        <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
-
-        <h1 class="product__title" data-product-title>The Statue</h1>
-
-        <p class="product__price" data-product-price>$89.00</p>
-        <p class="product__ship" data-product-ship>Ships worldwide</p>
-
-        <h2 class="product__label" id="variant-label">Size and Type</h2>
-        <div class="variants" role="radiogroup" aria-labelledby="variant-label" data-variants></div>
-        <p class="note" data-variant-note hidden></p>
-
-        <h2 class="product__label" id="qty-label">Quantity</h2>
-        <div class="qty">
-          <button class="qty__btn" type="button" data-qty="-1" aria-label="Decrease quantity">−</button>
-          <input class="qty__input" type="number" value="1" min="1" max="99" step="1"
-                 aria-labelledby="qty-label" data-qty-input>
-          <button class="qty__btn" type="button" data-qty="1" aria-label="Increase quantity">+</button>
-        </div>
-
-        <button class="btn-cart" type="button" data-add-to-cart>Add to Cart</button>
-        <p class="sr-only" role="status" data-cart-status></p>
-
-        <div class="notes" data-product-notes></div>
-
-        <div class="panels" data-product-panels></div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <section class="showcase" aria-label="Product detail" data-showcase-media></section>
-
+    <p class="section__intro" data-category-intro hidden></p>
+    <div class="grid" data-grid></div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -155,6 +125,6 @@
 
 <script src="script.js"></script>
 <script src="cart.js"></script>
-<script src="product.js"></script>
+<script src="category.js"></script>
 </body>
 </html>

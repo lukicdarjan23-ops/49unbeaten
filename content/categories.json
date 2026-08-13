@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "slug": "art",
+      "title": "Art",
+      "intro": "",
+      "hero_image": "",
+      "hero_alt": "",
+      "hero_link": "#"
+    },
+    {
+      "slug": "apparel",
+      "title": "Apparel",
+      "intro": "",
+      "hero_image": "",
+      "hero_alt": "",
+      "hero_link": "#"
+    },
+    {
+      "slug": "gifts",
+      "title": "Gifts",
+      "intro": "",
+      "hero_image": "",
+      "hero_alt": "",
+      "hero_link": "#"
+    }
+  ]
+}

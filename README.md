@@ -23,6 +23,7 @@ Then open `http://localhost:8000`.
 | --- | --- |
 | `index.html` | Homepage — header, hero, product grid, footer |
 | `product.html` | Product page — image, variants, quantity, add to cart |
+| `art.html`, `apparel.html`, `gifts.html` | Category pages — 260px hero, then the product grid |
 | `cart.html` | Cart page — lines, quantities, subtotal, checkout |
 | `contact.html` | Contact — email and WhatsApp |
 | `privacy.html`, `terms.html` | Legal pages, rendered from JSON |
@@ -30,9 +31,11 @@ Then open `http://localhost:8000`.
 | `script.js` | Shared: cart store, header cart readout, mobile menu, homepage grid |
 | `product.js` | Product page only: variants, quantity, add to cart |
 | `cart.js` | Cart drawer (injected on every page) and the cart page |
+| `category.js` | Category pages — hero and the category-filtered grid |
 | `page.js` | Contact and legal pages (picks its file from `data-page` on `<body>`) |
 | `content/settings.json` | Hero image/link, section heading, social links, footer notice |
-| `content/products.json` | The "Top Sellers" product list |
+| `content/products.json` | The product catalogue, each item tagged with a Category |
+| `content/categories.json` | Category headings and hero images |
 | `content/product.json` | The product page — images per material, variants, prices, panels |
 | `content/contact.json` | Contact email and WhatsApp number |
 | `content/privacy.json`, `content/terms.json` | Legal page copy |
@@ -120,10 +123,17 @@ to the site's built-in defaults instead of breaking the page.
   BRACKET]` is a real detail only you can supply — business name, address,
   jurisdiction, payment and fulfilment providers, retention periods. Fill
   those in and have someone qualified review both pages before taking money.
-- **One product page.** `product.html` renders whichever product is in
-  `content/product.json`. A real catalogue needs either one folder per product
-  (`prints/the-statue/index.html`) or a small build step — worth deciding
-  before adding the second product.
+- **One catalogue, tagged by category.** `content/products.json` is the single
+  product list and each item carries a Category (Art / Apparel / Gifts). The
+  homepage grid shows the lot; each category page filters to its own. A
+  product is entered once. A category with nothing in it shows a short empty
+  message rather than a bare grid.
+- **Only one product page, and the CMS cannot add more.** `product.html`
+  renders whichever single product sits in `content/product.json`, so every
+  card currently links to the same page. Adding a second product needs one of:
+  a folder collection plus `product.html?p=<slug>` (no build step, uglier
+  URLs), or a static site generator (clean URLs, better for search, adds
+  tooling). Worth deciding before the catalogue grows.
 - **Type.** Poppins from Google Fonts, with a Helvetica/Arial fallback stack if
   the font fails to load.
 - **Accessibility.** Skip link, labelled nav landmarks, visible focus rings,

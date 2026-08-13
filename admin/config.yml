@@ -67,6 +67,12 @@ collections:
                 name: "type"
                 widget: "string"
                 default: "Print"
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["Art", "Apparel", "Gifts"]
+                default: "Art"
+                hint: "Which category page this product appears on."
               - label: "Base Price (USD)"
                 name: "price"
                 widget: "number"
@@ -198,3 +204,27 @@ collections:
         label: "Terms & Conditions"
         file: "content/terms.json"
         fields: *legal_fields
+
+  - name: "categories"
+    label: "Category Pages"
+    files:
+      - name: "categories"
+        label: "Art / Apparel / Gifts"
+        file: "content/categories.json"
+        fields:
+          - name: "items"
+            label: "Categories"
+            widget: "list"
+            summary: "{{fields.title}}"
+            hint: "The Slug must stay as it is — each category page looks itself up by slug. Products appear here by their own Category field."
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string" }
+              - { label: "Intro", name: "intro", widget: "text", required: false }
+              - label: "Hero Image"
+                name: "hero_image"
+                widget: "image"
+                required: false
+                hint: "The 260px band at the top. Leave blank for the grey placeholder."
+              - { label: "Hero Image Alt Text", name: "hero_alt", widget: "string", required: false }
+              - { label: "Hero Link", name: "hero_link", widget: "string", required: false }

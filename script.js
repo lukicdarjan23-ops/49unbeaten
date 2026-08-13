@@ -153,6 +153,7 @@
   window.FNU = {
     money: money,
     fetchJson: fetchJson,
+    renderProducts: renderProducts,
     cart: {
       add: addLine,
       items: items,
@@ -318,16 +319,13 @@
     return card;
   }
 
-  function applyProducts(raw) {
-    var grid = document.querySelector("[data-grid]");
+  /* Shared by the homepage and the category pages, which pass an
+     already-filtered list. */
+  function renderProducts(grid, items) {
     if (!grid) return;
 
-    var items = raw && Array.isArray(raw.items) && raw.items.length
-      ? raw.items
-      : DEFAULT_PRODUCTS;
-
     var frag = document.createDocumentFragment();
-    items.forEach(function (item) {
+    (items || []).forEach(function (item) {
       frag.appendChild(buildCard({
         title: item.title || "Untitled",
         type: item.type || "Print",
@@ -342,6 +340,13 @@
     grid.appendChild(frag);
   }
 
+  function applyProducts(raw) {
+    var items = raw && Array.isArray(raw.items) && raw.items.length
+      ? raw.items
+      : DEFAULT_PRODUCTS;
+    renderProducts(document.querySelector("[data-grid]"), items);
+  }
+
   /* ------------------------------------------------------------------
      Wiring
      ------------------------------------------------------------------ */
@@ -350,7 +355,8 @@
     initMenu();
     paintCart(false);
 
-    if (!document.querySelector("[data-grid]")) return;
+    /* Category pages carry [data-grid] too but filter it themselves. */
+    if (!document.querySelector("[data-grid]") || document.body.dataset.category) return;
 
     Promise.all([
       fetchJson("content/settings.json"),

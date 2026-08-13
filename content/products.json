@@ -1,16 +1,16 @@
 {
   "items": [
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""},
-    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": ""}
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"},
+    {"title": "The Statue", "type": "Print", "price": 89, "href": "product.html", "image": "", "alt": "", "category": "Art"}
   ]
 }
