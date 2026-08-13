@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forty Nine Unbeaten — Originals on Canvas, Canvas Prints &amp; Prints</title>
-<meta name="description" content="Forty Nine Unbeaten — original artwork on canvas, canvas prints and fine art prints.">
+<title>The Statue — Forty Nine Unbeaten</title>
+<meta name="description" content="Museum-quality poster and canvas prints, made to order and shipped worldwide.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
       <a href="/gifts">Gifts</a>
     </nav>
 
-    <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
+    <a class="logo" href="index.html" aria-label="Forty Nine Unbeaten — home">
       <span class="logo__mark" aria-hidden="true">49</span>
       <span class="logo__type" aria-hidden="true">
         <span>Forty Nine</span>
@@ -53,18 +53,48 @@
 
 <main id="main">
 
-  <section class="hero" aria-label="Featured artwork">
-    <a class="hero__link" href="/art" data-hero-link>
-      <span class="ph ph--hero" data-hero-media aria-hidden="true">img</span>
-    </a>
-  </section>
+  <div class="product">
 
-  <section class="section" aria-labelledby="top-sellers">
-    <div class="section__head">
-      <h2 class="section__title" id="top-sellers" data-top-sellers-title>Top Sellers</h2>
-      <a class="section__link" href="/prints" data-view-all-link>View All</a>
+    <div class="product__media">
+      <span class="ph ph--product" data-product-media aria-hidden="true">img</span>
     </div>
-    <div class="grid" data-grid></div>
+
+    <div class="product__panel">
+      <div class="product__inner">
+
+        <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
+
+        <h1 class="product__title" data-product-title>The Statue</h1>
+
+        <p class="product__price" data-product-price>$89.00</p>
+        <p class="product__ship" data-product-ship>Ships worldwide</p>
+
+        <h2 class="product__label" id="variant-label">Size and Type</h2>
+        <div class="variants" role="radiogroup" aria-labelledby="variant-label" data-variants></div>
+        <p class="note" data-variant-note hidden></p>
+
+        <h2 class="product__label" id="qty-label">Quantity</h2>
+        <div class="qty">
+          <button class="qty__btn" type="button" data-qty="-1" aria-label="Decrease quantity">−</button>
+          <input class="qty__input" type="number" value="1" min="1" max="99" step="1"
+                 aria-labelledby="qty-label" data-qty-input>
+          <button class="qty__btn" type="button" data-qty="1" aria-label="Increase quantity">+</button>
+        </div>
+
+        <button class="btn-cart" type="button" data-add-to-cart>Add to Cart</button>
+        <p class="sr-only" role="status" data-cart-status></p>
+
+        <div class="notes" data-product-notes></div>
+
+        <div class="panels" data-product-panels></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <section class="showcase" aria-label="Product detail">
+    <span class="ph ph--showcase" data-showcase-media aria-hidden="true">img</span>
   </section>
 
 </main>
@@ -87,7 +117,7 @@
     </div>
 
     <nav class="footer__col" aria-label="Footer">
-      <a href="/">Home</a>
+      <a href="index.html">Home</a>
       <a href="/contact">Contact</a>
       <div class="social">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
@@ -126,5 +156,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="product.js"></script>
 </body>
 </html>

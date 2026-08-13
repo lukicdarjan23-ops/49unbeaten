@@ -85,16 +85,64 @@ collections:
                 name: "alt"
                 widget: "string"
                 required: false
-              - label: "Sizes & Prices"
-                name: "sizes"
-                widget: "list"
+  - name: "product"
+    label: "Product Page"
+    files:
+      - name: "product"
+        label: "The Statue"
+        file: "content/product.json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - label: "Main Image"
+            name: "image"
+            widget: "image"
+            required: false
+            hint: "Shown on the left. Leave blank for the grey placeholder."
+          - { label: "Main Image Alt Text", name: "alt", widget: "string", required: false }
+          - label: "Line Under the Price"
+            name: "ship_note"
+            widget: "string"
+            required: false
+          - label: "Breadcrumb"
+            name: "crumbs"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Link", name: "href", widget: "string" }
+          - label: "Size and Type"
+            name: "variants"
+            widget: "list"
+            summary: "{{fields.label}} — {{fields.price}}"
+            hint: "Each option sets its own price. Tick \"Selected by default\" on ONE option — the page opens on it and shows its price."
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - label: "Price (USD)"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+                min: 0
+              - label: "Note"
+                name: "note"
+                widget: "string"
                 required: false
-                summary: "{{fields.label}} — {{fields.price}}"
-                hint: "Shown when the + button is clicked; the item is only added to the cart once a size is picked. THE FIRST SIZE LEADS: the card rests at its price and its box is filled in the picker, so put the size you most want to sell at the top. Keep labels short (they sit in small boxes). Leave the list empty to add straight to the cart at the base price."
-                fields:
-                  - { label: "Size", name: "label", widget: "string" }
-                  - label: "Price (USD)"
-                    name: "price"
-                    widget: "number"
-                    value_type: "float"
-                    min: 0
+                hint: "Shown under the options while this one is selected, e.g. whether a frame is included."
+              - { label: "Selected by default", name: "selected", widget: "boolean", default: false, required: false }
+          - label: "Notes Under the Button"
+            name: "notes"
+            widget: "list"
+            required: false
+            field: { label: "Note", name: "note", widget: "string" }
+          - label: "Collapsible Panels"
+            name: "panels"
+            widget: "list"
+            required: false
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Wide Image Below"
+            name: "showcase_image"
+            widget: "image"
+            required: false
+          - { label: "Wide Image Alt Text", name: "showcase_alt", widget: "string", required: false }

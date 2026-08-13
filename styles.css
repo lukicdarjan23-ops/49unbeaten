@@ -38,13 +38,8 @@
   --fs-heading: clamp(22px, 2.0833vw, 40px);
   --lh-heading: 1.2;
 
-  /* The add button and each size box are the same square, so the open
-     picker reads as one continuous strip. */
-  /* 36px at full HD. The floor is 30px rather than proportional: these
-     are the buy controls, and adjacent size boxes can't use expanded
-     invisible hit areas without overlapping each other. */
-  --add-size: clamp(30px, 1.875vw, 36px);
-  --add-gap: clamp(8px, 0.8333vw, 16px);
+  --green: #1a8a1a;
+  --green-dark: #146d14;
 }
 
 *,
@@ -332,116 +327,273 @@ img.ph--card {
   color: var(--muted);
 }
 
-.card__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: clamp(12px, 1.25vw, 24px);
-}
-
 .card__price {
+  margin: clamp(12px, 1.25vw, 24px) 0 0;
   font-size: var(--fs-price);
   line-height: var(--lh-price);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
-/* Size picker — the add button sits at the right of the card foot and
-   the size boxes unfurl to its left, sharing borders so the open
-   control reads as one strip. */
+.card a:hover .ph { opacity: 0.88; }
+.ph { transition: opacity 0.15s ease; }
 
-.sizes {
+/* Product page
+   ========================================================================== */
+
+.product {
+  display: grid;
+  grid-template-columns: minmax(0, 48.6fr) minmax(0, 51.4fr);
+  border-bottom: 1px solid var(--rule);
+}
+
+.product__media {
   display: flex;
   align-items: center;
-  gap: var(--add-gap);
-  flex: none;
+  justify-content: center;
+  padding: clamp(32px, 4.2vw, 80px) clamp(20px, 3.1vw, 60px);
+  background: #f1f2f6;
+  border-right: 1px solid var(--rule);
 }
 
-.sizes__options {
+.ph--product {
+  width: 100%;
+  max-width: 424px;
+  aspect-ratio: 424 / 537;
+  font-size: clamp(28px, 3.2vw, 44px);
+}
+
+img.ph--product {
+  width: auto;
+  max-height: 68vh;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: none;
+}
+
+.product__panel {
+  padding: clamp(24px, 2.1vw, 40px) clamp(20px, 2.1vw, 40px);
+}
+
+.product__inner {
+  max-width: 640px;
+}
+
+.crumbs {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  animation: sizes-in 0.18s ease;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-.sizes__options[hidden] { display: none; }
-
-@keyframes sizes-in {
-  from { opacity: 0; transform: translateX(8px); }
-  to   { opacity: 1; transform: none; }
+.crumbs a {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
 }
 
-.sizes__opt {
+.crumbs a:hover { border-bottom-color: currentColor; }
+.crumbs a:last-child { color: var(--ink); }
+
+.product__title {
+  margin: 14px 0 0;
+  font-size: clamp(22px, 1.6vw, 30px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.product__price {
+  margin: 12px 0 0;
+  font-size: clamp(30px, 2.34vw, 45px);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.product__ship {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.product__label {
+  margin: clamp(20px, 1.8vw, 32px) 0 12px;
+  font-size: clamp(15px, 0.94vw, 18px);
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Variant picker — a radio group of bordered cells, the chosen one filled */
+
+.variants {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.variant {
   display: grid;
   place-items: center;
-  min-width: var(--add-size);
-  height: var(--add-size);
-  padding: 0 6px;
-  margin-left: -1px; /* collapse the shared border with the previous box */
+  min-height: clamp(40px, 2.6vw, 50px);
+  padding: 8px 12px;
   border: 1px solid var(--rule);
   background: var(--paper);
-  font-size: clamp(11px, 0.7292vw, 14px);
+  font-size: clamp(13px, 0.83vw, 16px);
   font-weight: 500;
+  text-align: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.variant:hover { background: #f1f2f6; }
+
+.variant--selected,
+.variant--selected:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Info lines — the ⓘ mark is a background image so the note text can
+   come straight from the CMS as a plain string. */
+
+.note,
+.notes .note {
+  position: relative;
+  margin: 12px 0 0;
+  padding-left: 24px;
+  font-size: clamp(12px, 0.73vw, 14px);
+  line-height: 1.5;
+}
+
+.note::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 15px;
+  height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23000'/%3E%3Crect x='7.1' y='6.7' width='1.8' height='5.6' fill='%23fff'/%3E%3Ccircle cx='8' cy='4.3' r='1.1' fill='%23fff'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+.notes { margin-top: 18px; }
+
+/* Quantity stepper */
+
+.qty {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  align-items: stretch;
+  border: 1px solid var(--rule);
+}
+
+.qty__btn {
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 2.1vw, 41px);
+  min-height: clamp(38px, 2.1vw, 41px);
+  font-size: 16px;
   line-height: 1;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.sizes__opt:first-child { margin-left: 0; }
+.qty__btn:hover { background: var(--ink); color: var(--paper); }
 
-.sizes__opt:hover,
-.sizes__opt:focus-visible {
-  position: relative; /* lift the full border above its collapsed neighbour */
-  z-index: 1;
-  background: var(--ink);
-  color: var(--paper);
+.qty__input {
+  width: clamp(38px, 2.1vw, 41px);
+  border: 0;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
 }
 
-/* The first size in the CMS list leads: its box is filled at rest, and
-   the card rests at its price. Pointing at another size hands the fill
-   over so only one box ever reads as chosen. */
-.sizes__opt--featured {
-  background: var(--ink);
-  color: var(--paper);
+.qty__input::-webkit-outer-spin-button,
+.qty__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.sizes__options:hover .sizes__opt--featured:not(:hover),
-.sizes__options:focus-within .sizes__opt--featured:not(:focus) {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.card__add {
-  display: grid;
-  place-items: center;
-  /* Grown alongside the price text so the control stays proportional. */
-  width: var(--add-size);
-  height: var(--add-size);
-  flex: none;
-  border: 1px solid var(--rule);
-  font-size: clamp(15px, 1.0417vw, 20px);
-  line-height: 1;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.card__add:hover {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
-}
-
-/* Rotating the glyph 45deg turns the plus into the close cross. The box
-   itself must not rotate, or the square border becomes a diamond. */
-.card__add-glyph {
+.btn-cart {
   display: block;
-  line-height: 1;
-  transition: transform 0.18s ease;
+  width: 100%;
+  margin-top: clamp(20px, 1.8vw, 32px);
+  padding: clamp(14px, 0.94vw, 18px);
+  background: var(--green);
+  color: #fff;
+  font-size: clamp(14px, 0.83vw, 16px);
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.15s ease;
 }
 
-.card__add[aria-expanded="true"] .card__add-glyph { transform: rotate(45deg); }
+.btn-cart:hover { background: var(--green-dark); }
 
-.card a:hover .ph { opacity: 0.88; }
-.ph { transition: opacity 0.15s ease; }
+/* Collapsible panels */
+
+.panels { margin-top: clamp(22px, 1.8vw, 32px); }
+
+.panel { border-top: 1px solid var(--rule); }
+.panel:last-child { border-bottom: 1px solid var(--rule); }
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(14px, 0.94vw, 18px) 0;
+  font-size: clamp(14px, 0.83vw, 16px);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+
+.panel__head::-webkit-details-marker { display: none; }
+
+.panel__head::after {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-right: 1.6px solid var(--ink);
+  border-bottom: 1.6px solid var(--ink);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+
+.panel[open] .panel__head::after { transform: rotate(45deg); }
+
+.panel__body {
+  padding: 0 0 clamp(14px, 0.94vw, 18px);
+  font-size: clamp(12px, 0.73vw, 14px);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+/* Full-bleed detail image below the buy panel */
+
+.showcase { display: block; }
+
+.ph--showcase {
+  width: 100%;
+  aspect-ratio: 1920 / 620;
+  min-height: 220px;
+  font-size: clamp(40px, 4.7vw, 90px);
+}
+
+img.ph--showcase {
+  height: 100%;
+  object-fit: cover;
+  background: var(--ph);
+}
 
 /* Footer
    ========================================================================== */
@@ -593,6 +745,19 @@ img.ph--card {
     visibility: visible;
   }
 
+  /* Image above, buy panel below. */
+  .product { grid-template-columns: minmax(0, 1fr); }
+
+  .product__media {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ph--product { max-width: 340px; }
+  img.ph--product { max-height: 60vh; }
+
+  .product__inner { max-width: none; }
+
   .logo__mark { font-size: 23px; }
   .logo__type { font-size: 11px; }
 
@@ -608,14 +773,8 @@ img.ph--card {
 }
 
 @media (max-width: 480px) {
-  /* The dimension labels make the inline row wider than a half-width
-     card can hold, so the price moves above the picker rather than
-     letting the row force the grid columns apart. */
-  .card__foot {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+  /* Four variant cells side by side get too cramped to read. */
+  .variants { grid-template-columns: minmax(0, 1fr); gap: 10px; }
 
   .logo__type span:first-child { letter-spacing: -0.02em; }
   .section__head { padding: 14px var(--pad); }
