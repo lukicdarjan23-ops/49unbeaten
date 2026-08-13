@@ -22,7 +22,10 @@
   };
 
   var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
-    return { title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue", image: "", alt: "" };
+    return {
+      title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue",
+      image: "", alt: "", sizes: ["S", "L"]
+    };
   });
 
   var money = new Intl.NumberFormat("en-US", {
@@ -115,6 +118,81 @@
     return link;
   }
 
+  /* The add button reveals a row of size boxes to its left; nothing
+     reaches the cart until one of them is chosen. A product with no
+     sizes configured keeps the plain one-click add. */
+  function buildSizePicker(product) {
+    var wrap = document.createElement("div");
+    wrap.className = "sizes";
+
+    var add = document.createElement("button");
+    add.className = "card__add";
+    add.type = "button";
+
+    var glyph = document.createElement("span");
+    glyph.className = "card__add-glyph";
+    glyph.textContent = "+";
+    glyph.setAttribute("aria-hidden", "true");
+    add.appendChild(glyph);
+
+    if (!product.sizes.length) {
+      add.dataset.add = product.id;
+      add.setAttribute("aria-label", "Add " + product.title + " to cart");
+      wrap.appendChild(add);
+      return wrap;
+    }
+
+    var options = document.createElement("div");
+    options.className = "sizes__options";
+    options.hidden = true;
+    options.setAttribute("role", "group");
+    options.setAttribute("aria-label", "Choose a size for " + product.title);
+
+    product.sizes.forEach(function (size) {
+      var opt = document.createElement("button");
+      opt.className = "sizes__opt";
+      opt.type = "button";
+      opt.textContent = size;
+      opt.dataset.add = product.id;
+      opt.dataset.size = size;
+      opt.setAttribute("aria-label", "Add " + product.title + ", size " + size + ", to cart");
+      options.appendChild(opt);
+    });
+
+    add.dataset.toggle = "";
+    add.setAttribute("aria-expanded", "false");
+    add.setAttribute("aria-label", "Choose a size for " + product.title);
+
+    wrap.appendChild(options);
+    wrap.appendChild(add);
+    return wrap;
+  }
+
+  function closePickers(except) {
+    document.querySelectorAll(".card__add[aria-expanded='true']").forEach(function (btn) {
+      if (btn === except) return;
+      btn.setAttribute("aria-expanded", "false");
+      var options = btn.parentNode.querySelector(".sizes__options");
+      if (options) options.hidden = true;
+    });
+  }
+
+  function togglePicker(button) {
+    var open = button.getAttribute("aria-expanded") === "true";
+    closePickers(button);
+
+    var options = button.parentNode.querySelector(".sizes__options");
+    if (!options) return;
+
+    button.setAttribute("aria-expanded", String(!open));
+    options.hidden = open;
+
+    if (!open) {
+      var first = options.querySelector(".sizes__opt");
+      if (first) first.focus();
+    }
+  }
+
   function buildCard(product) {
     var card = document.createElement("article");
     card.className = "card";
@@ -141,15 +219,8 @@
     price.className = "card__price";
     price.textContent = money.format(product.price);
 
-    var add = document.createElement("button");
-    add.className = "card__add";
-    add.type = "button";
-    add.dataset.add = product.id;
-    add.setAttribute("aria-label", "Add " + product.title + " to cart");
-    add.textContent = "+";
-
     foot.appendChild(price);
-    foot.appendChild(add);
+    foot.appendChild(buildSizePicker(product));
 
     body.appendChild(title);
     body.appendChild(type);
@@ -181,6 +252,15 @@
        or adding/removing items in the CMS resets any in-progress cart,
        which is fine for this front-end-only cart placeholder. */
     PRODUCTS = items.map(function (item, index) {
+      /* The CMS list widget stores sizes as plain strings; tolerate
+         objects too in case the field is ever given sub-fields. */
+      var sizes = (Array.isArray(item.sizes) ? item.sizes : [])
+        .map(function (size) {
+          if (typeof size === "string") return size.trim();
+          return size && size.size ? String(size.size).trim() : "";
+        })
+        .filter(Boolean);
+
       return {
         id: "product-" + index,
         title: item.title || "Untitled",
@@ -188,7 +268,8 @@
         price: Number(item.price) || 0,
         href: item.href || "#",
         image: item.image || "",
-        alt: item.alt || ""
+        alt: item.alt || "",
+        sizes: sizes
       };
     });
 
@@ -222,12 +303,17 @@
 
   var cart = load();
 
+  /* Cart keys are "<product id>::<size>" so the same print in two sizes
+     is two line items. Sizeless products keep a bare product id. */
+  var KEY_SEP = "::";
+
   function totals() {
     var count = 0;
     var value = 0;
 
-    Object.keys(cart).forEach(function (id) {
-      var qty = cart[id];
+    Object.keys(cart).forEach(function (key) {
+      var qty = cart[key];
+      var id = key.split(KEY_SEP)[0];
       var product = PRODUCTS.filter(function (p) { return p.id === id; })[0];
       if (!product || !qty) return;
       count += qty;
@@ -256,8 +342,9 @@
     widget.classList.add("cart--bump");
   }
 
-  function addToCart(id) {
-    cart[id] = (cart[id] || 0) + 1;
+  function addToCart(id, size) {
+    var key = size ? id + KEY_SEP + size : id;
+    cart[key] = (cart[key] || 0) + 1;
     save(cart);
     paintCart(true);
   }
@@ -293,9 +380,31 @@
     if (!grid) return;
 
     grid.addEventListener("click", function (event) {
+      var toggle = event.target.closest("[data-toggle]");
+      if (toggle) {
+        togglePicker(toggle);
+        return;
+      }
+
       var button = event.target.closest("[data-add]");
       if (!button) return;
-      addToCart(button.dataset.add);
+
+      addToCart(button.dataset.add, button.dataset.size);
+      closePickers();
+    });
+
+    /* Dismiss an open picker on outside click or Escape. */
+    document.addEventListener("click", function (event) {
+      if (event.target.closest(".sizes")) return;
+      closePickers();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape") return;
+      var open = document.querySelector(".card__add[aria-expanded='true']");
+      if (!open) return;
+      closePickers();
+      open.focus();
     });
   }
 

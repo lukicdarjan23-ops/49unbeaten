@@ -37,6 +37,14 @@
   --lh-price: 1.4;
   --fs-heading: clamp(22px, 2.0833vw, 40px);
   --lh-heading: 1.2;
+
+  /* The add button and each size box are the same square, so the open
+     picker reads as one continuous strip. */
+  /* 36px at full HD. The floor is 30px rather than proportional: these
+     are the buy controls, and adjacent size boxes can't use expanded
+     invisible hit areas without overlapping each other. */
+  --add-size: clamp(30px, 1.875vw, 36px);
+  --add-gap: clamp(8px, 0.8333vw, 16px);
 }
 
 *,
@@ -244,6 +252,10 @@ img.ph--card {
 /* Hero
    ========================================================================== */
 
+.hero {
+  border-bottom: 1px solid var(--rule);
+}
+
 .hero__link { display: block; }
 
 /* Section head
@@ -332,12 +344,61 @@ img.ph--card {
   font-variant-numeric: tabular-nums;
 }
 
+/* Size picker — the add button sits at the right of the card foot and
+   the size boxes unfurl to its left, sharing borders so the open
+   control reads as one strip. */
+
+.sizes {
+  display: flex;
+  align-items: center;
+  gap: var(--add-gap);
+  flex: none;
+}
+
+.sizes__options {
+  display: flex;
+  align-items: center;
+  animation: sizes-in 0.18s ease;
+}
+
+.sizes__options[hidden] { display: none; }
+
+@keyframes sizes-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.sizes__opt {
+  display: grid;
+  place-items: center;
+  min-width: var(--add-size);
+  height: var(--add-size);
+  padding: 0 6px;
+  margin-left: -1px; /* collapse the shared border with the previous box */
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  font-size: clamp(11px, 0.7292vw, 14px);
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sizes__opt:first-child { margin-left: 0; }
+
+.sizes__opt:hover,
+.sizes__opt:focus-visible {
+  position: relative; /* lift the full border above its collapsed neighbour */
+  z-index: 1;
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .card__add {
   display: grid;
   place-items: center;
   /* Grown alongside the price text so the control stays proportional. */
-  width: clamp(23px, 1.6667vw, 32px);
-  height: clamp(23px, 1.6667vw, 32px);
+  width: var(--add-size);
+  height: var(--add-size);
   flex: none;
   border: 1px solid var(--rule);
   font-size: clamp(15px, 1.0417vw, 20px);
@@ -350,6 +411,16 @@ img.ph--card {
   border-color: var(--ink);
   color: var(--paper);
 }
+
+/* Rotating the glyph 45deg turns the plus into the close cross. The box
+   itself must not rotate, or the square border becomes a diamond. */
+.card__add-glyph {
+  display: block;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.card__add[aria-expanded="true"] .card__add-glyph { transform: rotate(45deg); }
 
 .card a:hover .ph { opacity: 0.88; }
 .ph { transition: opacity 0.15s ease; }

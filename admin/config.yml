@@ -84,3 +84,10 @@ collections:
                 name: "alt"
                 widget: "string"
                 required: false
+              - label: "Sizes"
+                name: "sizes"
+                widget: "list"
+                required: false
+                default: ["S", "L"]
+                field: { label: "Size", name: "size", widget: "string" }
+                hint: "Shown when the + button is clicked. The item is only added to the cart once a size is picked. Leave the list empty to add straight to the cart with no size step."
