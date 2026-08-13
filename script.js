@@ -23,9 +23,9 @@
 
   var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
     return {
-      title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue",
+      title: "The Statue", type: "Print", price: 49, href: "/prints/the-statue",
       image: "", alt: "",
-      sizes: [{ label: "S", price: 89 }, { label: "L", price: 129 }]
+      sizes: [{ label: "S", price: 49 }, { label: "L", price: 89 }]
     };
   });
 
