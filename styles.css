@@ -293,7 +293,10 @@ img.ph--card {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* minmax(0, ...) rather than a bare 1fr: a bare fr floors at the
+     column's min-content width, so an open size picker would widen its
+     own column and squeeze the card beside it. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
@@ -345,13 +348,6 @@ img.ph--card {
   white-space: nowrap;
 }
 
-/* Only present when a product's sizes differ in price. */
-.card__price-from {
-  font-size: var(--fs-type);
-  font-weight: 400;
-  color: var(--muted);
-}
-
 /* Size picker — the add button sits at the right of the card foot and
    the size boxes unfurl to its left, sharing borders so the open
    control reads as one strip. */
@@ -399,6 +395,20 @@ img.ph--card {
   z-index: 1;
   background: var(--ink);
   color: var(--paper);
+}
+
+/* The first size in the CMS list leads: its box is filled at rest, and
+   the card rests at its price. Pointing at another size hands the fill
+   over so only one box ever reads as chosen. */
+.sizes__opt--featured {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.sizes__options:hover .sizes__opt--featured:not(:hover),
+.sizes__options:focus-within .sizes__opt--featured:not(:focus) {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .card__add {
@@ -529,7 +539,7 @@ img.ph--card {
    ========================================================================== */
 
 @media (max-width: 1000px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
   .grid > .card:nth-child(3n) { border-right: 0; }
   .grid > .card:nth-last-child(-n + 4) { border-bottom: 1px solid var(--rule); }
@@ -588,7 +598,7 @@ img.ph--card {
 
   .cart__meta { font-size: 12px; }
 
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid > .card:nth-child(3n),
   .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
   .grid > .card:nth-child(2n) { border-right: 0; }
@@ -598,6 +608,15 @@ img.ph--card {
 }
 
 @media (max-width: 480px) {
+  /* The dimension labels make the inline row wider than a half-width
+     card can hold, so the price moves above the picker rather than
+     letting the row force the grid columns apart. */
+  .card__foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   .logo__type span:first-child { letter-spacing: -0.02em; }
   .section__head { padding: 14px var(--pad); }
   .footer__inner {

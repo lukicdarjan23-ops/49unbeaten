@@ -23,9 +23,9 @@
 
   var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
     return {
-      title: "The Statue", type: "Print", price: 49, href: "/prints/the-statue",
+      title: "The Statue", type: "Print", price: 89, href: "/prints/the-statue",
       image: "", alt: "",
-      sizes: [{ label: "S", price: 49 }, { label: "L", price: 89 }]
+      sizes: [{ label: "16×20", price: 89 }, { label: "8×10", price: 49 }]
     };
   });
 
@@ -124,14 +124,7 @@
      without re-deriving it from the product list. */
 
   function paintRestingPrice(priceEl) {
-    priceEl.textContent = "";
-    if (priceEl.dataset.restFrom === "1") {
-      var from = document.createElement("span");
-      from.className = "card__price-from";
-      from.textContent = "from ";
-      priceEl.appendChild(from);
-    }
-    priceEl.appendChild(document.createTextNode(priceEl.dataset.restPrice));
+    priceEl.textContent = priceEl.dataset.restPrice;
   }
 
   function previewPrice(priceEl, amount) {
@@ -173,9 +166,9 @@
     options.setAttribute("role", "group");
     options.setAttribute("aria-label", "Choose a size for " + product.title);
 
-    product.sizes.forEach(function (size) {
+    product.sizes.forEach(function (size, index) {
       var opt = document.createElement("button");
-      opt.className = "sizes__opt";
+      opt.className = index === 0 ? "sizes__opt sizes__opt--featured" : "sizes__opt";
       opt.type = "button";
       opt.textContent = size.label;
       opt.dataset.add = product.id;
@@ -251,7 +244,6 @@
     var price = document.createElement("span");
     price.className = "card__price";
     price.dataset.restPrice = money.format(product.displayPrice);
-    price.dataset.restFrom = product.hasRange ? "1" : "0";
     paintRestingPrice(price);
 
     foot.appendChild(price);
@@ -305,12 +297,9 @@
         })
         .filter(Boolean);
 
-      /* At rest a card shows the cheapest size, prefixed with "from"
-         only when the sizes actually differ in price. */
-      var prices = sizes.map(function (s) { return s.price; });
-      var low = prices.length ? Math.min.apply(null, prices) : base;
-      var high = prices.length ? Math.max.apply(null, prices) : base;
-
+      /* The first size is the featured one: the card rests at its price
+         and its box is filled in the picker. Order the list in the CMS
+         to choose which size leads. */
       return {
         id: "product-" + index,
         title: item.title || "Untitled",
@@ -320,8 +309,7 @@
         image: item.image || "",
         alt: item.alt || "",
         sizes: sizes,
-        displayPrice: low,
-        hasRange: high > low
+        displayPrice: sizes.length ? sizes[0].price : base
       };
     });
 

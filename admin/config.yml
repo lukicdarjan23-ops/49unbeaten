@@ -90,7 +90,7 @@ collections:
                 widget: "list"
                 required: false
                 summary: "{{fields.label}} — {{fields.price}}"
-                hint: "Shown when the + button is clicked; the item is only added to the cart once a size is picked. The card shows the cheapest size, prefixed with \"from\" when the prices differ. Leave empty to add straight to the cart at the base price."
+                hint: "Shown when the + button is clicked; the item is only added to the cart once a size is picked. THE FIRST SIZE LEADS: the card rests at its price and its box is filled in the picker, so put the size you most want to sell at the top. Keep labels short (they sit in small boxes). Leave the list empty to add straight to the cart at the base price."
                 fields:
                   - { label: "Size", name: "label", widget: "string" }
                   - label: "Price (USD)"
