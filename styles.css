@@ -6,17 +6,37 @@
   --ink: #000;
   --paper: #fff;
   --muted: #8a8a8a;
-  --rule: #e6e6e6;
+  --rule: #000;
   --rule-dark: #2a2a2a;
   --ph: #d9d9d9;
   --ph-ink: #111;
 
   --header-h: 50px;
   --pad: 16px;
-  /* Header and footer contents sit in a centred column; the hero and the
-     product grid stay full-bleed. */
+  /* The footer's contents sit in a centred column; the header, hero and
+     product grid are full-bleed. */
   --container: 860px;
   --font: "Poppins", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+
+  /* Design values are specified at full HD (1920px) and scale down
+     fluidly — each max below is the 1920px figure, and the vw middle
+     term is that figure as a percentage of 1920. */
+  --edge: clamp(16px, 2.0833vw, 40px);          /* header inset from the page edges */
+  --card-pad-top: clamp(20px, 4.1667vw, 80px);  /* top rule to image */
+  --card-pad-x: clamp(14px, 1.25vw, 24px);      /* image to card sides */
+  --card-pad-bottom: clamp(14px, 1.25vw, 24px);
+  --card-gap: clamp(18px, 2.9167vw, 56px);      /* image bottom to first line of text */
+
+  /* Line heights are kept as ratios so the specified size/line-height
+     pairs hold at every width: 28/20 and 24/16 both reduce to these. */
+  --fs-title: clamp(14px, 1.0417vw, 20px);
+  --lh-title: 1.4;
+  --fs-type: clamp(12px, 0.8333vw, 16px);
+  --lh-type: 1.5;
+  --fs-price: clamp(14px, 1.0417vw, 20px);
+  --lh-price: 1.4;
+  --fs-heading: clamp(22px, 2.0833vw, 40px);
+  --lh-heading: 1.2;
 }
 
 *,
@@ -130,9 +150,7 @@ img.ph--card {
   justify-content: space-between;
   gap: 16px;
   min-height: var(--header-h);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--pad);
+  padding: 0 var(--edge);
 }
 
 .nav {
@@ -236,12 +254,15 @@ img.ph--card {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px var(--pad);
+  /* Matches the cards' side padding so the heading lines up with the
+     left edge of the first product image. */
+  padding: 18px var(--card-pad-x);
 }
 
 .section__title {
   margin: 0;
-  font-size: clamp(20px, 2.2vw, 26px);
+  font-size: var(--fs-heading);
+  line-height: var(--lh-heading);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -268,7 +289,7 @@ img.ph--card {
 .card {
   display: flex;
   flex-direction: column;
-  padding: var(--pad);
+  padding: var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom);
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
@@ -279,18 +300,20 @@ img.ph--card {
 
 .card__media { display: block; }
 
-.card__body { padding-top: 14px; }
+.card__body { padding-top: var(--card-gap); }
 
 .card__title {
   margin: 0;
-  font-size: 13px;
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
   font-weight: 500;
   letter-spacing: -0.01em;
 }
 
 .card__type {
   margin: 1px 0 0;
-  font-size: 11px;
+  font-size: var(--fs-type);
+  line-height: var(--lh-type);
   color: var(--muted);
 }
 
@@ -299,11 +322,12 @@ img.ph--card {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: clamp(12px, 1.25vw, 24px);
 }
 
 .card__price {
-  font-size: 13px;
+  font-size: var(--fs-price);
+  line-height: var(--lh-price);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
@@ -311,11 +335,12 @@ img.ph--card {
 .card__add {
   display: grid;
   place-items: center;
-  width: 23px;
-  height: 23px;
+  /* Grown alongside the price text so the control stays proportional. */
+  width: clamp(23px, 1.6667vw, 32px);
+  height: clamp(23px, 1.6667vw, 32px);
   flex: none;
   border: 1px solid var(--rule);
-  font-size: 15px;
+  font-size: clamp(15px, 1.0417vw, 20px);
   line-height: 1;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
@@ -459,7 +484,7 @@ img.ph--card {
     gap: 0;
     background: var(--paper);
     border-bottom: 1px solid var(--rule);
-    padding: 0 var(--pad);
+    padding: 0 var(--edge);
     max-height: 0;
     overflow: hidden;
     visibility: hidden;
