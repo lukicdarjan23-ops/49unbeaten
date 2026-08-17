@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forty Nine Unbeaten — Originals on Canvas, Canvas Prints &amp; Prints</title>
-<meta name="description" content="Forty Nine Unbeaten — original artwork on canvas, canvas prints and fine art prints.">
+<title>All Products — Forty Nine Unbeaten</title>
+<meta name="description" content="Every piece from Forty Nine Unbeaten — art, apparel and gifts in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
       <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
-    <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
+    <a class="logo" href="index.html" aria-label="Forty Nine Unbeaten — home">
       <img class="logo__img" data-logo-img src="/images/uploads/49-logo-black.svg" alt="Forty Nine Unbeaten">
       <span class="logo__wordmark" data-logo-fallback hidden>
         <span class="logo__mark" aria-hidden="true">49</span>
@@ -62,21 +62,19 @@
 </header>
 
 <main id="main">
-
-  <section class="hero" data-site-hero aria-label="Featured artwork">
-    <a class="hero__link" href="art.html" data-hero-link>
-      <span class="ph ph--hero" data-hero-media aria-hidden="true">img</span>
+  <section class="hero hero--sm" aria-label="All Products">
+    <a class="hero__link" href="#" data-hero-link>
+      <span class="ph ph--hero-sm" data-hero-media aria-hidden="true">img</span>
     </a>
   </section>
 
-  <section class="section" aria-labelledby="top-sellers">
+  <section class="section" aria-labelledby="all-title">
     <div class="section__head">
-      <h2 class="section__title" id="top-sellers" data-top-sellers-title data-cms-fill>Featured items</h2>
-      <a class="section__link" href="all.html" data-view-all-link data-cms-fill>View All Products</a>
+      <h1 class="section__title" id="all-title" data-page-title data-cms-fill>All Products</h1>
     </div>
-    <div class="grid" data-grid data-home-grid></div>
+    <p class="section__intro" data-page-intro hidden></p>
+    <div class="grid" data-grid></div>
   </section>
-
 </main>
 
 <footer class="footer">
@@ -98,7 +96,7 @@
     </div>
 
     <nav class="footer__col" aria-label="Footer">
-      <a href="/">Home</a>
+      <a href="index.html">Home</a>
       <a href="contact.html">Contact</a>
       <div class="social">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
@@ -138,22 +136,6 @@
 
 <script src="script.js"></script>
 <script src="cart.js"></script>
-
-<!-- Netlify Identity invite and password-recovery links land on the site
-     root carrying a token in the address. The widget has to be present
-     here to catch it and open the set-password dialog — without this the
-     link just opens the homepage and appears to do nothing. -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", function (user) {
-      if (!user) {
-        window.netlifyIdentity.on("login", function () {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
+<script src="all.js"></script>
 </body>
 </html>

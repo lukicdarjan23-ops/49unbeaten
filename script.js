@@ -154,6 +154,7 @@
     money: money,
     fetchJson: fetchJson,
     renderProducts: renderProducts,
+    renderHero: renderHero,
     cart: {
       add: addLine,
       items: items,
@@ -289,26 +290,38 @@
     });
   }
 
+  /* Fills a hero band from whichever record owns it: the homepage's from
+     settings.json, a listing page's from its own file. Shared so the two
+     don't drift apart. `scope` is the section that owns the band, which
+     keeps the homepage hero off the pages that have one of their own. */
+  function renderHero(scope, source, className) {
+    if (!scope) return;
+
+    var link = scope.querySelector("[data-hero-link]");
+    var slot = scope.querySelector("[data-hero-media]");
+
+    if (link) link.href = source.hero_link || "#";
+    if (!slot) return;
+
+    if (!source.hero_image) {
+      slot.textContent = "img";
+      return;
+    }
+
+    var img = document.createElement("img");
+    img.className = className;
+    img.src = source.hero_image;
+    img.alt = source.hero_alt || "";
+    img.loading = "eager";
+    img.decoding = "async";
+    slot.replaceWith(img);
+  }
+
   function applySettings(raw) {
     var settings = Object.assign({}, DEFAULT_SETTINGS, raw || {});
     applyLogos(settings);
 
-    var heroLink = document.querySelector("[data-hero-link]");
-    var heroMedia = document.querySelector("[data-hero-media]");
-    if (heroLink) heroLink.href = settings.hero_link;
-    if (heroMedia) {
-      if (settings.hero_image) {
-        var img = document.createElement("img");
-        img.className = "ph--hero";
-        img.src = settings.hero_image;
-        img.alt = settings.hero_alt || "";
-        img.loading = "eager";
-        img.decoding = "async";
-        heroMedia.replaceWith(img);
-      } else {
-        heroMedia.textContent = "img";
-      }
-    }
+    renderHero(document.querySelector("[data-site-hero]"), settings, "ph--hero");
 
     var title = document.querySelector("[data-top-sellers-title]");
     if (title) title.textContent = settings.top_sellers_title;
@@ -362,12 +375,19 @@
     return link;
   }
 
-  /* The card shows the default variant's price — the one ticked in the
-     CMS, or the first if none is. */
+  /* The card shows the default option's price — the one ticked in the CMS,
+     or the first if none is. Art is priced by variant, apparel by shirt
+     size; a card has to read whichever list the product carries. */
   function cardPrice(item) {
-    var variants = Array.isArray(item.variants) ? item.variants : [];
-    if (!variants.length) return Number(item.price) || 0;
-    var chosen = variants.filter(function (v) { return v.selected; })[0] || variants[0];
+    var options = [];
+    if (Array.isArray(item.variants) && item.variants.length) {
+      options = item.variants;
+    } else if (Array.isArray(item.sizes) && item.sizes.length) {
+      options = item.sizes;
+    }
+
+    if (!options.length) return Number(item.price) || 0;
+    var chosen = options.filter(function (v) { return v.selected; })[0] || options[0];
     return Number(chosen.price) || 0;
   }
 
@@ -449,7 +469,11 @@
     initMenu();
     paintCart(false);
 
-    var isHomeGrid = document.querySelector("[data-grid]") && !document.body.dataset.category;
+    /* Only the homepage's own grid, named outright. The category pages and
+       All Products carry a [data-grid] too and fill it themselves — left
+       to a looser test, both scripts would write to the same grid and the
+       slower one would win. */
+    var isHomeGrid = !!document.querySelector("[data-grid][data-home-grid]");
 
     fetchJson("content/categories.json").then(applyCategoryLinks);
 

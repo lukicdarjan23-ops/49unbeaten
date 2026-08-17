@@ -181,6 +181,32 @@ collections:
               - { label: "Široka slika na dnu strane", name: "showcase_image", widget: "image", required: false }
               - { label: "Opis široke slike", name: "showcase_alt", widget: "string", required: false }
 
+  - name: "allproducts"
+    label: "Strana Svi proizvodi"
+    files:
+      - name: "allproducts"
+        label: "Svi proizvodi"
+        file: "content/allproducts.json"
+        fields:
+          - { label: "Naslov strane", name: "title", widget: "string" }
+          - { label: "Uvodni tekst", name: "intro", widget: "text", required: false }
+          - label: "Redosled proizvoda"
+            name: "order"
+            widget: "select"
+            default: "mixed"
+            options:
+              - { label: "Izmešano po kategorijama (preporučeno)", value: "mixed" }
+              - { label: "Redom kao u listi Proizvodi", value: "cms" }
+              - { label: "Nasumično pri svakom otvaranju", value: "random" }
+            hint: "Izmešano znači: prvo jedan Art, pa jedan Apparel, pa jedan Gifts, pa opet Art — tako da se kategorije ne grupišu. Redosled je uvek isti, pa kupac ponovo nađe ono što je video. Nasumično se menja pri svakom osvežavanju."
+          - label: "Velika slika na vrhu"
+            name: "hero_image"
+            widget: "image"
+            required: false
+            hint: "Uska traka na vrhu strane, visine 260px. Ostavi prazno za sivi kvadrat."
+          - { label: "Opis slike", name: "hero_alt", widget: "string", required: false }
+          - { label: "Gde vodi slika", name: "hero_link", widget: "string", required: false }
+
   - name: "contact"
     label: "Strana Kontakt"
     files:

@@ -10,26 +10,6 @@
 
   var FNU = window.FNU || {};
 
-  function renderHero(category) {
-    var link = document.querySelector("[data-hero-link]");
-    var slot = document.querySelector("[data-hero-media]");
-
-    if (link) link.href = category.hero_link || "#";
-    if (!slot) return;
-
-    if (category.hero_image) {
-      var img = document.createElement("img");
-      img.className = "ph--hero-sm";
-      img.src = category.hero_image;
-      img.alt = category.hero_alt || "";
-      img.loading = "eager";
-      img.decoding = "async";
-      slot.replaceWith(img);
-    } else {
-      slot.textContent = "img";
-    }
-  }
-
   function renderEmpty(grid, name) {
     grid.textContent = "";
     var empty = document.createElement("p");
@@ -76,7 +56,9 @@
         intro.hidden = !category.intro;
       }
 
-      renderHero(category);
+      if (FNU.renderHero) {
+        FNU.renderHero(document.querySelector(".hero"), category, "ph--hero-sm");
+      }
 
       var matches = products.filter(function (item) {
         return (item.category || "").toLowerCase() === name.toLowerCase();
