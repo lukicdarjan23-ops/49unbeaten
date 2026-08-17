@@ -49,120 +49,84 @@ collections:
             widget: "text"
 
   - name: "products"
-    label: "Products"
+    label: "Proizvodi"
     files:
       - name: "products"
-        label: "Top Sellers Grid"
+        label: "Svi proizvodi"
         file: "content/products.json"
         fields:
           - name: "items"
-            label: "Products"
+            label: "Proizvodi"
             widget: "list"
-            summary: "{{title}} — {{price}}"
+            summary: "{{fields.title}} ({{fields.category}})"
+            label_singular: "Proizvod"
+            hint: "Dodaj proizvod klikom na dugme ispod. Svaki proizvod automatski dobija svoju stranicu."
             fields:
-              - label: "Title"
+              - label: "Naziv"
                 name: "title"
                 widget: "string"
-              - label: "Type"
+              - label: "Adresa stranice (slug)"
+                name: "slug"
+                widget: "string"
+                hint: "Mala slova i crtice, bez razmaka i kvacica. Npr: the-statue. Mora biti razlicito od svih ostalih proizvoda."
+              - label: "Podnaslov na kartici"
                 name: "type"
                 widget: "string"
                 default: "Print"
-              - label: "Category"
+              - label: "Kategorija"
                 name: "category"
                 widget: "select"
                 options: ["Art", "Apparel", "Gifts"]
                 default: "Art"
-                hint: "Which category page this product appears on."
-              - label: "Base Price (USD)"
-                name: "price"
-                widget: "number"
-                value_type: "float"
-                min: 0
-                hint: "Used only when the product has no sizes listed below. With sizes, each size sets its own price."
-              - label: "Product Link"
-                name: "href"
-                widget: "string"
-              - label: "Image"
+              - label: "Slika na kartici"
                 name: "image"
                 widget: "image"
                 required: false
-                hint: "Leave blank to show the grey placeholder."
-              - label: "Image Alt Text"
-                name: "alt"
+                hint: "Slika koja se vidi u mrezi proizvoda. Ostavi prazno za sivi kvadrat."
+              - { label: "Opis slike na kartici", name: "alt", widget: "string", required: false }
+              - label: "Tekst ispod cene"
+                name: "ship_note"
                 widget: "string"
                 required: false
-
-  - name: "product"
-    label: "Product Page"
-    files:
-      - name: "product"
-        label: "The Statue"
-        file: "content/product.json"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - label: "Images by Material"
-            name: "media"
-            widget: "list"
-            summary: "{{fields.group}}"
-            hint: "One image per material, shared by every size of it. The Group name must match the Group set on the options below — that is how the page knows which image to show."
-            fields:
-              - label: "Group"
-                name: "group"
-                widget: "string"
-                hint: "e.g. Print or Canvas"
-              - { label: "Image", name: "image", widget: "image", required: false }
-              - { label: "Image Alt Text", name: "alt", widget: "string", required: false }
-          - label: "Line Under the Price"
-            name: "ship_note"
-            widget: "string"
-            required: false
-          - label: "Breadcrumb"
-            name: "crumbs"
-            widget: "list"
-            summary: "{{fields.label}}"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Link", name: "href", widget: "string" }
-          - label: "Size and Type"
-            name: "variants"
-            widget: "list"
-            summary: "{{fields.label}} — {{fields.price}}"
-            hint: "Each option sets its own price. Tick \"Selected by default\" on ONE option — the page opens on it and shows its price."
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - label: "Price (USD)"
-                name: "price"
-                widget: "number"
-                value_type: "float"
-                min: 0
-              - label: "Group"
-                name: "group"
-                widget: "string"
-                hint: "Which image this option shows — must match a Group in \"Images by Material\" above."
-              - label: "Note"
-                name: "note"
-                widget: "string"
+              - label: "Slike po materijalu"
+                name: "media"
+                widget: "list"
+                summary: "{{fields.group}}"
+                hint: "Jedna slika po materijalu, deli je svaka velicina tog materijala. Naziv grupe mora da se poklopi sa Grupom kod opcija ispod."
+                fields:
+                  - { label: "Grupa", name: "group", widget: "string" }
+                  - { label: "Slika", name: "image", widget: "image", required: false }
+                  - { label: "Opis slike", name: "alt", widget: "string", required: false }
+              - label: "Velicine i cene"
+                name: "variants"
+                widget: "list"
+                summary: "{{fields.label}} — {{fields.price}}"
+                hint: "Svaka opcija ima svoju cenu. Kvacicu Podrazumevano stavi na JEDNU opciju — na njoj se stranica otvara i njena cena se vidi na kartici."
+                fields:
+                  - { label: "Naziv opcije", name: "label", widget: "string" }
+                  - label: "Cena (USD)"
+                    name: "price"
+                    widget: "number"
+                    value_type: "float"
+                    min: 0
+                  - { label: "Grupa", name: "group", widget: "string" }
+                  - { label: "Napomena", name: "note", widget: "string", required: false }
+                  - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+              - label: "Napomene ispod dugmeta"
+                name: "notes"
+                widget: "list"
                 required: false
-                hint: "Shown under the options while this one is selected, e.g. whether a frame is included."
-              - { label: "Selected by default", name: "selected", widget: "boolean", default: false, required: false }
-          - label: "Notes Under the Button"
-            name: "notes"
-            widget: "list"
-            required: false
-            field: { label: "Note", name: "note", widget: "string" }
-          - label: "Collapsible Panels"
-            name: "panels"
-            widget: "list"
-            required: false
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
-          - label: "Wide Image Below"
-            name: "showcase_image"
-            widget: "image"
-            required: false
-          - { label: "Wide Image Alt Text", name: "showcase_alt", widget: "string", required: false }
+                field: { label: "Napomena", name: "note", widget: "string" }
+              - label: "Sekcije koje se otvaraju"
+                name: "panels"
+                widget: "list"
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Naslov", name: "title", widget: "string" }
+                  - { label: "Tekst", name: "body", widget: "text" }
+              - { label: "Siroka slika ispod", name: "showcase_image", widget: "image", required: false }
+              - { label: "Opis siroke slike", name: "showcase_alt", widget: "string", required: false }
 
   - name: "contact"
     label: "Contact Page"

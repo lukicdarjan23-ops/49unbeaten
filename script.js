@@ -207,10 +207,10 @@
     sales_notice: "All sales final. No returns. Refund only in the event item not delivered or delivered damaged."
   };
 
-  var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function () {
+  var DEFAULT_PRODUCTS = Array.from({ length: 12 }, function (_, index) {
     return {
-      title: "The Statue", type: "Print", price: 89,
-      href: "product.html", image: "", alt: ""
+      slug: index ? "the-statue-" + (index + 1) : "the-statue",
+      title: "The Statue", type: "Print", price: 89, image: "", alt: ""
     };
   });
 
@@ -286,6 +286,19 @@
     return link;
   }
 
+  /* The card shows the default variant's price — the one ticked in the
+     CMS, or the first if none is. */
+  function cardPrice(item) {
+    var variants = Array.isArray(item.variants) ? item.variants : [];
+    if (!variants.length) return Number(item.price) || 0;
+    var chosen = variants.filter(function (v) { return v.selected; })[0] || variants[0];
+    return Number(chosen.price) || 0;
+  }
+
+  function productHref(item) {
+    return item.slug ? "product.html?p=" + encodeURIComponent(item.slug) : "product.html";
+  }
+
   function buildCard(product) {
     var card = document.createElement("article");
     card.className = "card";
@@ -329,8 +342,8 @@
       frag.appendChild(buildCard({
         title: item.title || "Untitled",
         type: item.type || "Print",
-        price: Number(item.price) || 0,
-        href: item.href || "product.html",
+        price: cardPrice(item),
+        href: productHref(item),
         image: item.image || "",
         alt: item.alt || ""
       }));

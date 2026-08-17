@@ -1,7 +1,10 @@
 /* Forty Nine Unbeaten — product page.
-   Content comes from content/product.json (edited in the CMS); the
-   DEFAULTS below keep the page rendering if that file can't be
-   fetched. Relies on window.FNU from script.js for the cart store. */
+
+   Which product to show comes from the address: product.html?p=<slug>.
+   All products live in the one catalogue, content/products.json, so
+   adding a product in the CMS is enough — no new page needed. The
+   DEFAULTS below keep the page rendering if the file can't be fetched.
+   Relies on window.FNU from script.js for the cart store. */
 (function () {
   "use strict";
 
@@ -9,6 +12,7 @@
   var money = FNU.money || new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
 
   var DEFAULTS = {
+    slug: "the-statue",
     title: "The Statue",
     ship_note: "Ships worldwide",
     /* One image per material, shared by every size of that material. A
@@ -312,6 +316,13 @@
       ship.hidden = !product.ship_note;
     }
 
+    if (product.title) {
+      var last = product.crumbs[product.crumbs.length - 1];
+      if (!last || last.label !== product.title) {
+        product.crumbs = product.crumbs.concat([{ label: product.title, href: "#" }]);
+      }
+    }
+
     renderCrumbs();
     renderMedia("[data-showcase-media]", product.showcase_image, product.showcase_alt, "ph--showcase", "img");
     renderVariants();
@@ -333,7 +344,19 @@
     initAddToCart();
 
     var get = FNU.fetchJson || function () { return Promise.resolve(null); };
-    get("content/product.json").then(apply);
+
+    get("content/products.json").then(function (raw) {
+      var items = (raw && Array.isArray(raw.items)) ? raw.items : [];
+      var wanted = new URLSearchParams(window.location.search).get("p");
+
+      /* Fall back to the first product when the address has no slug or
+         names one that no longer exists, so the page always renders. */
+      var found = wanted && items.filter(function (item) {
+        return item.slug === wanted;
+      })[0];
+
+      apply(found || items[0] || null);
+    });
   }
 
   if (document.readyState === "loading") {

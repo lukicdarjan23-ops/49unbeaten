@@ -34,9 +34,8 @@ Then open `http://localhost:8000`.
 | `category.js` | Category pages — hero and the category-filtered grid |
 | `page.js` | Contact and legal pages (picks its file from `data-page` on `<body>`) |
 | `content/settings.json` | Hero image/link, section heading, social links, footer notice |
-| `content/products.json` | The product catalogue, each item tagged with a Category |
+| `content/products.json` | The whole catalogue — one entry per product, holding both its card and its full product page |
 | `content/categories.json` | Category headings and hero images |
-| `content/product.json` | The product page — images per material, variants, prices, panels |
 | `content/contact.json` | Contact email and WhatsApp number |
 | `content/privacy.json`, `content/terms.json` | Legal page copy |
 | `admin/` | The Decap CMS admin panel (`/admin`) — see below |
@@ -128,12 +127,17 @@ to the site's built-in defaults instead of breaking the page.
   homepage grid shows the lot; each category page filters to its own. A
   product is entered once. A category with nothing in it shows a short empty
   message rather than a bare grid.
-- **Only one product page, and the CMS cannot add more.** `product.html`
-  renders whichever single product sits in `content/product.json`, so every
-  card currently links to the same page. Adding a second product needs one of:
-  a folder collection plus `product.html?p=<slug>` (no build step, uglier
-  URLs), or a static site generator (clean URLs, better for search, adds
-  tooling). Worth deciding before the catalogue grows.
+- **Products are added from the CMS.** `content/products.json` holds every
+  product, each with its own slug, card fields and full product-page content
+  (images per material, variants, notes, panels). `product.html?p=<slug>`
+  looks the product up by slug, so adding an entry in the CMS gives that
+  product a working page with no new files and no build step. A slug that
+  doesn't match anything falls back to the first product rather than
+  rendering an empty page.
+- **URLs carry a query string** (`product.html?p=the-statue`) rather than
+  being folders (`/prints/the-statue`). That is the trade for having no build
+  step. If search ranking matters later, a static site generator would give
+  clean paths — but it adds tooling.
 - **Type.** Poppins from Google Fonts, with a Helvetica/Arial fallback stack if
   the font fails to load.
 - **Accessibility.** Skip link, labelled nav landmarks, visible focus rings,
