@@ -53,7 +53,18 @@
 
       var category = categories.filter(function (entry) {
         return entry.slug && entry.slug.toLowerCase() === name.toLowerCase();
-      })[0] || { title: name };
+      })[0];
+
+      /* Deleted in the CMS: the link is already gone from the header, so
+         send anyone still holding the old address back to the homepage.
+         Add the category back in the CMS and the page works again. */
+      if (!category) {
+        if (categories.length) {
+          window.location.replace("index.html");
+          return;
+        }
+        category = { title: name }; /* file missing entirely — show the page */
+      }
 
       var heading = document.querySelector("[data-category-title]");
       if (heading) heading.textContent = category.title || name;

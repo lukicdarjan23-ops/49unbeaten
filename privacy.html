@@ -7,7 +7,7 @@
 <meta name="description" content="How Forty Nine Unbeaten handles your personal data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="privacy">
@@ -22,16 +22,19 @@
     </button>
 
     <nav class="nav" id="site-nav" aria-label="Primary">
-      <a href="art.html">Art</a>
-      <a href="apparel.html">Apparel</a>
-      <a href="gifts.html">Gifts</a>
+      <a href="art.html" data-nav="art">Art</a>
+      <a href="apparel.html" data-nav="apparel">Apparel</a>
+      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
     <a class="logo" href="index.html" aria-label="Forty Nine Unbeaten — home">
-      <span class="logo__mark" aria-hidden="true">49</span>
-      <span class="logo__type" aria-hidden="true">
-        <span>Forty Nine</span>
-        <span>Unbeaten</span>
+      <img class="logo__img" data-logo-img src="/images/uploads/49-logo-black.svg" alt="Forty Nine Unbeaten">
+      <span class="logo__wordmark" data-logo-fallback hidden>
+        <span class="logo__mark" aria-hidden="true">49</span>
+        <span class="logo__type" aria-hidden="true">
+          <span>Forty Nine</span>
+          <span>Unbeaten</span>
+        </span>
       </span>
     </a>
 
@@ -64,7 +67,8 @@
   <div class="footer__inner">
 
     <div class="footer__brand">
-      <svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Forty Nine Unbeaten">
+      <img class="seal seal--img" data-seal-img src="/images/uploads/49-logo-white.svg" alt="Forty Nine Unbeaten">
+      <svg class="seal" data-seal-fallback hidden viewBox="0 0 200 200" role="img" aria-label="Forty Nine Unbeaten">
         <defs>
           <path id="sealTop" d="M 22 100 A 78 78 0 0 1 178 100"/>
           <path id="sealBottom" d="M 27 100 A 73 73 0 0 0 173 100"/>
@@ -99,9 +103,9 @@
     </nav>
 
     <nav class="footer__col" aria-label="Shop">
-      <a href="art.html">Art</a>
-      <a href="apparel.html">Apparel</a>
-      <a href="gifts.html">Gifts</a>
+      <a href="art.html" data-nav="art">Art</a>
+      <a href="apparel.html" data-nav="apparel">Apparel</a>
+      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
     <nav class="footer__col" aria-label="Legal">

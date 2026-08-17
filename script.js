@@ -218,31 +218,75 @@
     };
   });
 
-  /* Uploaded logos replace the typeset wordmark and the drawn seal. With
-     nothing uploaded the built-in versions stay, so the header and footer
-     are never empty. Runs on every page, not just the homepage. */
-  function applyLogos(settings) {
-    if (settings.logo_header) {
-      document.querySelectorAll("a.logo").forEach(function (logo) {
-        logo.textContent = "";
-        var img = document.createElement("img");
-        img.className = "logo__img";
-        img.src = settings.logo_header;
-        img.alt = settings.logo_header_alt || "";
-        logo.appendChild(img);
-      });
+  /* Uploaded logos replace the typeset wordmark and the drawn seal.
+
+     Both versions sit in the HTML from the start — the uploaded one
+     visible, the drawn one hidden — so the real logo is painted with the
+     first frame and nothing flickers while settings.json loads. This only
+     steps in when the CMS says something different: a newly uploaded file
+     swaps the src, an emptied field brings the drawn version back. */
+  function swapLogo(img, fallback, src, alt) {
+    var wanted = String(src || "");
+
+    if (!wanted) {
+      if (img) img.hidden = true;
+      if (fallback) fallback.hidden = false;
+      return;
     }
 
-    if (settings.logo_footer) {
-      document.querySelectorAll(".footer__brand").forEach(function (brand) {
-        brand.textContent = "";
-        var img = document.createElement("img");
-        img.className = "seal seal--img";
-        img.src = settings.logo_footer;
-        img.alt = settings.logo_footer_alt || "";
-        brand.appendChild(img);
-      });
-    }
+    if (fallback) fallback.hidden = true;
+    if (!img) return;
+    img.hidden = false;
+    /* getAttribute, not .src — the property is resolved to an absolute URL
+       and would never match the stored path. */
+    if (img.getAttribute("src") !== wanted) img.setAttribute("src", wanted);
+    if (alt != null && img.getAttribute("alt") !== alt) img.setAttribute("alt", alt);
+  }
+
+  function applyLogos(settings) {
+    document.querySelectorAll("a.logo").forEach(function (logo) {
+      swapLogo(
+        logo.querySelector("[data-logo-img]"),
+        logo.querySelector("[data-logo-fallback]"),
+        settings.logo_header,
+        settings.logo_header_alt
+      );
+    });
+
+    document.querySelectorAll(".footer__brand").forEach(function (brand) {
+      swapLogo(
+        brand.querySelector("[data-seal-img]"),
+        brand.querySelector("[data-seal-fallback]"),
+        settings.logo_footer,
+        settings.logo_footer_alt
+      );
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Category links
+
+     Art / Apparel / Gifts are listed in the CMS. Delete one there and its
+     link disappears from the header and the footer; add it back and the
+     link returns. The pages themselves stay in place, and category.js
+     sends anyone who lands on a removed one back to the homepage.
+     ------------------------------------------------------------------ */
+
+  function applyCategoryLinks(raw) {
+    var items = raw && Array.isArray(raw.items) ? raw.items : null;
+    if (!items) return; /* file missing — leave the built-in links alone */
+
+    var live = {};
+    items.forEach(function (item) {
+      var slug = String(item && item.slug || "").trim().toLowerCase();
+      if (slug) live[slug] = item.title || slug;
+    });
+
+    document.querySelectorAll("[data-nav]").forEach(function (link) {
+      var slug = link.dataset.nav;
+      link.hidden = !live[slug];
+      if (live[slug]) link.textContent = live[slug];
+    });
   }
 
   function applySettings(raw) {
@@ -406,6 +450,8 @@
     paintCart(false);
 
     var isHomeGrid = document.querySelector("[data-grid]") && !document.body.dataset.category;
+
+    fetchJson("content/categories.json").then(applyCategoryLinks);
 
     fetchJson("content/settings.json").then(function (settings) {
       applySettings(settings);

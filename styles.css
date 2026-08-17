@@ -78,6 +78,8 @@ button {
   cursor: pointer;
 }
 
+[hidden] { display: none !important; }
+
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -203,9 +205,15 @@ img.ph--card {
   white-space: nowrap;
 }
 
+.logo__wordmark {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
 .logo__mark {
   font-size: 27px;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 1;
 }
@@ -223,7 +231,7 @@ img.ph--card {
   display: flex;
   flex-direction: column;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.06;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -298,7 +306,7 @@ img.ph--card {
   margin: 0;
   font-size: var(--fs-heading);
   line-height: var(--lh-heading);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
@@ -449,7 +457,7 @@ img.ph--product {
   margin: 14px 0 0;
   font-size: clamp(22px, 1.6vw, 30px);
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -458,7 +466,7 @@ img.ph--product {
   margin: 12px 0 0;
   font-size: clamp(30px, 2.34vw, 45px);
   line-height: 1.15;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
@@ -473,7 +481,7 @@ img.ph--product {
   margin: clamp(20px, 1.8vw, 32px) 0 12px;
   font-size: clamp(15px, 0.94vw, 18px);
   line-height: 1.3;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -625,7 +633,7 @@ img.ph--product {
   background: var(--green);
   color: #fff;
   font-size: clamp(14px, 0.83vw, 16px);
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
   transition: background-color 0.15s ease;
 }
@@ -704,7 +712,7 @@ img.ph--showcase {
   margin: 0;
   font-size: var(--fs-heading);
   line-height: var(--lh-heading);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -734,7 +742,7 @@ img.ph--showcase {
   border-top: 1px solid var(--rule);
   font-size: clamp(15px, 0.94vw, 18px);
   line-height: 1.35;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -777,7 +785,7 @@ img.ph--showcase {
 
 .contact__value {
   font-size: clamp(17px, 1.25vw, 24px);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   word-break: break-word;
 }
@@ -899,7 +907,7 @@ img.ph--showcase {
   justify-content: space-between;
   gap: 16px;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
@@ -994,7 +1002,7 @@ body.has-drawer { overflow: hidden; }
 .drawer__title {
   margin: 0;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
@@ -1109,7 +1117,7 @@ body.has-drawer { overflow: hidden; }
   fill: var(--paper);
   font-family: var(--font);
   font-size: 21px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.14em;
 }
 
@@ -1117,7 +1125,7 @@ body.has-drawer { overflow: hidden; }
   fill: var(--paper);
   font-family: var(--font);
   font-size: 62px;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: -0.05em;
 }
 
@@ -1272,3 +1280,10 @@ body.has-drawer { overflow: hidden; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* A last row that doesn't fill leaves a rail hanging in empty space to
+   the right of the final card. Last in source order so it wins over the
+   per-breakpoint rules above, whatever the column count.
+   ========================================================================== */
+
+.grid > .card:last-child { border-right: 0; }

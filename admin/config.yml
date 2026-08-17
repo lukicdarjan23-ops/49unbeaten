@@ -101,7 +101,7 @@ collections:
                 name: "featured"
                 widget: "boolean"
                 default: false
-                hint: "Čekirani proizvodi čine mrežu na naslovnoj strani. Ako nijedan nije čekiran, prikazuju se svi."
+                hint: "Čekirani proizvodi čine mrežu na naslovnoj strani. Ako nijedan nije čekiran, prikazuju se svi. Najlepše izgleda kada je čekiran broj deljiv sa 4, 3 i 2 — dakle 4 ili 12; tada nijedan red nije poluprazan ni na jednoj veličini ekrana."
               - label: "Slika na kartici"
                 name: "image"
                 widget: "image"
@@ -233,7 +233,7 @@ collections:
             label: "Kategorije"
             widget: "list"
             summary: "{{fields.title}}"
-            hint: "NE MENJAJ polje Slug — po njemu se svaka strana pronalazi. Proizvodi se ovde pojavljuju sami, po svojoj Kategoriji."
+            hint: "NE MENJAJ polje Slug — po njemu se svaka strana pronalazi. Proizvodi se ovde pojavljuju sami, po svojoj Kategoriji. Ako obrišeš kategoriju, njen link nestaje iz menija u vrhu i u futeru, a ko otvori staru adresu vraća se na naslovnu. Vrati je nazad sa istim slugom i sve radi opet. Postoje samo tri sluga: art, apparel, gifts."
             fields:
               - { label: "Slug (ne dirati)", name: "slug", widget: "string" }
               - { label: "Naslov strane", name: "title", widget: "string" }
