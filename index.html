@@ -127,5 +127,22 @@
 
 <script src="script.js"></script>
 <script src="cart.js"></script>
+
+<!-- Netlify Identity invite and password-recovery links land on the site
+     root carrying a token in the address. The widget has to be present
+     here to catch it and open the set-password dialog — without this the
+     link just opens the homepage and appears to do nothing. -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
