@@ -210,6 +210,15 @@ img.ph--card {
   line-height: 1;
 }
 
+/* Uploaded logo replaces the typeset wordmark; height is capped so any
+   aspect ratio still fits the header band. */
+.logo__img {
+  height: clamp(24px, 1.98vw, 38px);
+  width: auto;
+  max-width: min(46vw, 320px);
+  object-fit: contain;
+}
+
 .logo__type {
   display: flex;
   flex-direction: column;
@@ -329,7 +338,6 @@ img.ph--card {
      own column and squeeze the card beside it. */
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
 }
 
 .card {
@@ -340,9 +348,9 @@ img.ph--card {
   border-bottom: 1px solid var(--rule);
 }
 
-/* No rail on the last column, no rule under the last row */
+/* No rail on the last column. Every card keeps its bottom rule — the
+   grid has none of its own, so a part-full last row still gets a line. */
 .grid > .card:nth-child(4n) { border-right: 0; }
-.grid > .card:nth-last-child(-n + 4) { border-bottom: 0; }
 
 .card__media { display: block; }
 
@@ -1091,6 +1099,12 @@ body.has-drawer { overflow: hidden; }
 
 .seal { width: 150px; height: 150px; }
 
+.seal--img {
+  height: auto;
+  max-height: 150px;
+  object-fit: contain;
+}
+
 .seal__text {
   fill: var(--paper);
   font-family: var(--font);
@@ -1165,8 +1179,6 @@ body.has-drawer { overflow: hidden; }
   .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
   .grid > .card:nth-child(3n) { border-right: 0; }
-  .grid > .card:nth-last-child(-n + 4) { border-bottom: 1px solid var(--rule); }
-  .grid > .card:nth-last-child(-n + 3) { border-bottom: 0; }
 
   .footer__inner {
     grid-template-columns: repeat(3, 1fr);
@@ -1237,9 +1249,6 @@ body.has-drawer { overflow: hidden; }
   .grid > .card:nth-child(3n),
   .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
   .grid > .card:nth-child(2n) { border-right: 0; }
-  .grid > .card:nth-last-child(-n + 3),
-  .grid > .card:nth-last-child(-n + 4) { border-bottom: 1px solid var(--rule); }
-  .grid > .card:nth-last-child(-n + 2) { border-bottom: 0; }
 }
 
 @media (max-width: 480px) {

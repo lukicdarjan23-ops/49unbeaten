@@ -196,6 +196,10 @@
      ------------------------------------------------------------------ */
 
   var DEFAULT_SETTINGS = {
+    logo_header: "",
+    logo_header_alt: "Forty Nine Unbeaten",
+    logo_footer: "",
+    logo_footer_alt: "Forty Nine Unbeaten",
     hero_image: "",
     hero_alt: "Featured artwork",
     hero_link: "/art",
@@ -214,8 +218,36 @@
     };
   });
 
+  /* Uploaded logos replace the typeset wordmark and the drawn seal. With
+     nothing uploaded the built-in versions stay, so the header and footer
+     are never empty. Runs on every page, not just the homepage. */
+  function applyLogos(settings) {
+    if (settings.logo_header) {
+      document.querySelectorAll("a.logo").forEach(function (logo) {
+        logo.textContent = "";
+        var img = document.createElement("img");
+        img.className = "logo__img";
+        img.src = settings.logo_header;
+        img.alt = settings.logo_header_alt || "";
+        logo.appendChild(img);
+      });
+    }
+
+    if (settings.logo_footer) {
+      document.querySelectorAll(".footer__brand").forEach(function (brand) {
+        brand.textContent = "";
+        var img = document.createElement("img");
+        img.className = "seal seal--img";
+        img.src = settings.logo_footer;
+        img.alt = settings.logo_footer_alt || "";
+        brand.appendChild(img);
+      });
+    }
+  }
+
   function applySettings(raw) {
     var settings = Object.assign({}, DEFAULT_SETTINGS, raw || {});
+    applyLogos(settings);
 
     var heroLink = document.querySelector("[data-hero-link]");
     var heroMedia = document.querySelector("[data-hero-media]");
@@ -373,15 +405,12 @@
     initMenu();
     paintCart(false);
 
-    /* Category pages carry [data-grid] too but filter it themselves. */
-    if (!document.querySelector("[data-grid]") || document.body.dataset.category) return;
+    var isHomeGrid = document.querySelector("[data-grid]") && !document.body.dataset.category;
 
-    Promise.all([
-      fetchJson("content/settings.json"),
-      fetchJson("content/products.json")
-    ]).then(function (results) {
-      applySettings(results[0]);
-      applyProducts(results[1]);
+    fetchJson("content/settings.json").then(function (settings) {
+      applySettings(settings);
+      if (!isHomeGrid) return;
+      fetchJson("content/products.json").then(applyProducts);
     });
   }
 

@@ -15,6 +15,24 @@ collections:
         label: "Opšte"
         file: "content/settings.json"
         fields:
+          - label: "Logo u zaglavlju"
+            name: "logo_header"
+            widget: "image"
+            required: false
+            hint: "SVG ili PNG. Zamenjuje ispisano 49 FORTY NINE UNBEATEN. Ostavi prazno da ostane ispisana verzija."
+          - label: "Opis logoa u zaglavlju"
+            name: "logo_header_alt"
+            widget: "string"
+            required: false
+          - label: "Logo u futeru"
+            name: "logo_footer"
+            widget: "image"
+            required: false
+            hint: "Okrugli pečat na dnu. SVG ili PNG, najbolje kvadratna slika. Ostavi prazno da ostane nacrtana verzija."
+          - label: "Opis logoa u futeru"
+            name: "logo_footer_alt"
+            widget: "string"
+            required: false
           - label: "Velika slika na početnoj"
             name: "hero_image"
             widget: "image"
