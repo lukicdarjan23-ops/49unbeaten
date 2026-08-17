@@ -9,42 +9,42 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "settings"
-    label: "Site Settings"
+    label: "Podešavanja sajta"
     files:
       - name: "settings"
-        label: "General"
+        label: "Opšte"
         file: "content/settings.json"
         fields:
-          - label: "Hero Image"
+          - label: "Velika slika na početnoj"
             name: "hero_image"
             widget: "image"
             required: false
-            hint: "Shown at the top of the homepage. Leave blank to keep the grey placeholder."
-          - label: "Hero Image Alt Text"
+            hint: "Široka slika na vrhu početne strane. Ostavi prazno za sivi kvadrat."
+          - label: "Opis velike slike"
             name: "hero_alt"
             widget: "string"
             required: false
-          - label: "Hero Link"
+          - label: "Gde vodi velika slika"
             name: "hero_link"
             widget: "string"
-          - label: "\"Top Sellers\" Heading"
+          - label: "Naslov iznad mreže proizvoda"
             name: "top_sellers_title"
             widget: "string"
-          - label: "\"View All\" Link Text"
+          - label: "Tekst linka desno od naslova"
             name: "view_all_text"
             widget: "string"
-          - label: "\"View All\" Link URL"
+          - label: "Gde vodi taj link"
             name: "view_all_link"
             widget: "string"
-          - label: "Instagram URL"
+          - label: "Instagram adresa"
             name: "instagram_url"
             widget: "string"
             required: false
-          - label: "WhatsApp URL"
+          - label: "WhatsApp adresa"
             name: "whatsapp_url"
             widget: "string"
             required: false
-          - label: "Footer Notice Text"
+          - label: "Tekst u crnoj traci na dnu"
             name: "sales_notice"
             widget: "text"
 
@@ -60,7 +60,7 @@ collections:
             widget: "list"
             summary: "{{fields.title}} ({{fields.category}})"
             label_singular: "Proizvod"
-            hint: "Dodaj proizvod klikom na dugme ispod. Svaki proizvod automatski dobija svoju stranicu."
+            hint: "Klikni Add Proizvod za novi. Svaki proizvod automatski dobija svoju stranu na sajtu."
             fields:
               - label: "Naziv"
                 name: "title"
@@ -68,7 +68,7 @@ collections:
               - label: "Adresa stranice (slug)"
                 name: "slug"
                 widget: "string"
-                hint: "Mala slova i crtice, bez razmaka i kvacica. Npr: the-statue. Mora biti razlicito od svih ostalih proizvoda."
+                hint: "Mala slova i crtice, bez razmaka i bez kvačica. Npr: the-statue. Mora biti različit od svih ostalih proizvoda."
               - label: "Podnaslov na kartici"
                 name: "type"
                 widget: "string"
@@ -82,26 +82,26 @@ collections:
                 name: "image"
                 widget: "image"
                 required: false
-                hint: "Slika koja se vidi u mrezi proizvoda. Ostavi prazno za sivi kvadrat."
+                hint: "Slika koja se vidi u mreži proizvoda. Ostavi prazno za sivi kvadrat."
               - { label: "Opis slike na kartici", name: "alt", widget: "string", required: false }
               - label: "Tekst ispod cene"
                 name: "ship_note"
                 widget: "string"
                 required: false
-              - label: "Slike po materijalu"
+              - label: "Slike po materijalu (Print / Canvas)"
                 name: "media"
                 widget: "list"
                 summary: "{{fields.group}}"
-                hint: "Jedna slika po materijalu, deli je svaka velicina tog materijala. Naziv grupe mora da se poklopi sa Grupom kod opcija ispod."
+                hint: "Jedna slika po materijalu — dele je sve veličine tog materijala. Naziv grupe mora da se poklopi sa Grupom kod opcija ispod."
                 fields:
                   - { label: "Grupa", name: "group", widget: "string" }
                   - { label: "Slika", name: "image", widget: "image", required: false }
                   - { label: "Opis slike", name: "alt", widget: "string", required: false }
-              - label: "Velicine i cene"
+              - label: "Veličine i cene"
                 name: "variants"
                 widget: "list"
                 summary: "{{fields.label}} — {{fields.price}}"
-                hint: "Svaka opcija ima svoju cenu. Kvacicu Podrazumevano stavi na JEDNU opciju — na njoj se stranica otvara i njena cena se vidi na kartici."
+                hint: "Svaka opcija ima svoju cenu. Kvačicu Podrazumevano stavi na SAMO JEDNU opciju — na njoj se strana otvara i njena cena se vidi na kartici."
                 fields:
                   - { label: "Naziv opcije", name: "label", widget: "string" }
                   - label: "Cena (USD)"
@@ -125,70 +125,70 @@ collections:
                 fields:
                   - { label: "Naslov", name: "title", widget: "string" }
                   - { label: "Tekst", name: "body", widget: "text" }
-              - { label: "Siroka slika ispod", name: "showcase_image", widget: "image", required: false }
-              - { label: "Opis siroke slike", name: "showcase_alt", widget: "string", required: false }
+              - { label: "Široka slika na dnu strane", name: "showcase_image", widget: "image", required: false }
+              - { label: "Opis široke slike", name: "showcase_alt", widget: "string", required: false }
 
   - name: "contact"
-    label: "Contact Page"
+    label: "Strana Kontakt"
     files:
       - name: "contact"
-        label: "Contact"
+        label: "Kontakt"
         file: "content/contact.json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Intro", name: "intro", widget: "text", required: false }
-          - label: "Email Address"
+          - { label: "Naslov", name: "title", widget: "string" }
+          - { label: "Uvodni tekst", name: "intro", widget: "text", required: false }
+          - label: "Mejl adresa"
             name: "email"
             widget: "string"
-            hint: "Shown as a clickable mailto link."
-          - label: "WhatsApp Number"
+            hint: "Prikazuje se kao link na koji se klikne."
+          - label: "WhatsApp broj"
             name: "whatsapp"
             widget: "string"
-            hint: "Include the country code, e.g. +381 60 123 4567. Spaces and dashes are stripped for the wa.me link."
+            hint: "Sa pozivnim brojem, npr. +381 60 123 4567. Razmaci i crtice se sami uklanjaju."
 
   - name: "legal"
-    label: "Legal Pages"
+    label: "Pravne strane"
     files:
       - name: "privacy"
-        label: "Privacy Policy"
+        label: "Politika privatnosti"
         file: "content/privacy.json"
         fields: &legal_fields
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Last Updated", name: "updated", widget: "string", required: false }
-          - { label: "Intro", name: "intro", widget: "text", required: false }
-          - label: "Sections"
+          - { label: "Naslov", name: "title", widget: "string" }
+          - { label: "Datum poslednje izmene", name: "updated", widget: "string", required: false }
+          - { label: "Uvodni tekst", name: "intro", widget: "text", required: false }
+          - label: "Sekcije"
             name: "sections"
             widget: "list"
             summary: "{{fields.heading}}"
-            hint: "DRAFT TEXT — anything in [SQUARE BRACKETS] must be replaced with your real details, and the whole page should be checked by someone qualified before you take orders. Leave a blank line between paragraphs."
+            hint: "OVO JE NACRT. Sve u [UGLASTIM ZAGRADAMA] moraš da zameniš svojim podacima, i neka pravnik pregleda pre nego što počneš da naplaćuješ. Prazan red razdvaja pasuse."
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Naslov sekcije", name: "heading", widget: "string" }
+              - { label: "Tekst", name: "body", widget: "text" }
       - name: "terms"
-        label: "Terms & Conditions"
+        label: "Uslovi korišćenja"
         file: "content/terms.json"
         fields: *legal_fields
 
   - name: "categories"
-    label: "Category Pages"
+    label: "Strane kategorija"
     files:
       - name: "categories"
         label: "Art / Apparel / Gifts"
         file: "content/categories.json"
         fields:
           - name: "items"
-            label: "Categories"
+            label: "Kategorije"
             widget: "list"
             summary: "{{fields.title}}"
-            hint: "The Slug must stay as it is — each category page looks itself up by slug. Products appear here by their own Category field."
+            hint: "NE MENJAJ polje Slug — po njemu se svaka strana pronalazi. Proizvodi se ovde pojavljuju sami, po svojoj Kategoriji."
             fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Heading", name: "title", widget: "string" }
-              - { label: "Intro", name: "intro", widget: "text", required: false }
-              - label: "Hero Image"
+              - { label: "Slug (ne dirati)", name: "slug", widget: "string" }
+              - { label: "Naslov strane", name: "title", widget: "string" }
+              - { label: "Uvodni tekst", name: "intro", widget: "text", required: false }
+              - label: "Velika slika na početnoj"
                 name: "hero_image"
                 widget: "image"
                 required: false
-                hint: "The 260px band at the top. Leave blank for the grey placeholder."
-              - { label: "Hero Image Alt Text", name: "hero_alt", widget: "string", required: false }
-              - { label: "Hero Link", name: "hero_link", widget: "string", required: false }
+                hint: "Uska traka na vrhu strane, visine 260px. Ostavi prazno za sivi kvadrat."
+              - { label: "Opis slike", name: "hero_alt", widget: "string", required: false }
+              - { label: "Gde vodi slika", name: "hero_link", widget: "string", required: false }
