@@ -455,6 +455,11 @@
 
     fetchJson("content/settings.json").then(function (settings) {
       applySettings(settings);
+      /* Everything the CMS supplies is in place — let the held text show.
+         fetchJson resolves null rather than rejecting, so this runs even
+         when the file is missing and the defaults are what's on screen. */
+      document.documentElement.classList.remove("cms-loading");
+
       if (!isHomeGrid) return;
       fetchJson("content/products.json").then(applyProducts);
     });

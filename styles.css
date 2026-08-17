@@ -46,7 +46,28 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Always leave room for the scrollbar. The homepage is short until the
+     product grid renders, so the bar arrives a frame late and everything
+     slides sideways as it does. Two declarations: the second is the exact
+     one, the first covers browsers that don't have it yet. */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* Text the CMS supplies is hidden, not removed, so it holds its space and
+   the wording never changes under the reader's eye. visibility rather than
+   display for that reason. The animation is a safety net: if the script
+   never gets to clear the flag, the text appears on its own. */
+.cms-loading [data-cms-fill] {
+  visibility: hidden;
+  animation: cms-reveal 0s linear 1.5s forwards;
+}
+
+@keyframes cms-reveal {
+  to { visibility: visible; }
+}
 
 body {
   margin: 0;

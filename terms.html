@@ -9,6 +9,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+  /* Marks the page as still waiting on content/settings.json. Text the CMS
+     fills is held invisible — space reserved, so nothing moves — until the
+     real value is in. Added from script rather than markup so the page is
+     readable with JavaScript switched off. */
+  document.documentElement.classList.add("cms-loading");
+</script>
 </head>
 <body data-page="terms">
 
@@ -116,7 +123,7 @@
   </div>
 
   <div class="footer__bar">
-    <p data-sales-notice>All sales final. No returns. Refund only in the event item not delivered or delivered damaged.</p>
+    <p data-sales-notice data-cms-fill>All sales final. No returns. Refund only in the event item not delivered or delivered damaged.</p>
   </div>
 </footer>
 
