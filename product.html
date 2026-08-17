@@ -69,9 +69,23 @@
         <p class="product__price" data-product-price>$89.00</p>
         <p class="product__ship" data-product-ship>Ships worldwide</p>
 
-        <h2 class="product__label" id="variant-label">Size and Type</h2>
-        <div class="variants" role="radiogroup" aria-labelledby="variant-label" data-variants></div>
-        <p class="note" data-variant-note hidden></p>
+        <!-- Art products: one flat list of size + material combinations. -->
+        <div data-art-options>
+          <h2 class="product__label" id="variant-label">Size and Type</h2>
+          <div class="variants" role="radiogroup" aria-labelledby="variant-label" data-variants></div>
+          <p class="note" data-variant-note hidden></p>
+        </div>
+
+        <!-- Apparel: size and colour chosen separately. -->
+        <div data-apparel-options hidden>
+          <h2 class="product__label" id="size-label">Size</h2>
+          <div class="sizes-row" role="radiogroup" aria-labelledby="size-label" data-sizes></div>
+
+          <h2 class="product__label" id="color-label">
+            Color <span class="product__label-value" data-color-name></span>
+          </h2>
+          <div class="swatches" role="radiogroup" aria-labelledby="color-label" data-colors></div>
+        </div>
 
         <h2 class="product__label" id="qty-label">Quantity</h2>
         <div class="qty">

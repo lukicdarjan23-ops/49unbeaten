@@ -78,6 +78,12 @@ collections:
                 widget: "select"
                 options: ["Art", "Apparel", "Gifts"]
                 default: "Art"
+                hint: "Određuje i na kojoj se strani pojavljuje i kako izgleda strana proizvoda. Apparel dobija izbor veličine majice i boje umesto Print/Canvas."
+              - label: "Prikaži na naslovnoj (Top Sellers)"
+                name: "featured"
+                widget: "boolean"
+                default: false
+                hint: "Čekirani proizvodi čine mrežu na naslovnoj strani. Ako nijedan nije čekiran, prikazuju se svi."
               - label: "Slika na kartici"
                 name: "image"
                 widget: "image"
@@ -97,7 +103,7 @@ collections:
                   - { label: "Grupa", name: "group", widget: "string" }
                   - { label: "Slika", name: "image", widget: "image", required: false }
                   - { label: "Opis slike", name: "alt", widget: "string", required: false }
-              - label: "Veličine i cene"
+              - label: "Veličine i cene — SAMO za Art"
                 name: "variants"
                 widget: "list"
                 summary: "{{fields.label}} — {{fields.price}}"
@@ -111,6 +117,35 @@ collections:
                     min: 0
                   - { label: "Grupa", name: "group", widget: "string" }
                   - { label: "Napomena", name: "note", widget: "string", required: false }
+                  - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+              - label: "Veličine majica — SAMO za Apparel"
+                name: "sizes"
+                widget: "list"
+                required: false
+                summary: "{{fields.label}} — {{fields.price}}"
+                hint: "Prikazuju se u jednom redu. Kvačicu Podrazumevano stavi na SAMO JEDNU."
+                fields:
+                  - { label: "Oznaka", name: "label", widget: "string" }
+                  - label: "Cena (USD)"
+                    name: "price"
+                    widget: "number"
+                    value_type: "float"
+                    min: 0
+                  - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+              - label: "Boje majica — SAMO za Apparel"
+                name: "colors"
+                widget: "list"
+                required: false
+                summary: "{{fields.label}}"
+                hint: "Kvadratići ispod veličina. Grupa mora da se poklopi sa Grupom u \"Slike po materijalu\" iznad, da bi se slika menjala sa bojom."
+                fields:
+                  - { label: "Naziv boje", name: "label", widget: "string" }
+                  - label: "Boja"
+                    name: "hex"
+                    widget: "color"
+                    required: false
+                    hint: "Boja kvadratića na sajtu."
+                  - { label: "Grupa (za sliku)", name: "group", widget: "string", required: false }
                   - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
               - label: "Napomene ispod dugmeta"
                 name: "notes"

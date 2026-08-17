@@ -357,7 +357,12 @@
     var items = raw && Array.isArray(raw.items) && raw.items.length
       ? raw.items
       : DEFAULT_PRODUCTS;
-    renderProducts(document.querySelector("[data-grid]"), items);
+
+    /* The homepage grid is the shop's pick, ticked per product in the
+       CMS. With nothing ticked it shows everything, so the page is never
+       empty by accident. */
+    var featured = items.filter(function (item) { return item.featured; });
+    renderProducts(document.querySelector("[data-grid]"), featured.length ? featured : items);
   }
 
   /* ------------------------------------------------------------------

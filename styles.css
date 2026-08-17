@@ -498,6 +498,52 @@ img.ph--product {
   color: var(--paper);
 }
 
+/* Apparel: sizes in one row, colours as swatches below */
+
+.sizes-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.variant--size { padding: 8px 4px; }
+
+.product__label-value {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.swatch {
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 2.6vw, 50px);
+  height: clamp(38px, 2.6vw, 50px);
+  flex: none;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  transition: box-shadow 0.15s ease;
+}
+
+.swatch__dot {
+  width: 100%;
+  height: 100%;
+  /* Inset so the cell's black border reads as the frame, not the colour
+     itself — pale shirt colours would otherwise have no visible edge. */
+  transform: scale(0.78);
+}
+
+.swatch--selected,
+.swatch:hover {
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink);
+}
+
 /* Info lines — the ⓘ mark is a background image so the note text can
    come straight from the CMS as a plain string. */
 

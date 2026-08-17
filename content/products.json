@@ -65,7 +65,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-2",
@@ -132,7 +135,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-3",
@@ -199,7 +205,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-4",
@@ -266,7 +275,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-5",
@@ -333,7 +345,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-6",
@@ -400,7 +415,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-7",
@@ -467,7 +485,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-8",
@@ -534,7 +555,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": true,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-9",
@@ -601,7 +625,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": false,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-10",
@@ -668,7 +695,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": false,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-11",
@@ -735,7 +765,10 @@
         }
       ],
       "showcase_image": "",
-      "showcase_alt": ""
+      "showcase_alt": "",
+      "featured": false,
+      "sizes": [],
+      "colors": []
     },
     {
       "slug": "the-statue-12",
@@ -799,6 +832,111 @@
         {
           "title": "Shipping and delivery",
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
+        }
+      ],
+      "showcase_image": "",
+      "showcase_alt": "",
+      "featured": false,
+      "sizes": [],
+      "colors": []
+    },
+    {
+      "slug": "unbeaten-tee",
+      "title": "Unbeaten Tee",
+      "type": "T-shirt",
+      "category": "Apparel",
+      "featured": true,
+      "image": "",
+      "alt": "",
+      "ship_note": "Ships worldwide",
+      "media": [
+        {
+          "group": "Black",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "White",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Navy",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Sand",
+          "image": "",
+          "alt": ""
+        }
+      ],
+      "variants": [],
+      "sizes": [
+        {
+          "label": "S",
+          "price": 39,
+          "selected": true
+        },
+        {
+          "label": "M",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "L",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "XL",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "XXL",
+          "price": 44,
+          "selected": false
+        }
+      ],
+      "colors": [
+        {
+          "label": "Black",
+          "hex": "#111111",
+          "group": "Black",
+          "selected": true
+        },
+        {
+          "label": "White",
+          "hex": "#f2f2f2",
+          "group": "White",
+          "selected": false
+        },
+        {
+          "label": "Navy",
+          "hex": "#1e2a44",
+          "group": "Navy",
+          "selected": false
+        },
+        {
+          "label": "Sand",
+          "hex": "#d8c9ae",
+          "group": "Sand",
+          "selected": false
+        }
+      ],
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
+      "panels": [
+        {
+          "title": "Quick Specs",
+          "body": "Heavyweight cotton tee, printed to order."
+        },
+        {
+          "title": "Shipping and delivery",
+          "body": "Dispatched within 2 business days, shipped worldwide with tracking."
         }
       ],
       "showcase_image": "",
