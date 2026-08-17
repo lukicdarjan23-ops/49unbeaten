@@ -1,15 +1,15 @@
 {
-  "logo_header": "",
-  "logo_header_alt": "Forty Nine Unbeaten",
-  "logo_footer": "",
-  "logo_footer_alt": "Forty Nine Unbeaten",
+  "logo_header": "/images/uploads/49-logo-black.svg",
   "whatsapp_url": "https://wa.me/",
   "instagram_url": "https://instagram.com",
   "top_sellers_title": "Top Sellers TRSTSDS",
   "hero_alt": "Featured artwork",
   "view_all_text": "View All",
+  "logo_header_alt": "Forty Nine Unbeaten",
   "sales_notice": "All sales final. No returns. Refund only in the event item not delivered or delivered damaged.",
+  "logo_footer": "/images/uploads/49-logo-white.svg",
   "view_all_link": "/prints",
   "hero_image": "",
+  "logo_footer_alt": "Forty Nine Unbeaten",
   "hero_link": "/originals-on-canvas"
 }
