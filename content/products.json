@@ -1,25 +1,26 @@
 {
   "items": [
     {
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
+      "media": [
+        {
+          "group": "Print",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Canvas",
+          "image": "",
+          "alt": ""
+        }
+      ],
+      "alt": "",
+      "showcase_image": "",
       "slug": "the-statue",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
+      "featured": true,
       "variants": [
         {
           "label": "Print 8x10",
@@ -50,10 +51,6 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
       "panels": [
         {
           "title": "Quick Specs",
@@ -64,32 +61,36 @@
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
+      "colors": [],
       "sizes": [],
-      "colors": []
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
+      "title": "The Statue",
+      "type": "Print",
+      "image": "",
+      "category": "Art"
     },
     {
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
+      "media": [
+        {
+          "group": "Print",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Canvas",
+          "image": "",
+          "alt": ""
+        }
+      ],
+      "alt": "",
+      "showcase_image": "",
       "slug": "the-statue-2",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
+      "featured": true,
       "variants": [
         {
           "label": "Print 8x10",
@@ -120,10 +121,6 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
       "panels": [
         {
           "title": "Quick Specs",
@@ -134,32 +131,36 @@
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
+      "colors": [],
       "sizes": [],
-      "colors": []
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
+      "title": "The Statue",
+      "type": "Print",
+      "image": "",
+      "category": "Art"
     },
     {
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
+      "media": [
+        {
+          "group": "Print",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Canvas",
+          "image": "",
+          "alt": ""
+        }
+      ],
+      "alt": "",
+      "showcase_image": "",
       "slug": "the-statue-3",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
+      "featured": true,
       "variants": [
         {
           "label": "Print 8x10",
@@ -190,10 +191,6 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
       "panels": [
         {
           "title": "Quick Specs",
@@ -204,102 +201,36 @@
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
+      "colors": [],
       "sizes": [],
-      "colors": []
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
+      "title": "The Statue",
+      "type": "Print",
+      "image": "",
+      "category": "Art"
     },
     {
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
+      "media": [
+        {
+          "group": "Print",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "group": "Canvas",
+          "image": "",
+          "alt": ""
+        }
+      ],
+      "alt": "",
+      "showcase_image": "",
       "slug": "the-statue-4",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
       "featured": true,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-5",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
       "variants": [
         {
           "label": "Print 8x10",
@@ -330,10 +261,6 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
       "panels": [
         {
           "title": "Quick Specs",
@@ -344,20 +271,20 @@
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
+      "colors": [],
       "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-6",
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
       "title": "The Statue",
       "type": "Print",
-      "category": "Art",
       "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
+      "category": "Art"
+    },
+    {
+      "notes": [
+        "Ships in 2 business days",
+        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
+      ],
       "media": [
         {
           "group": "Print",
@@ -370,356 +297,10 @@
           "alt": ""
         }
       ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-7",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
       "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
       "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-8",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": true,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-9",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": false,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-10",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": false,
-      "sizes": [],
-      "colors": []
-    },
-    {
       "slug": "the-statue-11",
-      "title": "The Statue",
-      "type": "Print",
-      "category": "Art",
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
+      "featured": false,
       "variants": [
         {
           "label": "Print 8x10",
@@ -750,10 +331,6 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
       "panels": [
         {
           "title": "Quick Specs",
@@ -764,91 +341,20 @@
           "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": false,
+      "colors": [],
       "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "the-statue-12",
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
       "title": "The Statue",
       "type": "Print",
-      "category": "Art",
       "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
-      "media": [
-        {
-          "group": "Print",
-          "image": "",
-          "alt": ""
-        },
-        {
-          "group": "Canvas",
-          "image": "",
-          "alt": ""
-        }
-      ],
-      "variants": [
-        {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
-          "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": true
-        },
-        {
-          "label": "Canvas 16x20",
-          "price": 149,
-          "group": "Canvas",
-          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
-          "selected": false
-        }
-      ],
+      "category": "Art"
+    },
+    {
       "notes": [
         "Ships in 2 business days",
         "Made to order, no returns. Full refund if it shows up damaged or never shows up."
       ],
-      "panels": [
-        {
-          "title": "Quick Specs",
-          "body": "Museum-quality print on thick matte paper, or giclée on cotton canvas stretched over a wood frame. Archival inks. All sizes in inches."
-        },
-        {
-          "title": "Shipping and delivery",
-          "body": "Made to order and dispatched within 2 business days. Shipped worldwide with tracking — prints in a rigid tube, canvases boxed."
-        }
-      ],
-      "showcase_image": "",
-      "showcase_alt": "",
-      "featured": false,
-      "sizes": [],
-      "colors": []
-    },
-    {
-      "slug": "unbeaten-tee",
-      "title": "Unbeaten Tee",
-      "type": "T-shirt",
-      "category": "Apparel",
-      "featured": true,
-      "image": "",
-      "alt": "",
-      "ship_note": "Ships worldwide",
       "media": [
         {
           "group": "Black",
@@ -871,32 +377,19 @@
           "alt": ""
         }
       ],
+      "alt": "",
+      "showcase_image": "",
+      "slug": "unbeaten-tee",
+      "featured": true,
       "variants": [],
-      "sizes": [
+      "panels": [
         {
-          "label": "S",
-          "price": 39,
-          "selected": true
+          "title": "Quick Specs",
+          "body": "Heavyweight cotton tee, printed to order."
         },
         {
-          "label": "M",
-          "price": 39,
-          "selected": false
-        },
-        {
-          "label": "L",
-          "price": 39,
-          "selected": false
-        },
-        {
-          "label": "XL",
-          "price": 39,
-          "selected": false
-        },
-        {
-          "label": "XXL",
-          "price": 44,
-          "selected": false
+          "title": "Shipping and delivery",
+          "body": "Dispatched within 2 business days, shipped worldwide with tracking."
         }
       ],
       "colors": [
@@ -925,22 +418,39 @@
           "selected": false
         }
       ],
-      "notes": [
-        "Ships in 2 business days",
-        "Made to order, no returns. Full refund if it shows up damaged or never shows up."
-      ],
-      "panels": [
+      "sizes": [
         {
-          "title": "Quick Specs",
-          "body": "Heavyweight cotton tee, printed to order."
+          "label": "S",
+          "price": 39,
+          "selected": true
         },
         {
-          "title": "Shipping and delivery",
-          "body": "Dispatched within 2 business days, shipped worldwide with tracking."
+          "label": "M",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "L",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "XL",
+          "price": 39,
+          "selected": false
+        },
+        {
+          "label": "XXL",
+          "price": 44,
+          "selected": false
         }
       ],
-      "showcase_image": "",
-      "showcase_alt": ""
+      "ship_note": "Ships worldwide",
+      "showcase_alt": "",
+      "title": "Unbeaten Tee",
+      "type": "T-shirt",
+      "image": "",
+      "category": "Apparel"
     }
   ]
 }
