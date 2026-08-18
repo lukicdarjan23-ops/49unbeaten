@@ -1,5 +1,8 @@
 [build]
   publish = "."
+  # Server-side code. Anything in here runs on Netlify, not in the visitor's
+  # browser, which is the only place the Printful and PayPal keys may exist.
+  functions = "netlify/functions"
   # Writes the CMS's icons and share card into the HTML, stamps a page per
   # product at /products/<slug>/, and rebuilds sitemap.xml. Has to happen
   # here rather than in the browser: social scrapers and search engines read
@@ -73,7 +76,12 @@
   status = 301
 
 # Anything that isn't a real file falls through to the branded 404 page
-# rather than Netlify's own. Last, so the rules above win.
+# rather than Netlify's own. Last, so the rules above win — and functions,
+# which Netlify serves from /.netlify/functions/, are matched before it.
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 [[redirects]]
   from = "/*"
   to = "/404.html"

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Printful — pregled proizvoda</title>
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --ink: #111; --muted: #6b6b6b; --line: #dcdcdc; --bad: #b3261e; --good: #1a6b1a; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px 80px;
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #fafafa;
+  }
+  main { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .lede { color: var(--muted); margin: 0 0 24px; }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; margin-bottom: 18px; }
+  .panel h2 { font-size: 17px; margin: 0 0 4px; }
+  .id { font: 600 15px/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: #f1f1f1; padding: 4px 8px; border-radius: 5px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid #eee; }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .msg { padding: 14px 16px; border-radius: 8px; margin-bottom: 18px; }
+  .msg--bad { background: #fdecea; color: var(--bad); border: 1px solid #f5c6c2; }
+  .msg--wait { background: #eef2f7; color: #33475b; border: 1px solid #d7e0ea; }
+  .msg--good { background: #eaf6ea; color: var(--good); border: 1px solid #c7e6c7; }
+  details { margin-top: 10px; }
+  pre { background: #f6f6f6; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 12.5px; }
+  button { font: inherit; padding: 8px 14px; border: 1px solid var(--ink); background: #fff; border-radius: 6px; cursor: pointer; }
+  button:hover { background: #f0f0f0; }
+  a { color: inherit; }
+  .thumb { width: 54px; height: 54px; object-fit: contain; background: #f3f3f3; border-radius: 4px; }
+  .row { display: flex; align-items: center; gap: 14px; }
+  .foot { color: var(--muted); font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Printful — pregled proizvoda</h1>
+  <p class="lede">
+    Ovde vidiš šta stvarno stoji u tvojoj Printful prodavnici: koliko te svaki
+    artikal košta i koji je njegov broj. Ništa se odavde ne menja — samo se čita.
+  </p>
+
+  <div id="status" class="msg msg--wait">Proveravam da li si prijavljen…</div>
+  <div id="out"></div>
+
+  <p class="foot">
+    Ova strana je samo za tebe. Nije povezana ni sa jednom stranom sajta i
+    pretraživači je ne indeksiraju. <a href="/admin/">Nazad na CMS</a>
+  </p>
+</main>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var status = document.getElementById("status");
+  var out = document.getElementById("out");
+
+  function say(text, kind) {
+    status.className = "msg msg--" + (kind || "wait");
+    status.textContent = text;
+  }
+
+  function money(value, currency) {
+    if (value == null || isNaN(value)) return "—";
+    try {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: currency || "USD" }).format(value);
+    } catch (err) {
+      return value + " " + (currency || "");
+    }
+  }
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  function renderProduct(product) {
+    var panel = el("div", "panel");
+
+    var head = el("div", "row");
+    if (product.thumbnail) {
+      var img = el("img", "thumb");
+      img.src = product.thumbnail;
+      img.alt = "";
+      head.appendChild(img);
+    }
+
+    var titles = el("div");
+    titles.appendChild(el("h2", null, product.name || "(bez naziva)"));
+
+    var idLine = el("p");
+    idLine.style.margin = "2px 0 0";
+    idLine.appendChild(document.createTextNode("Printful ID proizvoda: "));
+    idLine.appendChild(el("span", "id", String(product.printful_product_id)));
+    idLine.appendChild(document.createTextNode("  —  ovaj broj ide u CMS"));
+    titles.appendChild(idLine);
+    head.appendChild(titles);
+    panel.appendChild(head);
+
+    var table = el("table");
+    var thead = el("tr");
+    ["Veličina", "Boja", "Košta tebe", "Cena u Printfulu", "ID varijante", "Dostupno"]
+      .forEach(function (label) { thead.appendChild(el("th", null, label)); });
+    table.appendChild(thead);
+
+    product.variants.forEach(function (v) {
+      var tr = el("tr");
+      tr.appendChild(el("td", null, v.size || "—"));
+      tr.appendChild(el("td", null, v.color || "—"));
+      tr.appendChild(el("td", "num", money(v.cost, v.currency)));
+      tr.appendChild(el("td", "num", money(v.retail, v.currency)));
+      tr.appendChild(el("td", "num", String(v.variant_id)));
+      tr.appendChild(el("td", null, v.available ? "da" : "NE — ukinuto"));
+      table.appendChild(tr);
+    });
+
+    panel.appendChild(table);
+    return panel;
+  }
+
+  function render(data) {
+    out.textContent = "";
+    var products = data.products || [];
+
+    if (!products.length) {
+      say("Veza radi, ali u prodavnici nema nijednog proizvoda. Napravi ga u Printfulu pa osveži ovu stranu.", "bad");
+      return;
+    }
+
+    say("Veza sa Printfulom radi. Nađeno proizvoda: " + products.length + ".", "good");
+    products.forEach(function (product) { out.appendChild(renderProduct(product)); });
+  }
+
+  function load(user) {
+    say("Učitavam iz Printfula…");
+
+    user.jwt().then(function (jwt) {
+      return fetch("/.netlify/functions/printful-catalog", {
+        headers: { "Authorization": "Bearer " + jwt }
+      });
+    }).then(function (res) {
+      return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+    }).then(function (result) {
+      if (result.ok) return render(result.body);
+
+      say("Printful je odbio zahtev: " + (result.body.error || "nepoznata greška"), "bad");
+      if (result.body.detail) {
+        var box = el("details");
+        box.appendChild(el("summary", null, "Tehnički detalji (pošalji mi ovo)"));
+        var pre = el("pre", null, JSON.stringify(result.body.detail, null, 2));
+        box.appendChild(pre);
+        out.appendChild(box);
+      }
+    }).catch(function (err) {
+      say("Nije uspelo: " + err.message, "bad");
+    });
+  }
+
+  function askToLogIn() {
+    say("Nisi prijavljen. Prijavi se pa se strana sama učitava.", "bad");
+    var button = el("button", null, "Prijavi se");
+    button.addEventListener("click", function () { window.netlifyIdentity.open("login"); });
+    out.textContent = "";
+    out.appendChild(button);
+  }
+
+  if (!window.netlifyIdentity) {
+    say("Netlify Identity se nije učitao. Osveži stranu.", "bad");
+    return;
+  }
+
+  window.netlifyIdentity.on("init", function (user) {
+    if (user) load(user);
+    else askToLogIn();
+  });
+  window.netlifyIdentity.on("login", function (user) {
+    window.netlifyIdentity.close();
+    load(user);
+  });
+  window.netlifyIdentity.init();
+})();
+</script>
+</body>
+</html>
