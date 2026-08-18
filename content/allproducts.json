@@ -4,5 +4,6 @@
   "hero_image": "",
   "hero_alt": "",
   "hero_link": "#",
-  "order": "mixed"
+  "order": "mixed",
+  "hero_text": ""
 }

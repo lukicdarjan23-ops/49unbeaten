@@ -450,7 +450,43 @@
       "title": "Unbeaten Tee",
       "type": "T-shirt",
       "image": "",
-      "category": "Apparel"
+      "category": "Apparel",
+      "size_guide": {
+        "title": "Size guide",
+        "note": "Measured flat, in centimetres. Allow 1–2 cm either way.",
+        "rows": [
+          {
+            "label": "S",
+            "chest": "46",
+            "length": "71",
+            "sleeve": "19"
+          },
+          {
+            "label": "M",
+            "chest": "51",
+            "length": "74",
+            "sleeve": "20"
+          },
+          {
+            "label": "L",
+            "chest": "56",
+            "length": "76",
+            "sleeve": "22"
+          },
+          {
+            "label": "XL",
+            "chest": "61",
+            "length": "79",
+            "sleeve": "23"
+          },
+          {
+            "label": "XXL",
+            "chest": "66",
+            "length": "81",
+            "sleeve": "25"
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,43 @@
+{
+  "title": "Shipping & Returns",
+  "updated": "",
+  "intro": "NACRT — zameni sve u [UGLASTIM ZAGRADAMA] svojim podacima pre nego što pustiš sajt u rad.",
+  "sections": [
+    {
+      "heading": "Made to order",
+      "body": "Every piece is printed once you order it, so nothing sits in a warehouse and nothing is wasted.\n\nOrders are printed and dispatched within [2–5] business days. Add the delivery time below on top of that."
+    },
+    {
+      "heading": "Delivery times",
+      "body": "Serbia and the region: [3–7] business days after dispatch.\n\nEurope: [5–10] business days after dispatch.\n\nUnited States, Canada, Australia and the rest of the world: [7–20] business days after dispatch.\n\nThese are the carrier's own estimates, not a guarantee. Customs, holidays and weather can add time."
+    },
+    {
+      "heading": "Shipping cost",
+      "body": "[Shipping is calculated at checkout and depends on the destination and the size of the order.]\n\n[Orders over $X ship free.]"
+    },
+    {
+      "heading": "Customs and import duty",
+      "body": "Orders shipped outside [the EU / Serbia] may attract import duty or tax on arrival. Those charges are set by your own country and are paid by you, not by us. We have no way of knowing the amount in advance."
+    },
+    {
+      "heading": "Tracking",
+      "body": "You get a tracking number by email as soon as the parcel leaves the printer. If it hasn't arrived within [7] days of the estimate above, write to us and we will chase it."
+    },
+    {
+      "heading": "Returns",
+      "body": "Everything is made to order, one copy for one customer, so we cannot resell a returned item. For that reason all sales are final and we do not accept returns or exchanges for a change of mind, or for the wrong size being ordered. Please use the size guide on the product page before you order.\n\nThis does not affect any right you have under [applicable consumer law]."
+    },
+    {
+      "heading": "Damaged, faulty or lost",
+      "body": "If your order arrives damaged or with a printing fault, or never arrives at all, you get a full refund or a free replacement — your choice.\n\nWrite to [hello@49unbeaten.com] within [30] days of delivery, with your order number and a photograph of the damage and of the packaging. We handle it from there; you do not need to send the item back."
+    },
+    {
+      "heading": "Wrong address",
+      "body": "Check your address carefully at checkout. A parcel returned to us because the address was wrong or nobody collected it can be reshipped, but the shipping is paid again."
+    },
+    {
+      "heading": "Questions",
+      "body": "Write to [hello@49unbeaten.com] or message us on WhatsApp — the Contact page has both."
+    }
+  ]
+}

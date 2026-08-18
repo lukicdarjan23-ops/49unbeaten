@@ -190,11 +190,88 @@
     });
   }
 
+  /* The size guide is a table rather than a paragraph, so it gets built
+     here instead of coming through the ordinary text panels. Columns are
+     dropped when no row fills them — a t-shirt listed by chest and length
+     shouldn't show an empty Sleeve column. */
+  function buildSizeGuide() {
+    var guide = product.size_guide || {};
+    var rows = (Array.isArray(guide.rows) ? guide.rows : []).filter(function (row) {
+      return row && String(row.label || "").trim();
+    });
+    if (!rows.length) return null;
+
+    var columns = [
+      { key: "label", head: "Size" },
+      { key: "chest", head: "Chest" },
+      { key: "length", head: "Length" },
+      { key: "sleeve", head: "Sleeve" }
+    ].filter(function (column) {
+      if (column.key === "label") return true;
+      return rows.some(function (row) { return String(row[column.key] || "").trim(); });
+    });
+
+    var details = document.createElement("details");
+    details.className = "panel";
+
+    var summary = document.createElement("summary");
+    summary.className = "panel__head";
+    summary.textContent = guide.title || "Size guide";
+    details.appendChild(summary);
+
+    var body = document.createElement("div");
+    body.className = "panel__body";
+
+    var table = document.createElement("table");
+    table.className = "sizes-table";
+
+    var thead = document.createElement("thead");
+    var headRow = document.createElement("tr");
+    columns.forEach(function (column) {
+      var th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = column.head;
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement("tbody");
+    rows.forEach(function (row) {
+      var tr = document.createElement("tr");
+      columns.forEach(function (column, index) {
+        var cell = document.createElement(index ? "td" : "th");
+        if (!index) cell.scope = "row";
+        cell.textContent = String(row[column.key] || "").trim() || "—";
+        tr.appendChild(cell);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    body.appendChild(table);
+
+    if (guide.note) {
+      var note = document.createElement("p");
+      note.className = "sizes-table__note";
+      note.textContent = guide.note;
+      body.appendChild(note);
+    }
+
+    details.appendChild(body);
+    return details;
+  }
+
   function renderPanels() {
     var wrap = document.querySelector("[data-product-panels]");
     if (!wrap) return;
 
     wrap.textContent = "";
+
+    /* First in the stack: it is the thing a shopper needs before they can
+       choose a size, not an afterthought below the shipping blurb. */
+    var guide = buildSizeGuide();
+    if (guide) wrap.appendChild(guide);
+
     product.panels.forEach(function (panel) {
       var details = document.createElement("details");
       details.className = "panel";

@@ -13,6 +13,7 @@
     intro: "",
     hero_image: "",
     hero_alt: "",
+    hero_text: "",
     hero_link: "#",
     order: "mixed"
   };

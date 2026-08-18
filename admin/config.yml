@@ -42,6 +42,11 @@ collections:
             name: "hero_alt"
             widget: "string"
             required: false
+          - label: "Tekst preko velike slike"
+            name: "hero_text"
+            widget: "string"
+            required: false
+            hint: "Krupan natpis na sredini slike. Ostavi prazno da se ne prikazuje ništa preko slike."
           - label: "Gde vodi velika slika"
             name: "hero_link"
             widget: "string"
@@ -165,6 +170,30 @@ collections:
                     hint: "Boja kvadratića na sajtu."
                   - { label: "Grupa (za sliku)", name: "group", widget: "string", required: false }
                   - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+              - label: "Tabela veličina"
+                name: "size_guide"
+                widget: "object"
+                required: false
+                collapsed: true
+                hint: "Otvara se kao sekcija na strani proizvoda, iznad ostalih. Ostavi listu praznu da se tabela uopšte ne pojavi."
+                fields:
+                  - { label: "Naslov sekcije", name: "title", widget: "string", required: false, default: "Size guide" }
+                  - label: "Napomena ispod tabele"
+                    name: "note"
+                    widget: "string"
+                    required: false
+                    hint: "Npr: Mereno spljošteno, u centimetrima."
+                  - label: "Redovi"
+                    name: "rows"
+                    widget: "list"
+                    required: false
+                    summary: "{{fields.label}}"
+                    label_singular: "Red"
+                    fields:
+                      - { label: "Veličina", name: "label", widget: "string" }
+                      - { label: "Grudi", name: "chest", widget: "string", required: false }
+                      - { label: "Dužina", name: "length", widget: "string", required: false }
+                      - { label: "Rukav", name: "sleeve", widget: "string", required: false }
               - label: "Napomene ispod dugmeta"
                 name: "notes"
                 widget: "list"
@@ -205,6 +234,11 @@ collections:
             required: false
             hint: "Uska traka na vrhu strane, visine 260px. Ostavi prazno za sivi kvadrat."
           - { label: "Opis slike", name: "hero_alt", widget: "string", required: false }
+          - label: "Tekst preko slike"
+            name: "hero_text"
+            widget: "string"
+            required: false
+            hint: "Krupan natpis na sredini slike. Ostavi prazno da se ne prikazuje ništa."
           - { label: "Gde vodi slika", name: "hero_link", widget: "string", required: false }
 
   - name: "contact"
@@ -247,6 +281,10 @@ collections:
         label: "Uslovi korišćenja"
         file: "content/terms.json"
         fields: *legal_fields
+      - name: "shipping"
+        label: "Isporuka i povraćaj"
+        file: "content/shipping.json"
+        fields: *legal_fields
 
   - name: "categories"
     label: "Strane kategorija"
@@ -270,4 +308,9 @@ collections:
                 required: false
                 hint: "Uska traka na vrhu strane, visine 260px. Ostavi prazno za sivi kvadrat."
               - { label: "Opis slike", name: "hero_alt", widget: "string", required: false }
+              - label: "Tekst preko slike"
+                name: "hero_text"
+                widget: "string"
+                required: false
+                hint: "Krupan natpis na sredini slike. Ostavi prazno da se ne prikazuje ništa."
               - { label: "Gde vodi slika", name: "hero_link", widget: "string", required: false }

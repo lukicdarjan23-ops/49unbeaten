@@ -6,7 +6,8 @@
       "intro": "",
       "hero_image": "",
       "hero_alt": "",
-      "hero_link": "#"
+      "hero_link": "#",
+      "hero_text": "Art"
     },
     {
       "slug": "apparel",
@@ -14,7 +15,8 @@
       "intro": "",
       "hero_image": "",
       "hero_alt": "",
-      "hero_link": "#"
+      "hero_link": "#",
+      "hero_text": "Apparel"
     }
   ]
 }

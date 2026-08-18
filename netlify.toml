@@ -1,2 +1,9 @@
 [build]
   publish = "."
+
+# Anything that isn't a real file falls through to the branded 404 page
+# rather than Netlify's own.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

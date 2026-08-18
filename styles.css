@@ -308,7 +308,34 @@ img.ph--card {
   border-bottom: 1px solid var(--rule);
 }
 
-.hero__link { display: block; }
+.hero__link {
+  display: block;
+  position: relative;
+}
+
+/* Headline laid over the hero picture, centred in the band. 64/68 at full
+   HD; the vw term is that size as a share of 1920 so it scales with the
+   rest. It only exists when the CMS has words for it — a hero left without
+   a caption is untouched, no tint over the picture. */
+.hero__caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(16px, 4vw, 80px);
+  text-align: center;
+  text-wrap: balance;
+  color: var(--paper);
+  font-size: clamp(26px, 3.3333vw, 64px);
+  line-height: 1.0625;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  /* Enough of a scrim to hold white type over a pale photograph, with the
+     shadow doing the rest on a busy one. */
+  background: rgba(0, 0, 0, 0.32);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 30px rgba(0, 0, 0, 0.45);
+}
 
 /* Section head
    ========================================================================== */
@@ -703,6 +730,38 @@ img.ph--product {
   max-width: 60ch;
 }
 
+/* Size guide table inside a panel */
+.sizes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.sizes-table th,
+.sizes-table td {
+  padding: 8px 10px 8px 0;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sizes-table thead th {
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.86em;
+}
+
+.sizes-table tbody th { font-weight: 500; }
+
+.sizes-table tbody tr:last-child th,
+.sizes-table tbody tr:last-child td { border-bottom: 0; }
+
+.sizes-table__note {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
 /* Full-bleed detail image below the buy panel */
 
 .showcase { display: block; }
@@ -750,6 +809,14 @@ img.ph--showcase {
   line-height: 1.6;
   max-width: 60ch;
 }
+
+/* The ways out of the 404 page */
+.page__link {
+  border-bottom: 1px solid var(--rule);
+  transition: opacity 0.15s ease;
+}
+
+.page__link:hover { opacity: 0.6; }
 
 /* Legal copy */
 

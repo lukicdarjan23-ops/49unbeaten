@@ -203,6 +203,7 @@
     logo_footer_alt: "Forty Nine Unbeaten",
     hero_image: "",
     hero_alt: "Featured artwork",
+    hero_text: "",
     hero_link: "/art",
     top_sellers_title: "Top Sellers",
     view_all_text: "View All",
@@ -299,12 +300,22 @@
 
     var link = scope.querySelector("[data-hero-link]");
     var slot = scope.querySelector("[data-hero-media]");
+    var caption = scope.querySelector("[data-hero-text]");
 
     if (link) link.href = source.hero_link || "#";
+
+    if (caption) {
+      caption.textContent = source.hero_text || "";
+      caption.hidden = !source.hero_text;
+    }
+
     if (!slot) return;
 
     if (!source.hero_image) {
-      slot.textContent = "img";
+      /* The grey box says "img" to show a picture belongs here — but not
+         underneath a caption, where the two words sit on top of each
+         other. */
+      slot.textContent = source.hero_text ? "" : "img";
       return;
     }
 
