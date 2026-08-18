@@ -207,7 +207,9 @@ img.ph--card {
   display: flex;
   align-items: center;
   gap: 22px;
-  font-size: 13px;
+  /* 16px at full HD. The floor is the 13px it used to be, so narrower
+     screens keep what they had rather than losing a pixel. */
+  font-size: clamp(13px, 0.8333vw, 16px);
   font-weight: 500;
 }
 
@@ -267,7 +269,7 @@ img.ph--card {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 13px;
+  font-size: clamp(13px, 0.8333vw, 16px);
   font-weight: 500;
 }
 
@@ -1424,7 +1426,12 @@ body.has-drawer { overflow: hidden; }
   .logo__mark { font-size: 23px; }
   .logo__type { font-size: 11px; }
 
-  .cart__meta { font-size: 12px; }
+  /* The burger and the cart are fixed widths, so the room left for a
+     centred logo runs out faster than the screen narrows — on a 320px
+     phone the wordmark was printing over the cart icon. Cap it at what
+     actually fits between the two. */
+  .logo__img { max-width: calc(100vw - 236px); }
+
 
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
