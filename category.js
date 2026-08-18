@@ -25,8 +25,8 @@
     var get = FNU.fetchJson || function () { return Promise.resolve(null); };
 
     Promise.all([
-      get("content/categories.json"),
-      get("content/products.json")
+      get("/content/categories.json"),
+      get("/content/products.json")
     ]).then(function (results) {
       var categories = (results[0] && results[0].items) || [];
       var products = (results[1] && results[1].items) || [];
@@ -40,7 +40,7 @@
          Add the category back in the CMS and the page works again. */
       if (!category) {
         if (categories.length) {
-          window.location.replace("index.html");
+          window.location.replace("/");
           return;
         }
         category = { title: name }; /* file missing entirely — show the page */

@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shipping &amp; Returns — Forty Nine Unbeaten</title>
-<meta name="description" content="Delivery times, shipping costs, customs and what happens if an order arrives damaged.">
-<link rel="canonical" href="https://49unbeaten.com/shipping.html">
+<title>Gifts — Forty Nine Unbeaten</title>
+<meta name="description" content="Gifts from Forty Nine Unbeaten.">
+<link rel="canonical" href="https://49unbeaten.com/gifts/">
 
 <!-- What Instagram, WhatsApp and the rest show when the link is shared. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Forty Nine Unbeaten">
-<meta property="og:title" content="Shipping &amp; Returns — Forty Nine Unbeaten">
-<meta property="og:description" content="Delivery times, shipping costs, customs and what happens if an order arrives damaged.">
-<meta property="og:url" content="https://49unbeaten.com/shipping.html">
+<meta property="og:title" content="Gifts — Forty Nine Unbeaten">
+<meta property="og:description" content="Gifts from Forty Nine Unbeaten.">
+<meta property="og:url" content="https://49unbeaten.com/gifts/">
 <meta property="og:image" content="https://49unbeaten.com/images/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/styles.css">
 <script>
   /* Marks the page as still waiting on content/settings.json. Text the CMS
      fills is held invisible — space reserved, so nothing moves — until the
@@ -33,7 +33,7 @@
   document.documentElement.classList.add("cms-loading");
 </script>
 </head>
-<body data-page="shipping">
+<body data-category="Gifts">
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -45,12 +45,12 @@
     </button>
 
     <nav class="nav" id="site-nav" aria-label="Primary">
-      <a href="art.html" data-nav="art">Art</a>
-      <a href="apparel.html" data-nav="apparel">Apparel</a>
-      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
-    <a class="logo" href="index.html" aria-label="Forty Nine Unbeaten — home">
+    <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
       <img class="logo__img" data-logo-img src="/images/uploads/49-logo-black.svg" alt="Forty Nine Unbeaten">
       <span class="logo__wordmark" data-logo-fallback hidden>
         <span class="logo__mark" aria-hidden="true">49</span>
@@ -61,7 +61,7 @@
       </span>
     </a>
 
-    <a class="cart" href="cart.html">
+    <a class="cart" href="/cart/">
       <svg class="cart__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M2.2 3h2.3a1 1 0 0 1 1 .8L6 6m0 0 1.9 8.9a1.7 1.7 0 0 0 1.6 1.3h8.2a1.7 1.7 0 0 0 1.6-1.3L21 7.6a.7.7 0 0 0-.7-.9H6Z"
               fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,12 +78,20 @@
 </header>
 
 <main id="main">
-  <div class="page">
-    <h1 class="page__title" data-page-title></h1>
-    <p class="page__updated" data-page-updated hidden></p>
-    <p class="page__intro" data-page-intro hidden></p>
-    <div class="prose" data-page-sections></div>
-  </div>
+  <section class="hero hero--sm" aria-label="Gifts">
+    <a class="hero__link" href="#" data-hero-link>
+      <span class="ph ph--hero-sm" data-hero-media aria-hidden="true">img</span>
+      <span class="hero__caption" data-hero-text hidden></span>
+    </a>
+  </section>
+
+  <section class="section" aria-labelledby="cat-title">
+    <div class="section__head">
+      <h1 class="section__title" id="cat-title" data-category-title>Gifts</h1>
+    </div>
+    <p class="section__intro" data-category-intro hidden></p>
+    <div class="grid" data-grid data-card-heading="h2"></div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -105,8 +113,8 @@
     </div>
 
     <nav class="footer__col" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="/">Home</a>
+      <a href="/contact/">Contact</a>
       <div class="social">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -126,15 +134,15 @@
     </nav>
 
     <nav class="footer__col" aria-label="Shop">
-      <a href="art.html" data-nav="art">Art</a>
-      <a href="apparel.html" data-nav="apparel">Apparel</a>
-      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
     <nav class="footer__col" aria-label="Legal">
-      <a href="shipping.html">Shipping &amp; Returns</a>
-      <a href="terms.html">Terms &amp; Conditions</a>
-      <a href="privacy.html">Privacy Policy</a>
+      <a href="/shipping/">Shipping &amp; Returns</a>
+      <a href="/terms/">Terms &amp; Conditions</a>
+      <a href="/privacy/">Privacy Policy</a>
     </nav>
 
   </div>
@@ -144,8 +152,8 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
-<script src="cart.js"></script>
-<script src="page.js"></script>
+<script src="/script.js"></script>
+<script src="/cart.js"></script>
+<script src="/category.js"></script>
 </body>
 </html>

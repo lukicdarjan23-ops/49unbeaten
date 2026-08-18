@@ -1,6 +1,6 @@
 /* Forty Nine Unbeaten — product page.
 
-   Which product to show comes from the address: product.html?p=<slug>.
+   Which product to show comes from the address: /products/<slug>/.
    All products live in the one catalogue, content/products.json, so
    adding a product in the CMS is enough — no new page needed. The
    DEFAULTS below keep the page rendering if the file can't be fetched.
@@ -55,6 +55,15 @@
 
   function slug(text) {
     return String(text).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  /* Which product this page is for. The address is /products/<slug>/; the
+     old ?p=<slug> form is still read so a link shared before the change
+     keeps working even if it reaches this script directly. */
+  function wantedSlug() {
+    var match = /\/products\/([^\/]+)\/?$/.exec(window.location.pathname);
+    if (match) return decodeURIComponent(match[1]);
+    return new URLSearchParams(window.location.search).get("p");
   }
 
   /* ------------------------------------------------------------------
@@ -658,9 +667,9 @@
     /* Always derived from the product's own category — an apparel item
        must not end up filed under Art. */
     var category = String(product.category || "").trim();
-    product.crumbs = [{ label: "Home", href: "index.html" }];
+    product.crumbs = [{ label: "Home", href: "/" }];
     if (category) {
-      product.crumbs.push({ label: category, href: category.toLowerCase() + ".html" });
+      product.crumbs.push({ label: category, href: "/" + category.toLowerCase() + "/" });
     }
     if (!Array.isArray(product.notes)) product.notes = [];
     if (!Array.isArray(product.panels)) product.panels = [];
@@ -768,9 +777,9 @@
 
     var get = FNU.fetchJson || function () { return Promise.resolve(null); };
 
-    get("content/products.json").then(function (raw) {
+    get("/content/products.json").then(function (raw) {
       var items = (raw && Array.isArray(raw.items)) ? raw.items : [];
-      var wanted = new URLSearchParams(window.location.search).get("p");
+      var wanted = wantedSlug();
 
       /* Fall back to the first product when the address has no slug or
          names one that no longer exists, so the page always renders. */

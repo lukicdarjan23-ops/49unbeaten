@@ -126,7 +126,7 @@
 
     var link = document.createElement("a");
     link.className = "cart-empty__link";
-    link.href = "index.html";
+    link.href = "/";
     link.textContent = "Browse the shop";
 
     wrap.appendChild(p);
@@ -199,7 +199,7 @@
           '<p class="sum__note">Shipping and any duties are calculated at checkout.</p>' +
           '<button class="btn-cart" type="button" data-checkout>Checkout</button>' +
           '<p class="sum__notice" data-checkout-notice hidden></p>' +
-          '<a class="sum__link" href="cart.html">View full cart</a>' +
+          '<a class="sum__link" href="/cart/">View full cart</a>' +
         '</div>' +
       '</aside>';
 
@@ -300,7 +300,7 @@
       }
     });
 
-    /* The header cart stays a real link to cart.html; JS upgrades it to
+    /* The header cart stays a real link to /cart/; JS upgrades it to
        open the drawer instead. */
     document.querySelectorAll("a.cart").forEach(function (link) {
       link.addEventListener("click", function (event) {

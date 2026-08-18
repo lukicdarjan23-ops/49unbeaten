@@ -1,12 +1,79 @@
 [build]
   publish = "."
-  # Bakes the CMS's favicon and share image into the HTML. Has to happen
-  # here rather than in the browser: social scrapers read the raw file and
-  # never run JavaScript. Runs on every publish, including from the CMS.
-  command = "node tools/apply-settings.js"
+  # Writes the CMS's icons and share card into the HTML, stamps a page per
+  # product at /products/<slug>/, and rebuilds sitemap.xml. Has to happen
+  # here rather than in the browser: social scrapers and search engines read
+  # the raw file. Runs on every publish, including from the CMS.
+  command = "node tools/build.js"
+
+# --- Addresses that existed before pages moved into folders. 301 so search
+#     engines transfer what they know, and old shared links keep working. ---
+
+[[redirects]]
+  from = "/product.html"
+  query = { p = ":slug" }
+  to = "/products/:slug/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product.html"
+  to = "/products/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/all.html"
+  to = "/products/"
+  status = 301
+
+[[redirects]]
+  from = "/art.html"
+  to = "/art/"
+  status = 301
+
+[[redirects]]
+  from = "/apparel.html"
+  to = "/apparel/"
+  status = 301
+
+[[redirects]]
+  from = "/gifts.html"
+  to = "/gifts/"
+  status = 301
+
+[[redirects]]
+  from = "/cart.html"
+  to = "/cart/"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/shipping.html"
+  to = "/shipping/"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+
+[[redirects]]
+  from = "/thanks.html"
+  to = "/thanks/"
+  status = 301
 
 # Anything that isn't a real file falls through to the branded 404 page
-# rather than Netlify's own.
+# rather than Netlify's own. Last, so the rules above win.
 [[redirects]]
   from = "/*"
   to = "/404.html"

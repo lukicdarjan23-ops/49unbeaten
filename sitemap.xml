@@ -6,38 +6,68 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/all.html</loc>
+    <loc>https://49unbeaten.com/products/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/art.html</loc>
+    <loc>https://49unbeaten.com/art/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/apparel.html</loc>
+    <loc>https://49unbeaten.com/apparel/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/contact.html</loc>
+    <loc>https://49unbeaten.com/contact/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/shipping.html</loc>
+    <loc>https://49unbeaten.com/shipping/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/terms.html</loc>
+    <loc>https://49unbeaten.com/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://49unbeaten.com/privacy.html</loc>
+    <loc>https://49unbeaten.com/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/the-statue/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/the-statue-2/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/the-statue-3/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/the-statue-4/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/the-statue-11/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://49unbeaten.com/products/unbeaten-tee/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

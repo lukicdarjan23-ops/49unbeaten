@@ -3,8 +3,17 @@
   "intro": "That address doesn't lead anywhere. It may have moved, or the link may have a typo in it.",
   "sections": [],
   "links": [
-    { "label": "Back to the homepage", "href": "index.html" },
-    { "label": "See all products", "href": "all.html" },
-    { "label": "Get in touch", "href": "contact.html" }
+    {
+      "label": "Back to the homepage",
+      "href": "/"
+    },
+    {
+      "label": "See all products",
+      "href": "/products/"
+    },
+    {
+      "label": "Get in touch",
+      "href": "/contact/"
+    }
   ]
 }

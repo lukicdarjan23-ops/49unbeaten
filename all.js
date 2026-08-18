@@ -85,8 +85,8 @@
     var get = FNU.fetchJson || function () { return Promise.resolve(null); };
 
     Promise.all([
-      get("content/allproducts.json"),
-      get("content/products.json")
+      get("/content/allproducts.json"),
+      get("/content/products.json")
     ]).then(function (results) {
       var page = Object.assign({}, DEFAULTS, results[0] || {});
       var products = (results[1] && results[1].items) || [];

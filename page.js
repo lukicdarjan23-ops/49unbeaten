@@ -57,7 +57,7 @@
       if (!link || !link.label) return;
       var a = document.createElement("a");
       a.className = "page__link";
-      a.href = link.href || "index.html";
+      a.href = link.href || "/";
       a.textContent = link.label;
       wrap.appendChild(a);
     });
@@ -150,7 +150,7 @@
     var get = (window.FNU && window.FNU.fetchJson) ||
       function () { return Promise.resolve(null); };
 
-    get("content/" + page + ".json").then(apply);
+    get("/content/" + page + ".json").then(apply);
   }
 
   if (document.readyState === "loading") {

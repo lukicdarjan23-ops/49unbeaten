@@ -1,0 +1,5 @@
+# Product pages are stamped from product.html on every deploy, so they are
+# an output, not source. Committing them would mean a stale page every time
+# a product changes in the CMS.
+/products/*/
+!/products/index.html

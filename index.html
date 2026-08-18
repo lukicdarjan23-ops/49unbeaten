@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/styles.css">
 <script>
   /* Marks the page as still waiting on content/settings.json. Text the CMS
      fills is held invisible — space reserved, so nothing moves — until the
@@ -45,9 +45,9 @@
     </button>
 
     <nav class="nav" id="site-nav" aria-label="Primary">
-      <a href="art.html" data-nav="art">Art</a>
-      <a href="apparel.html" data-nav="apparel">Apparel</a>
-      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
     <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
@@ -61,7 +61,7 @@
       </span>
     </a>
 
-    <a class="cart" href="cart.html">
+    <a class="cart" href="/cart/">
       <svg class="cart__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M2.2 3h2.3a1 1 0 0 1 1 .8L6 6m0 0 1.9 8.9a1.7 1.7 0 0 0 1.6 1.3h8.2a1.7 1.7 0 0 0 1.6-1.3L21 7.6a.7.7 0 0 0-.7-.9H6Z"
               fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,7 +82,7 @@
   <h1 class="sr-only">Forty Nine Unbeaten — art, apparel and gifts</h1>
 
   <section class="hero" data-site-hero aria-label="Featured artwork">
-    <a class="hero__link" href="art.html" data-hero-link>
+    <a class="hero__link" href="/art/" data-hero-link>
       <span class="ph ph--hero" data-hero-media aria-hidden="true">img</span>
       <span class="hero__caption" data-hero-text hidden></span>
     </a>
@@ -91,7 +91,7 @@
   <section class="section" aria-labelledby="top-sellers">
     <div class="section__head">
       <h2 class="section__title" id="top-sellers" data-top-sellers-title data-cms-fill>Featured items</h2>
-      <a class="section__link" href="all.html" data-view-all-link data-cms-fill>View All Products</a>
+      <a class="section__link" href="/products/" data-view-all-link data-cms-fill>View All Products</a>
     </div>
     <div class="grid" data-grid data-home-grid></div>
   </section>
@@ -118,7 +118,7 @@
 
     <nav class="footer__col" aria-label="Footer">
       <a href="/">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="/contact/">Contact</a>
       <div class="social">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -138,15 +138,15 @@
     </nav>
 
     <nav class="footer__col" aria-label="Shop">
-      <a href="art.html" data-nav="art">Art</a>
-      <a href="apparel.html" data-nav="apparel">Apparel</a>
-      <a href="gifts.html" data-nav="gifts" hidden>Gifts</a>
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
     </nav>
 
     <nav class="footer__col" aria-label="Legal">
-      <a href="shipping.html">Shipping &amp; Returns</a>
-      <a href="terms.html">Terms &amp; Conditions</a>
-      <a href="privacy.html">Privacy Policy</a>
+      <a href="/shipping/">Shipping &amp; Returns</a>
+      <a href="/terms/">Terms &amp; Conditions</a>
+      <a href="/privacy/">Privacy Policy</a>
     </nav>
 
   </div>
@@ -156,8 +156,8 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
-<script src="cart.js"></script>
+<script src="/script.js"></script>
+<script src="/cart.js"></script>
 
 <!-- Netlify Identity invite and password-recovery links land on the site
      root carrying a token in the address. The widget has to be present

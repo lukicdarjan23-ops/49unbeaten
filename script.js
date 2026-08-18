@@ -1,8 +1,8 @@
 /* Forty Nine Unbeaten — shared site behaviour.
    Holds the cart store (used by the product page), the header cart
    readout and the mobile menu, plus the homepage product grid. Each
-   part no-ops when its markup isn't on the page, so both index.html
-   and product.html load this same file. */
+   part no-ops when its markup isn't on the page, so the homepage
+   and a product page load this same file. */
 (function () {
   "use strict";
 
@@ -213,10 +213,10 @@
     hero_image: "",
     hero_alt: "Featured artwork",
     hero_text: "",
-    hero_link: "/art",
+    hero_link: "/art/",
     top_sellers_title: "Top Sellers",
     view_all_text: "View All",
-    view_all_link: "/art",
+    view_all_link: "/products/",
     instagram_url: "https://instagram.com",
     whatsapp_url: "https://wa.me/",
     sales_notice: "All sales final. No returns. Refund only in the event item not delivered or delivered damaged."
@@ -425,7 +425,9 @@
   }
 
   function productHref(item) {
-    return item.slug ? "product.html?p=" + encodeURIComponent(item.slug) : "product.html";
+    /* One folder per product: /products/<slug>/. No file extension, so
+       the address stays valid whatever the site is built with later. */
+    return item.slug ? "/products/" + encodeURIComponent(item.slug) + "/" : "/products/";
   }
 
   function buildCard(product) {
@@ -513,9 +515,9 @@
        slower one would win. */
     var isHomeGrid = !!document.querySelector("[data-grid][data-home-grid]");
 
-    fetchJson("content/categories.json").then(applyCategoryLinks);
+    fetchJson("/content/categories.json").then(applyCategoryLinks);
 
-    fetchJson("content/settings.json").then(function (settings) {
+    fetchJson("/content/settings.json").then(function (settings) {
       applySettings(settings);
       /* Everything the CMS supplies is in place — let the held text show.
          fetchJson resolves null rather than rejecting, so this runs even
@@ -523,7 +525,7 @@
       document.documentElement.classList.remove("cms-loading");
 
       if (!isHomeGrid) return;
-      fetchJson("content/products.json").then(applyProducts);
+      fetchJson("/content/products.json").then(applyProducts);
     });
   }
 

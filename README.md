@@ -17,27 +17,76 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+## Addresses
+
+Every page is a folder, so nothing on the site ends in `.html`. That is how
+shops are normally addressed, and it means the addresses stay valid if the
+site is ever rebuilt on something else.
+
+| Address | Page |
+| --- | --- |
+| `/` | Homepage |
+| `/products/` | Every product, whatever the category |
+| `/products/<slug>/` | One product. Generated at deploy time, one per entry in the catalogue |
+| `/art/`, `/apparel/`, `/gifts/` | Category pages |
+| `/cart/`, `/contact/`, `/shipping/`, `/terms/`, `/privacy/`, `/thanks/` | Standing pages |
+| `/404.html` | Served by Netlify for anything that isn't a real address |
+
+The `.html` addresses these replaced are 301-redirected in `netlify.toml`,
+so nothing shared before the change breaks.
+
+A product's slug **is** its address. Change one after the site is indexed
+and the old address dies — the CMS says so on the field.
+
 ## Files
 
 | File | Contents |
 | --- | --- |
 | `index.html` | Homepage — header, hero, product grid, footer |
-| `product.html` | Product page — image, variants, quantity, add to cart |
-| `art.html`, `apparel.html`, `gifts.html` | Category pages — 260px hero, then the product grid |
-| `cart.html` | Cart page — lines, quantities, subtotal, checkout |
-| `contact.html` | Contact — email and WhatsApp |
-| `privacy.html`, `terms.html` | Legal pages, rendered from JSON |
-| `styles.css` | All styling for both pages, design tokens at the top |
-| `script.js` | Shared: cart store, header cart readout, mobile menu, homepage grid |
-| `product.js` | Product page only: variants, quantity, add to cart |
+| `product.html` | The template every product page is stamped from. Redirected away, never served |
+| `products/index.html` | All Products — the whole catalogue on one page |
+| `art/`, `apparel/`, `gifts/` | Category pages — 260px hero, then the product grid |
+| `cart/`, `contact/`, `shipping/`, `terms/`, `privacy/`, `thanks/` | The standing pages |
+| `404.html` | Page not found |
+| `tools/build.js` | The deploy step — see below |
+| `styles.css` | All styling, design tokens at the top |
+| `script.js` | Shared: cart store, header cart readout, mobile menu, logos, hero, homepage grid |
+| `product.js` | Product page: variants, sizes, colours, size guide, add to cart |
 | `cart.js` | Cart drawer (injected on every page) and the cart page |
 | `category.js` | Category pages — hero and the category-filtered grid |
-| `page.js` | Contact and legal pages (picks its file from `data-page` on `<body>`) |
-| `content/settings.json` | Hero image/link, section heading, social links, footer notice |
+| `all.js` | All Products — the whole catalogue, ordered as the CMS says |
+| `page.js` | Contact, legal, thank-you and 404 (picks its file from `data-page` on `<body>`) |
+| `content/settings.json` | Icons, share card, logos, hero, section heading, social links, footer notice |
 | `content/products.json` | The whole catalogue — one entry per product, holding both its card and its full product page |
 | `content/categories.json` | Category headings and hero images |
+| `content/allproducts.json` | All Products page — heading, hero, and the order products come in |
 | `content/contact.json` | Contact email and WhatsApp number |
+| `content/shipping.json` | Shipping and returns copy |
+| `content/thanks.json`, `content/notfound.json` | Order confirmation and page-not-found copy |
 | `content/privacy.json`, `content/terms.json` | Legal page copy |
+
+## The deploy step
+
+`node tools/build.js`, run by Netlify on every publish including the ones
+the CMS triggers. Everything else on this site is filled in by the browser;
+this handles the three things a browser is too late for.
+
+1. **Icons and the share card.** Facebook, WhatsApp and the rest read the
+   raw HTML and never run JavaScript, so these have to be in the file.
+2. **A page per product** at `/products/<slug>/`, carrying that product's
+   own title, description and share card. Without it every product is one
+   identical page to a search engine.
+3. **`sitemap.xml`**, listing what exists right now — so a product added in
+   the CMS is in the sitemap with nothing to remember.
+
+Product folders are generated, not committed; `.gitignore` keeps them out.
+Run the script locally before testing, or those pages won't be there.
+
+If `products.json` or `settings.json` exists but isn't valid JSON, the
+script stops with a non-zero exit. That fails the deploy on purpose — a
+failed deploy leaves the last good version of the site serving, which beats
+publishing a shop with no products in it.
+
 | `admin/` | The Decap CMS admin panel (`/admin`) — see below |
 | `netlify.toml` | Tells Netlify to serve the repo root as-is (no build step) |
 
@@ -102,7 +151,7 @@ to the site's built-in defaults instead of breaking the page.
   (`add`, `items`, `setQty`, `remove`, `totals`, `onChange`).
 - **Drawer and cart page.** `cart.js` injects the drawer into every page and
   upgrades the header cart link to open it; the link still points at
-  `cart.html`, so middle-click and no-JS both still work. Both surfaces render
+  `/cart/`, so middle-click and no-JS both still work. Both surfaces render
   the same line component and re-render from `cart.onChange`.
 - **Checkout is not connected.** The button is real but `startCheckout()` in
   `cart.js` only explains that no payment provider is wired up. A static site

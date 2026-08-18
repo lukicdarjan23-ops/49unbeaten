@@ -16,8 +16,17 @@
     }
   ],
   "links": [
-    { "label": "Keep looking around", "href": "all.html" },
-    { "label": "Shipping & Returns", "href": "shipping.html" },
-    { "label": "Contact us", "href": "contact.html" }
+    {
+      "label": "Keep looking around",
+      "href": "/products/"
+    },
+    {
+      "label": "Shipping & Returns",
+      "href": "/shipping/"
+    },
+    {
+      "label": "Contact us",
+      "href": "/contact/"
+    }
   ]
 }

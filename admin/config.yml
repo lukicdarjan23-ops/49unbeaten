@@ -115,7 +115,7 @@ collections:
               - label: "Adresa stranice (slug)"
                 name: "slug"
                 widget: "string"
-                hint: "Mala slova i crtice, bez razmaka i bez kvačica. Npr: the-statue. Mora biti različit od svih ostalih proizvoda."
+                hint: "OVO JE ADRESA STRANE. Mala slova i crtice, bez razmaka i bez kvačica. Npr: the-statue daje adresu 49unbeaten.com/products/the-statue/. Mora biti različit od svih ostalih. VAŽNO: dok sajt nije pušten u rad menjaj slobodno, ali kad jednom bude na Google-u NE MENJAJ GA — stara adresa prestaje da radi i gubi se mesto u pretrazi."
               - label: "Podnaslov na kartici"
                 name: "type"
                 widget: "string"
@@ -313,7 +313,7 @@ collections:
               - label: "Adresa"
                 name: "href"
                 widget: "string"
-                hint: "Npr: index.html, all.html, contact.html, shipping.html"
+                hint: "Npr: / za naslovnu, /products/ za sve proizvode, /contact/, /shipping/"
       - name: "notfound"
         label: "Strana 404 (stranica ne postoji)"
         file: "content/notfound.json"
@@ -375,7 +375,7 @@ collections:
             label: "Kategorije"
             widget: "list"
             summary: "{{fields.title}}"
-            hint: "NE MENJAJ polje Slug — po njemu se svaka strana pronalazi. Proizvodi se ovde pojavljuju sami, po svojoj Kategoriji. Ako obrišeš kategoriju, njen link nestaje iz menija u vrhu i u futeru, a ko otvori staru adresu vraća se na naslovnu. Vrati je nazad sa istim slugom i sve radi opet. Postoje samo tri sluga: art, apparel, gifts."
+            hint: "NE MENJAJ polje Slug — to je adresa strane (art daje 49unbeaten.com/art/). Proizvodi se ovde pojavljuju sami, po svojoj Kategoriji. Ako obrišeš kategoriju, njen link nestaje iz menija u vrhu i u futeru, ona ispada iz sitemapa, a ko otvori staru adresu vraća se na naslovnu. Vrati je nazad sa istim slugom i sve radi opet. Postoje samo tri sluga: art, apparel, gifts."
             fields:
               - { label: "Slug (ne dirati)", name: "slug", widget: "string" }
               - { label: "Naslov strane", name: "title", widget: "string" }
