@@ -14,7 +14,7 @@
   --ph: #d9d9d9;
   --ph-ink: #111;
 
-  --header-h: 50px;
+  --header-h: 72px;
   --pad: 16px;
   /* The footer's contents sit in a centred column; the header, hero and
      product grid are full-bleed. */
@@ -366,7 +366,7 @@ img.ph--card {
 }
 
 .section__link {
-  font-size: 14px;
+  font-size: clamp(13px, 0.8333vw, 16px);
   font-weight: 400;
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s ease;
@@ -400,11 +400,10 @@ img.ph--card {
      column's min-content width, so an open size picker would widen its
      own column and squeeze the card beside it. */
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  /* The two edges no card draws for itself. Together with the right and
-     bottom rule on every card, each cell is closed on all four sides —
-     including the one that ends a part-full row. */
+  /* Only the rule above the first row. The grid's left and right edges stay
+     open: a card in the first column draws no left rail, and one in the last
+     column draws no right rail, so the row runs to the page edge unframed. */
   border-top: 1px solid var(--rule);
-  border-left: 1px solid var(--rule);
 }
 
 .card {
@@ -414,6 +413,11 @@ img.ph--card {
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
+
+/* The rails sit between cards, never on the outside. Counting forwards from
+   the first card, so the rule holds however many products there are — the
+   column count is what matters, and it changes at each breakpoint below. */
+.grid > .card:nth-child(4n) { border-right: 0; }
 
 .card__media { display: block; }
 
@@ -1362,6 +1366,8 @@ body.has-drawer { overflow: hidden; }
 
 @media (max-width: 1000px) {
   .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
+  .grid > .card:nth-child(3n) { border-right: 0; }
 
   .footer__inner {
     grid-template-columns: repeat(3, 1fr);
@@ -1378,7 +1384,6 @@ body.has-drawer { overflow: hidden; }
 
   .header__inner {
     justify-content: space-between;
-    min-height: 54px;
   }
 
   .nav {
@@ -1434,6 +1439,9 @@ body.has-drawer { overflow: hidden; }
 
 
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid > .card:nth-child(3n),
+  .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
+  .grid > .card:nth-child(2n) { border-right: 0; }
 }
 
 @media (max-width: 480px) {
