@@ -324,10 +324,12 @@
   }
 
   function renderSizeGuide() {
-    var opener = document.querySelector("[data-guide-open]");
-    if (!opener) return;
+    /* One link sits under the shirt sizes and one under the art sizes, so
+       it lands directly beneath whichever size picker the product shows.
+       Only the visible group's link is ever on screen. */
+    var openers = [].slice.call(document.querySelectorAll("[data-guide-open]"));
+    if (!openers.length) return;
 
-    guideOpener = opener;
     if (guideDrawer) {
       guideDrawer.remove();
       guideDrawer = null;
@@ -337,11 +339,13 @@
     var rows = guideRows();
 
     /* No measurements entered, no link — an art print shouldn't offer one. */
-    opener.hidden = !rows.length;
-    if (!rows.length) return;
+    openers.forEach(function (opener) {
+      opener.hidden = !rows.length;
+      var linkText = opener.querySelector("[data-guide-link-text]");
+      if (linkText) linkText.textContent = guide.link_text || "Size guide";
+    });
 
-    var linkText = opener.querySelector("[data-guide-link-text]");
-    if (linkText) linkText.textContent = guide.link_text || "Size guide";
+    if (!rows.length) return;
 
     guideDrawer = document.createElement("div");
     guideDrawer.className = "drawer drawer--guide";
@@ -406,7 +410,13 @@
     guideDrawer.appendChild(panel);
     document.body.appendChild(guideDrawer);
 
-    opener.addEventListener("click", openGuide);
+    openers.forEach(function (opener) {
+      opener.addEventListener("click", function () {
+        /* Focus returns to the link that was actually used. */
+        guideOpener = opener;
+        openGuide();
+      });
+    });
 
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") closeGuide();

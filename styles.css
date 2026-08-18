@@ -593,8 +593,8 @@ img.ph--product {
   position: relative;
   display: grid;
   place-items: center;
-  width: clamp(38px, 2.6vw, 50px);
-  height: clamp(38px, 2.6vw, 50px);
+  width: clamp(30px, 2.08vw, 40px);
+  height: clamp(30px, 2.08vw, 40px);
   flex: none;
   border: 1px solid rgba(0, 0, 0, 0.22);
   background: var(--paper);
