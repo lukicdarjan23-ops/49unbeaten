@@ -116,8 +116,15 @@ function costLookup() {
   };
 }
 
-/* Printful describes a variant's size and colour in `options` on some
-   endpoints and only inside the name on others. Read whichever is there. */
+/* Printful puts a variant's size and colour in `options` on some products,
+   on the nested `product` on others, and for posters and prints only inside
+   the variant's name — "Enhanced Matte Paper Poster - 12″×18″". Read
+   whichever of the three is actually there.
+
+   The name is the least reliable of the three, so it is only consulted
+   last, and only for the half of "Colour / Size" that can be told apart
+   with confidence. Whatever cannot be read stays empty; the caller shows
+   the full name alongside, so nothing is lost either way. */
 function readOption(variant, wanted) {
   const options = Array.isArray(variant.options) ? variant.options : [];
   const match = options.filter(function (o) {
@@ -128,7 +135,24 @@ function readOption(variant, wanted) {
   const product = variant.product || {};
   if (wanted === "size" && product.size) return String(product.size);
   if (wanted === "color" && product.color) return String(product.color);
-  return "";
+
+  return fromName(variant.name, wanted);
+}
+
+/* "<product> - <colour> / <size>" for garments, "<product> - <size>" for
+   flat goods. Only the two-part form names a colour; a single trailing part
+   is a size, since that is the form posters and prints take. */
+function fromName(name, wanted) {
+  const text = String(name || "");
+  const dash = text.lastIndexOf(" - ");
+  if (dash === -1) return "";
+
+  const tail = text.slice(dash + 3).trim();
+  if (!tail) return "";
+
+  const parts = tail.split("/").map(function (p) { return p.trim(); }).filter(Boolean);
+  if (parts.length >= 2) return wanted === "color" ? parts[0] : parts[parts.length - 1];
+  return wanted === "size" ? parts[0] : "";
 }
 
 module.exports = { call, storeProducts, costLookup, readOption, PrintfulError };

@@ -33,6 +33,8 @@
   button { font: inherit; padding: 8px 14px; border: 1px solid var(--ink); background: #fff; border-radius: 6px; cursor: pointer; }
   button:hover { background: #f0f0f0; }
   a { color: inherit; }
+  td.vname { color: var(--muted); font-size: 13px; max-width: 260px; }
+  td.id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
   .thumb { width: 54px; height: 54px; object-fit: contain; background: #f3f3f3; border-radius: 4px; }
   .row { display: flex; align-items: center; gap: 14px; }
   .foot { color: var(--muted); font-size: 13px; margin-top: 28px; }
@@ -109,17 +111,20 @@
 
     var table = el("table");
     var thead = el("tr");
-    ["Veličina", "Boja", "Košta tebe", "Cena u Printfulu", "ID varijante", "Dostupno"]
+    ["Naziv varijante", "Veličina", "Boja", "Košta tebe", "Cena u Printfulu", "ID varijante", "Dostupno"]
       .forEach(function (label) { thead.appendChild(el("th", null, label)); });
     table.appendChild(thead);
 
     product.variants.forEach(function (v) {
       var tr = el("tr");
+      /* Printful's own name for the variant, always shown — it is the one
+         field that is never empty, whatever kind of product this is. */
+      tr.appendChild(el("td", "vname", v.name || "—"));
       tr.appendChild(el("td", null, v.size || "—"));
       tr.appendChild(el("td", null, v.color || "—"));
       tr.appendChild(el("td", "num", money(v.cost, v.currency)));
       tr.appendChild(el("td", "num", money(v.retail, v.currency)));
-      tr.appendChild(el("td", "num", String(v.variant_id)));
+      tr.appendChild(el("td", "num id", String(v.variant_id)));
       tr.appendChild(el("td", null, v.available ? "da" : "NE — ukinuto"));
       table.appendChild(tr);
     });
