@@ -311,7 +311,20 @@
     var slot = scope.querySelector("[data-hero-media]");
     var caption = scope.querySelector("[data-hero-text]");
 
-    if (link) link.href = source.hero_link || "#";
+    /* A hero with nowhere to go shouldn't behave like a link — clicking it
+       would only jump the page to the top, and a keyboard lands on it for
+       nothing. Left as an <a> in the markup and demoted here, so the one
+       that does have a destination keeps working without JavaScript. */
+    if (link) {
+      var target = String(source.hero_link || "").trim();
+      if (target && target !== "#") {
+        link.href = target;
+        link.removeAttribute("aria-hidden");
+        link.removeAttribute("tabindex");
+      } else {
+        link.removeAttribute("href");
+      }
+    }
 
     if (caption) {
       caption.textContent = source.hero_text || "";
@@ -422,7 +435,10 @@
     var body = document.createElement("div");
     body.className = "card__body";
 
-    var title = document.createElement("h3");
+    /* Card titles sit under the homepage's h2 section heading, so h3 is
+       right there — but the listing pages lead with an h1 and would jump a
+       level. Each grid says which it wants. */
+    var title = document.createElement(product.heading || "h3");
     title.className = "card__title";
 
     var titleLink = document.createElement("a");
@@ -453,6 +469,7 @@
   function renderProducts(grid, items) {
     if (!grid) return;
 
+    var heading = grid.dataset.cardHeading === "h2" ? "h2" : "h3";
     var frag = document.createDocumentFragment();
     (items || []).forEach(function (item) {
       frag.appendChild(buildCard({
@@ -461,7 +478,8 @@
         price: cardPrice(item),
         href: productHref(item),
         image: item.image || "",
-        alt: item.alt || ""
+        alt: item.alt || "",
+        heading: heading
       }));
     });
 
