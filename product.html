@@ -113,6 +113,18 @@
           <div class="swatches" role="radiogroup" aria-labelledby="color-label" data-colors></div>
         </div>
 
+        <!-- Opens the measurements panel. Hidden until the product has a
+             size guide entered in the CMS. -->
+        <button class="guide-link" type="button" data-guide-open hidden>
+          <svg class="guide-link__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="1.5" y="7.5" width="21" height="9" rx="1"
+                  fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M6 7.5v4M10 7.5v2.5M14 7.5v4M18 7.5v2.5"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span data-guide-link-text>Size guide</span>
+        </button>
+
         <h2 class="product__label" id="qty-label">Quantity</h2>
         <div class="qty">
           <button class="qty__btn" type="button" data-qty="-1" aria-label="Decrease quantity">−</button>

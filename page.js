@@ -44,6 +44,49 @@
     });
   }
 
+  /* Ways onward from a page that is an end in itself — the 404 and the
+     order confirmation. Listed in the CMS as label plus address. */
+  function renderLinks(data) {
+    var wrap = document.querySelector("[data-page-links]");
+    if (!wrap) return;
+
+    var links = Array.isArray(data.links) ? data.links : [];
+    wrap.textContent = "";
+
+    links.forEach(function (link) {
+      if (!link || !link.label) return;
+      var a = document.createElement("a");
+      a.className = "page__link";
+      a.href = link.href || "index.html";
+      a.textContent = link.label;
+      wrap.appendChild(a);
+    });
+
+    wrap.hidden = !wrap.childNodes.length;
+  }
+
+  /* Landing here means the payment provider sent the shopper back after a
+     completed order, so the basket they just paid for should not still be
+     sitting in the header. Gated on the provider's reference being in the
+     address: someone who simply opens the page keeps their cart. */
+  function clearPaidCart() {
+    if (document.body.dataset.page !== "thanks") return;
+
+    var params = new URLSearchParams(window.location.search);
+    var paid = params.get("order") || params.get("token") || params.get("paymentId");
+    if (!paid) return;
+
+    if (window.FNU && window.FNU.cart && window.FNU.cart.clear) {
+      window.FNU.cart.clear();
+    }
+
+    var ref = document.querySelector("[data-order-ref]");
+    if (ref) {
+      ref.textContent = paid;
+      ref.hidden = false;
+    }
+  }
+
   function renderContacts(data) {
     var wrap = document.querySelector("[data-contact-methods]");
     if (!wrap) return;
@@ -95,11 +138,14 @@
 
     renderSections(data);
     renderContacts(data);
+    renderLinks(data);
   }
 
   function init() {
     var page = document.body.dataset.page;
     if (!page) return;
+
+    clearPaidCart();
 
     var get = (window.FNU && window.FNU.fetchJson) ||
       function () { return Promise.resolve(null); };

@@ -452,7 +452,16 @@
       "image": "",
       "category": "Apparel",
       "size_guide": {
-        "title": "Size guide",
+        "link_text": "Size guide",
+        "title": "Size Guide",
+        "intro": "",
+        "table_title": "Menswear size chart",
+        "columns": {
+          "col_size": "Size",
+          "col_chest": "Fit chests up to",
+          "col_length": "Length",
+          "col_sleeve": "Sleeve"
+        },
         "note": "Measured flat, in centimetres. Allow 1–2 cm either way.",
         "rows": [
           {

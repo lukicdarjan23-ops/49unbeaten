@@ -152,6 +152,27 @@
     });
   }
 
+  /* Black or white, whichever stands out on the given shirt colour.
+     Relative luminance per WCAG, so mid greens and navies land the right
+     way round instead of on a naive average of the channels. */
+  function readableInk(hex) {
+    var match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(hex || "").trim());
+    if (!match) return "#000";
+
+    var value = match[1];
+    if (value.length === 3) {
+      value = value[0] + value[0] + value[1] + value[1] + value[2] + value[2];
+    }
+
+    var channel = function (start) {
+      var c = parseInt(value.slice(start, start + 2), 16) / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    };
+
+    var luminance = 0.2126 * channel(0) + 0.7152 * channel(2) + 0.0722 * channel(4);
+    return luminance > 0.4 ? "#000" : "#fff";
+  }
+
   function renderColors() {
     var wrap = document.querySelector("[data-colors]");
     if (!wrap) return;
@@ -173,6 +194,24 @@
       dot.style.background = color.hex || "#ccc";
       btn.appendChild(dot);
 
+      /* Drawn rather than a text glyph so its colour can be flipped to
+         whichever of black or white shows up on this shirt. */
+      var check = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      check.setAttribute("class", "swatch__check");
+      check.setAttribute("viewBox", "0 0 24 24");
+      check.setAttribute("aria-hidden", "true");
+      check.setAttribute("focusable", "false");
+
+      var tick = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      tick.setAttribute("d", "M4 12.5 9.5 18 20 6.5");
+      tick.setAttribute("fill", "none");
+      tick.setAttribute("stroke", readableInk(color.hex));
+      tick.setAttribute("stroke-width", "2.6");
+      tick.setAttribute("stroke-linecap", "round");
+      tick.setAttribute("stroke-linejoin", "round");
+      check.appendChild(tick);
+      btn.appendChild(check);
+
       wrap.appendChild(btn);
     });
   }
@@ -190,42 +229,40 @@
     });
   }
 
-  /* The size guide is a table rather than a paragraph, so it gets built
-     here instead of coming through the ordinary text panels. Columns are
-     dropped when no row fills them — a t-shirt listed by chest and length
-     shouldn't show an empty Sleeve column. */
-  function buildSizeGuide() {
+  /* ------------------------------------------------------------------
+     Size guide
+
+     A ruler link under the options opens a panel from the side holding
+     the measurements table. Every word of it — the link, the heading, the
+     column names, the note — comes from the CMS.
+     ------------------------------------------------------------------ */
+
+  var COLUMN_KEYS = ["chest", "length", "sleeve"];
+
+  function guideRows() {
     var guide = product.size_guide || {};
-    var rows = (Array.isArray(guide.rows) ? guide.rows : []).filter(function (row) {
+    return (Array.isArray(guide.rows) ? guide.rows : []).filter(function (row) {
       return row && String(row.label || "").trim();
     });
-    if (!rows.length) return null;
+  }
 
-    var columns = [
-      { key: "label", head: "Size" },
-      { key: "chest", head: "Chest" },
-      { key: "length", head: "Length" },
-      { key: "sleeve", head: "Sleeve" }
-    ].filter(function (column) {
-      if (column.key === "label") return true;
-      return rows.some(function (row) { return String(row[column.key] || "").trim(); });
+  function buildGuideTable(guide, rows) {
+    /* A column the shop left blank on every row is dropped, so a t-shirt
+       measured by chest and length shows no empty Sleeve column. */
+    /* The CMS groups the column names in their own block; older entries
+       have them loose on the guide itself. */
+    var heads = guide.columns || guide;
+    var fallback = { label: "Size", chest: "Chest", length: "Length", sleeve: "Sleeve" };
+
+    var columns = [{ key: "label", head: heads.col_size || fallback.label }];
+    COLUMN_KEYS.forEach(function (key) {
+      var used = rows.some(function (row) { return String(row[key] || "").trim(); });
+      if (used) columns.push({ key: key, head: heads["col_" + key] || fallback[key] });
     });
-
-    var details = document.createElement("details");
-    details.className = "panel";
-
-    var summary = document.createElement("summary");
-    summary.className = "panel__head";
-    summary.textContent = guide.title || "Size guide";
-    details.appendChild(summary);
-
-    var body = document.createElement("div");
-    body.className = "panel__body";
 
     var table = document.createElement("table");
     table.className = "sizes-table";
 
-    var thead = document.createElement("thead");
     var headRow = document.createElement("tr");
     columns.forEach(function (column) {
       var th = document.createElement("th");
@@ -233,6 +270,8 @@
       th.textContent = column.head;
       headRow.appendChild(th);
     });
+
+    var thead = document.createElement("thead");
     thead.appendChild(headRow);
     table.appendChild(thead);
 
@@ -248,7 +287,111 @@
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    body.appendChild(table);
+
+    return table;
+  }
+
+  var guideDrawer = null;
+  var guideOpener = null;
+
+  function closeGuide() {
+    if (!guideDrawer || guideDrawer.hidden) return;
+
+    guideDrawer.classList.remove("is-open");
+    document.body.classList.remove("has-drawer");
+
+    var panel = guideDrawer.querySelector(".drawer__panel");
+    var done = function () { guideDrawer.hidden = true; };
+    if (panel) {
+      panel.addEventListener("transitionend", done, { once: true });
+    } else {
+      done();
+    }
+
+    if (guideOpener) guideOpener.focus();
+  }
+
+  function openGuide() {
+    if (!guideDrawer) return;
+
+    guideDrawer.hidden = false;
+    void guideDrawer.offsetWidth; /* let the transition run from closed */
+    guideDrawer.classList.add("is-open");
+    document.body.classList.add("has-drawer");
+
+    var close = guideDrawer.querySelector(".drawer__close");
+    if (close) close.focus();
+  }
+
+  function renderSizeGuide() {
+    var opener = document.querySelector("[data-guide-open]");
+    if (!opener) return;
+
+    guideOpener = opener;
+    if (guideDrawer) {
+      guideDrawer.remove();
+      guideDrawer = null;
+    }
+
+    var guide = product.size_guide || {};
+    var rows = guideRows();
+
+    /* No measurements entered, no link — an art print shouldn't offer one. */
+    opener.hidden = !rows.length;
+    if (!rows.length) return;
+
+    var linkText = opener.querySelector("[data-guide-link-text]");
+    if (linkText) linkText.textContent = guide.link_text || "Size guide";
+
+    guideDrawer = document.createElement("div");
+    guideDrawer.className = "drawer drawer--guide";
+    guideDrawer.hidden = true;
+
+    var scrim = document.createElement("div");
+    scrim.className = "drawer__scrim";
+    scrim.addEventListener("click", closeGuide);
+
+    var panel = document.createElement("aside");
+    panel.className = "drawer__panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-label", guide.title || "Size guide");
+
+    var head = document.createElement("div");
+    head.className = "drawer__head";
+
+    var heading = document.createElement("h2");
+    heading.className = "drawer__title";
+    heading.textContent = guide.title || "Size guide";
+
+    var close = document.createElement("button");
+    close.className = "drawer__close";
+    close.type = "button";
+    close.setAttribute("aria-label", "Close size guide");
+    close.textContent = "×";
+    close.addEventListener("click", closeGuide);
+
+    head.appendChild(heading);
+    head.appendChild(close);
+
+    var body = document.createElement("div");
+    body.className = "drawer__body";
+
+    if (guide.intro) {
+      var intro = document.createElement("p");
+      intro.className = "guide__intro";
+      intro.textContent = guide.intro;
+      body.appendChild(intro);
+    }
+
+    if (guide.table_title) {
+      var caption = document.createElement("h3");
+      caption.className = "guide__caption";
+      caption.textContent = guide.table_title;
+      body.appendChild(caption);
+    }
+
+    body.appendChild(buildGuideTable(guide, rows));
 
     if (guide.note) {
       var note = document.createElement("p");
@@ -257,8 +400,17 @@
       body.appendChild(note);
     }
 
-    details.appendChild(body);
-    return details;
+    panel.appendChild(head);
+    panel.appendChild(body);
+    guideDrawer.appendChild(scrim);
+    guideDrawer.appendChild(panel);
+    document.body.appendChild(guideDrawer);
+
+    opener.addEventListener("click", openGuide);
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeGuide();
+    });
   }
 
   function renderPanels() {
@@ -266,11 +418,6 @@
     if (!wrap) return;
 
     wrap.textContent = "";
-
-    /* First in the stack: it is the thing a shopper needs before they can
-       choose a size, not an afterthought below the shipping blurb. */
-    var guide = buildSizeGuide();
-    if (guide) wrap.appendChild(guide);
 
     product.panels.forEach(function (panel) {
       var details = document.createElement("details");
@@ -576,6 +723,7 @@
     renderMedia("[data-showcase-media]", product.showcase_image, product.showcase_alt, "ph--showcase", "img");
     renderNotes();
     renderPanels();
+    renderSizeGuide();
 
     var artPanel = document.querySelector("[data-art-options]");
     var apparelPanel = document.querySelector("[data-apparel-options]");

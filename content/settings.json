@@ -12,5 +12,10 @@
   "hero_image": "",
   "logo_footer_alt": "Forty Nine Unbeaten",
   "hero_link": "art.html",
-  "hero_text": "Forty Nine Unbeaten"
+  "hero_text": "Forty Nine Unbeaten",
+  "favicon": "/images/favicon.svg",
+  "apple_icon": "/images/apple-touch-icon.png",
+  "share_image": "/images/og-cover.png",
+  "site_name": "Forty Nine Unbeaten",
+  "site_url": "https://49unbeaten.com"
 }

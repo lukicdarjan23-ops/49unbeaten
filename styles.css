@@ -584,28 +584,53 @@ img.ph--product {
   gap: 12px;
 }
 
+/* The chip is the whole cell, with a hairline so a white or sand shirt
+   still has an edge against the page. Selection is marked twice over —
+   a ring drawn clear of the chip, and a tick in the colour that reads
+   against it — because a single subtle cue is what made the old version
+   impossible to read at a glance. */
 .swatch {
+  position: relative;
   display: grid;
   place-items: center;
   width: clamp(38px, 2.6vw, 50px);
   height: clamp(38px, 2.6vw, 50px);
   flex: none;
-  border: 1px solid var(--rule);
+  border: 1px solid rgba(0, 0, 0, 0.22);
   background: var(--paper);
   transition: box-shadow 0.15s ease;
 }
 
 .swatch__dot {
-  width: 100%;
-  height: 100%;
-  /* Inset so the cell's black border reads as the frame, not the colour
-     itself — pale shirt colours would otherwise have no visible edge. */
-  transform: scale(0.78);
+  position: absolute;
+  inset: 0;
 }
 
-.swatch--selected,
-.swatch:hover {
-  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink);
+.swatch__check {
+  position: relative;
+  width: 56%;
+  height: 56%;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+/* outline rather than box-shadow: it sits outside the border and takes no
+   space, so the row doesn't shift when the choice changes. */
+.swatch--selected {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.swatch--selected .swatch__check {
+  opacity: 1;
+  transform: none;
+}
+
+/* Deliberately unlike the selected ring — a soft grey halo, so hovering
+   never looks like choosing. */
+.swatch:hover:not(.swatch--selected) {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
 /* Info lines — the ⓘ mark is a background image so the note text can
@@ -730,7 +755,45 @@ img.ph--product {
   max-width: 60ch;
 }
 
-/* Size guide table inside a panel */
+/* Ruler link that opens the measurements panel */
+.guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(16px, 1.4vw, 24px);
+  font-size: clamp(12px, 0.73vw, 14px);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: opacity 0.15s ease;
+}
+
+.guide-link:hover { opacity: 0.6; }
+
+.guide-link__icon {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+.guide__intro {
+  margin: 0 0 clamp(16px, 1.4vw, 22px);
+  font-size: clamp(12px, 0.73vw, 14px);
+  line-height: 1.6;
+}
+
+.guide__caption {
+  margin: 0 0 10px;
+  font-size: clamp(13px, 0.83vw, 15px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.drawer--guide .drawer__body {
+  padding: clamp(18px, 1.6vw, 26px) var(--card-pad-x);
+  overflow-y: auto;
+}
+
+/* Size guide table */
 .sizes-table {
   width: 100%;
   border-collapse: collapse;
@@ -810,7 +873,26 @@ img.ph--showcase {
   max-width: 60ch;
 }
 
-/* The ways out of the 404 page */
+/* Ways onward from the 404 and the order confirmation */
+.page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px clamp(18px, 1.8vw, 30px);
+  margin-top: clamp(28px, 3vw, 48px);
+  padding-top: clamp(18px, 1.8vw, 28px);
+  border-top: 1px solid var(--rule);
+  font-size: clamp(13px, 0.83vw, 15px);
+}
+
+.page__ref {
+  margin: 14px 0 0;
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.page__ref::before { content: "Order reference: "; }
+
 .page__link {
   border-bottom: 1px solid var(--rule);
   transition: opacity 0.15s ease;

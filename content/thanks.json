@@ -1,0 +1,23 @@
+{
+  "title": "Thank you",
+  "intro": "Your order is in. A confirmation is on its way to the email address you gave at checkout — check the spam folder if it hasn't arrived within a few minutes.",
+  "sections": [
+    {
+      "heading": "What happens next",
+      "body": "Everything is printed once you order it. Yours goes into production within [2–5] business days.\n\nAs soon as it leaves the printer you get a second email with a tracking number."
+    },
+    {
+      "heading": "Delivery",
+      "body": "Once dispatched, expect [3–7] business days within the region and [7–20] worldwide. The Shipping & Returns page has the full breakdown."
+    },
+    {
+      "heading": "Something wrong?",
+      "body": "Wrong size, wrong address, or you'd like to change something — write to [hello@49unbeaten.com] as soon as you can, quoting your order number. Once a piece is in production we can no longer change it."
+    }
+  ],
+  "links": [
+    { "label": "Keep looking around", "href": "all.html" },
+    { "label": "Shipping & Returns", "href": "shipping.html" },
+    { "label": "Contact us", "href": "contact.html" }
+  ]
+}

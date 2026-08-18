@@ -15,6 +15,30 @@ collections:
         label: "Opšte"
         file: "content/settings.json"
         fields:
+          - label: "Ikonica u tabu (favicon)"
+            name: "favicon"
+            widget: "image"
+            required: false
+            hint: "Mala sličica u kartici pregledača. Kvadratna, najmanje 240x240. SVG ili PNG. Postavljena je verzija napravljena od tvog pečata."
+          - label: "Ikonica za prečicu na telefonu"
+            name: "apple_icon"
+            widget: "image"
+            required: false
+            hint: "Kvadratna PNG, 180x180. Koristi se kad neko doda sajt na početni ekran telefona."
+          - label: "Slika kad se deli link"
+            name: "share_image"
+            widget: "image"
+            required: false
+            hint: "Slika koja izlazi kad okačiš link na Instagram, WhatsApp ili Facebook. Obavezno 1200x630 piksela. Menja se tek posle objave — sačekaj minut-dva."
+          - label: "Ime sajta pri deljenju"
+            name: "site_name"
+            widget: "string"
+            required: false
+          - label: "Adresa sajta"
+            name: "site_url"
+            widget: "string"
+            required: false
+            hint: "NE DIRAJ osim ako promeniš domen. Bez kose crte na kraju."
           - label: "Logo u zaglavlju"
             name: "logo_header"
             widget: "image"
@@ -175,9 +199,27 @@ collections:
                 widget: "object"
                 required: false
                 collapsed: true
-                hint: "Otvara se kao sekcija na strani proizvoda, iznad ostalih. Ostavi listu praznu da se tabela uopšte ne pojavi."
+                hint: "Ispod izbora veličine pojavi se link sa ikonicom lenjira; klikom se sa desne strane otvori tabla sa tabelom. Ostavi listu Redovi praznu i link se uopšte ne pojavljuje."
                 fields:
-                  - { label: "Naslov sekcije", name: "title", widget: "string", required: false, default: "Size guide" }
+                  - { label: "Tekst linka (pored lenjira)", name: "link_text", widget: "string", required: false, default: "Size guide" }
+                  - { label: "Naslov table koja se otvara", name: "title", widget: "string", required: false, default: "Size Guide" }
+                  - label: "Uvodni tekst u tabli"
+                    name: "intro"
+                    widget: "text"
+                    required: false
+                    hint: "Kratak pasus iznad tabele. Ostavi prazno ako ne treba."
+                  - { label: "Naslov iznad same tabele", name: "table_title", widget: "string", required: false }
+                  - label: "Nazivi kolona"
+                    name: "columns"
+                    widget: "object"
+                    required: false
+                    collapsed: true
+                    hint: "Samo ako hoćeš drugačije nazive od podrazumevanih."
+                    fields:
+                      - { label: "Prva kolona", name: "col_size", widget: "string", required: false, default: "Size" }
+                      - { label: "Druga kolona", name: "col_chest", widget: "string", required: false, default: "Chest" }
+                      - { label: "Treća kolona", name: "col_length", widget: "string", required: false, default: "Length" }
+                      - { label: "Četvrta kolona", name: "col_sleeve", widget: "string", required: false, default: "Sleeve" }
                   - label: "Napomena ispod tabele"
                     name: "note"
                     widget: "string"
@@ -189,11 +231,12 @@ collections:
                     required: false
                     summary: "{{fields.label}}"
                     label_singular: "Red"
+                    hint: "Kolonu koju nigde ne popuniš tabela neće ni prikazati."
                     fields:
                       - { label: "Veličina", name: "label", widget: "string" }
-                      - { label: "Grudi", name: "chest", widget: "string", required: false }
-                      - { label: "Dužina", name: "length", widget: "string", required: false }
-                      - { label: "Rukav", name: "sleeve", widget: "string", required: false }
+                      - { label: "Druga kolona", name: "chest", widget: "string", required: false }
+                      - { label: "Treća kolona", name: "length", widget: "string", required: false }
+                      - { label: "Četvrta kolona", name: "sleeve", widget: "string", required: false }
               - label: "Napomene ispod dugmeta"
                 name: "notes"
                 widget: "list"
@@ -240,6 +283,41 @@ collections:
             required: false
             hint: "Krupan natpis na sredini slike. Ostavi prazno da se ne prikazuje ništa."
           - { label: "Gde vodi slika", name: "hero_link", widget: "string", required: false }
+
+  - name: "system"
+    label: "Posebne strane"
+    files:
+      - name: "thanks"
+        label: "Hvala na porudžbini"
+        file: "content/thanks.json"
+        fields: &linked_page_fields
+          - { label: "Naslov", name: "title", widget: "string" }
+          - { label: "Uvodni tekst", name: "intro", widget: "text", required: false }
+          - label: "Sekcije"
+            name: "sections"
+            widget: "list"
+            required: false
+            summary: "{{fields.heading}}"
+            hint: "Prazan red razdvaja pasuse."
+            fields:
+              - { label: "Naslov sekcije", name: "heading", widget: "string" }
+              - { label: "Tekst", name: "body", widget: "text" }
+          - label: "Linkovi na dnu"
+            name: "links"
+            widget: "list"
+            required: false
+            summary: "{{fields.label}}"
+            label_singular: "Link"
+            fields:
+              - { label: "Tekst", name: "label", widget: "string" }
+              - label: "Adresa"
+                name: "href"
+                widget: "string"
+                hint: "Npr: index.html, all.html, contact.html, shipping.html"
+      - name: "notfound"
+        label: "Strana 404 (stranica ne postoji)"
+        file: "content/notfound.json"
+        fields: *linked_page_fields
 
   - name: "contact"
     label: "Strana Kontakt"

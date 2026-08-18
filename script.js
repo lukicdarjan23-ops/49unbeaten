@@ -121,6 +121,14 @@
     emit();
   }
 
+  /* Emptied wholesale once an order is paid for. */
+  function clearLines() {
+    lines = {};
+    save();
+    paintCart(false);
+    emit();
+  }
+
   function removeLine(key) {
     if (!lines[key]) return;
     delete lines[key];
@@ -160,6 +168,7 @@
       items: items,
       setQty: setQty,
       remove: removeLine,
+      clear: clearLines,
       totals: totals,
       paint: paintCart,
       onChange: onChange

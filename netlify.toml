@@ -1,5 +1,9 @@
 [build]
   publish = "."
+  # Bakes the CMS's favicon and share image into the HTML. Has to happen
+  # here rather than in the browser: social scrapers read the raw file and
+  # never run JavaScript. Runs on every publish, including from the CMS.
+  command = "node tools/apply-settings.js"
 
 # Anything that isn't a real file falls through to the branded 404 page
 # rather than Netlify's own.
