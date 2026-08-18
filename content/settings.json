@@ -2,6 +2,7 @@
   "logo_header": "/images/uploads/49-logo-black.svg",
   "whatsapp_url": "https://wa.me/",
   "instagram_url": "https://instagram.com",
+  "site_name": "Forty Nine Unbeaten",
   "top_sellers_title": "Featured items",
   "hero_alt": "Featured artwork",
   "view_all_text": "View All Products",
@@ -9,13 +10,12 @@
   "sales_notice": "All sales final. No returns. Refund only in the event item not delivered or delivered damaged.",
   "logo_footer": "/images/uploads/49-logo-white.svg",
   "view_all_link": "/products/",
-  "hero_image": "",
-  "logo_footer_alt": "Forty Nine Unbeaten",
-  "hero_link": "/art/",
   "hero_text": "Forty Nine Unbeaten",
-  "favicon": "/images/favicon.svg",
-  "apple_icon": "/images/apple-touch-icon.png",
+  "favicon": "/images/uploads/favicon.png",
+  "hero_image": "",
+  "site_url": "https://49unbeaten.com",
+  "logo_footer_alt": "Forty Nine Unbeaten",
   "share_image": "/images/og-cover.png",
-  "site_name": "Forty Nine Unbeaten",
-  "site_url": "https://49unbeaten.com"
+  "apple_icon": "/images/apple-touch-icon.png",
+  "hero_link": "/art/"
 }
