@@ -366,7 +366,11 @@ img.ph--card {
      column's min-content width, so an open size picker would widen its
      own column and squeeze the card beside it. */
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* The two edges no card draws for itself. Together with the right and
+     bottom rule on every card, each cell is closed on all four sides —
+     including the one that ends a part-full row. */
   border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
 }
 
 .card {
@@ -376,10 +380,6 @@ img.ph--card {
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
-
-/* No rail on the last column. Every card keeps its bottom rule — the
-   grid has none of its own, so a part-full last row still gets a line. */
-.grid > .card:nth-child(4n) { border-right: 0; }
 
 .card__media { display: block; }
 
@@ -1206,8 +1206,6 @@ body.has-drawer { overflow: hidden; }
 
 @media (max-width: 1000px) {
   .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
-  .grid > .card:nth-child(3n) { border-right: 0; }
 
   .footer__inner {
     grid-template-columns: repeat(3, 1fr);
@@ -1275,9 +1273,6 @@ body.has-drawer { overflow: hidden; }
   .cart__meta { font-size: 12px; }
 
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid > .card:nth-child(3n),
-  .grid > .card:nth-child(4n) { border-right: 1px solid var(--rule); }
-  .grid > .card:nth-child(2n) { border-right: 0; }
 }
 
 @media (max-width: 480px) {
@@ -1301,10 +1296,3 @@ body.has-drawer { overflow: hidden; }
     transition-duration: 0.001ms !important;
   }
 }
-
-/* A last row that doesn't fill leaves a rail hanging in empty space to
-   the right of the final card. Last in source order so it wins over the
-   per-breakpoint rules above, whatever the column count.
-   ========================================================================== */
-
-.grid > .card:last-child { border-right: 0; }
