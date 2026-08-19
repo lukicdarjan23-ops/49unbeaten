@@ -336,10 +336,15 @@
     if (!source.hero_image) {
       /* The grey box says "img" to show a picture belongs here — but not
          underneath a caption, where the two words sit on top of each
-         other. */
+         other. With a caption over it the box is darkened instead, since
+         white type is invisible on the pale grey. Nothing is laid over a
+         real photograph. */
       slot.textContent = source.hero_text ? "" : "img";
+      scope.classList.toggle("hero--placeholder", !!source.hero_text);
       return;
     }
+
+    scope.classList.remove("hero--placeholder");
 
     var img = document.createElement("img");
     img.className = className;

@@ -338,11 +338,15 @@ img.ph--card {
   line-height: 1.0625;
   font-weight: 500;
   letter-spacing: -0.02em;
-  /* Enough of a scrim to hold white type over a pale photograph, with the
-     shadow doing the rest on a busy one. */
-  background: rgba(0, 0, 0, 0.32);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 30px rgba(0, 0, 0, 0.45);
+  /* Nothing is laid over the picture — no tint, no shadow. Contrast for the
+     words is the photograph's job, handled in the image itself. */
 }
+
+/* The exception is the grey stand-in shown before a picture is uploaded:
+   white type on it would be unreadable, so it is darkened while it is the
+   only thing there. Set from renderHero, and gone the moment a real image
+   takes its place. */
+.hero--placeholder .ph { background: #6e6e6e; }
 
 /* Section head
    ========================================================================== */
