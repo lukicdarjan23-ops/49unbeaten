@@ -280,8 +280,14 @@ function main() {
   const productUrls = buildProductPages(template, products, site);
   const pruned = pruneProductPages(productUrls);
 
-  const pages = STANDING.map((p) => p.file)
-    .concat(productUrls.map((u) => "products" + u.slice("/products".length) + "index.html"));
+  /* The standing pages are committed files. Stamping the CMS's icons into
+     them is a deploy-time act, so it only happens on Netlify — a local run
+     would otherwise leave the working tree dirty with output that must
+     never be committed. Generated product pages are always stamped; they
+     are gitignored, so there is nothing to dirty. */
+  const onNetlify = !!process.env.NETLIFY;
+  const generated = productUrls.map((u) => "products" + u.slice("/products".length) + "index.html");
+  const pages = onNetlify ? STANDING.map((p) => p.file).concat(generated) : generated;
 
   let touched = 0;
   pages.forEach((file) => {
@@ -304,7 +310,8 @@ function main() {
     "build:",
     "  product pages  " + productUrls.length + (pruned.length ? "  (removed " + pruned.join(", ") + ")" : ""),
     "  sitemap urls   " + urls,
-    "  icons/share    " + touched + " page(s) rewritten",
+    "  icons/share    " + touched + " page(s) rewritten" +
+      (onNetlify ? "" : "  (local run — committed pages left alone)"),
     "  favicon        " + site.favicon,
     "  share image    " + site.share
   ].join("\n"));
