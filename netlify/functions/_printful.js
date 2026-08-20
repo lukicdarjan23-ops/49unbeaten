@@ -92,27 +92,38 @@ async function storeProducts() {
   return detailed;
 }
 
-/* What Printful charges you for one catalogue variant. Cached per call so a
-   product with five sizes of the same garment doesn't ask five times. */
-function costLookup() {
-  const seen = new Map();
+/* What Printful charges you for one catalogue variant, and what the
+   catalogue calls the thing it belongs to — a poster, a canvas, a t-shirt.
+   Both arrive in the same response, so this asks once for the pair.
 
-  return async function cost(catalogVariantId) {
-    if (!catalogVariantId) return null;
+   Cached per call: a product with five sizes of the same garment would
+   otherwise ask five times for the same answer. */
+function catalogLookup() {
+  const seen = new Map();
+  const EMPTY = { cost: null, type: "", product: "" };
+
+  return async function lookup(catalogVariantId) {
+    if (!catalogVariantId) return EMPTY;
     if (seen.has(catalogVariantId)) return seen.get(catalogVariantId);
 
-    let price = null;
+    let info = EMPTY;
     try {
-      const info = await call("/products/variant/" + catalogVariantId);
-      const raw = info && info.variant && info.variant.price;
-      price = raw == null ? null : Number(raw);
+      const raw = await call("/products/variant/" + catalogVariantId);
+      const variant = (raw && raw.variant) || {};
+      const product = (raw && raw.product) || {};
+      info = {
+        cost: variant.price == null ? null : Number(variant.price),
+        /* Printful's own classification — POSTER, CANVAS, T-SHIRT. */
+        type: String(product.type || product.type_name || "").trim(),
+        product: String(product.model || product.name || "").trim()
+      };
     } catch (err) {
-      /* A missing cost should not sink the whole listing. */
-      price = null;
+      /* One missing lookup should not sink the whole listing. */
+      info = EMPTY;
     }
 
-    seen.set(catalogVariantId, price);
-    return price;
+    seen.set(catalogVariantId, info);
+    return info;
   };
 }
 
@@ -155,4 +166,4 @@ function fromName(name, wanted) {
   return wanted === "size" ? parts[0] : "";
 }
 
-module.exports = { call, storeProducts, costLookup, readOption, PrintfulError };
+module.exports = { call, storeProducts, catalogLookup, readOption, PrintfulError };

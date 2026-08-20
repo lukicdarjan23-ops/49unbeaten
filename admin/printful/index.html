@@ -109,9 +109,19 @@
     head.appendChild(titles);
     panel.appendChild(head);
 
+    /* A picture is sold by material and dimension; a garment by colour and
+       size. Same two columns either way, named and ordered for whichever
+       this product is. */
+    var apparel = product.layout === "apparel";
+    var pair = apparel
+      ? [{ head: "Boja", read: function (v) { return v.color; } },
+         { head: "Veličina", read: function (v) { return v.size; } }]
+      : [{ head: "Tip", read: function (v) { return v.kind; } },
+         { head: "Dimenzija", read: function (v) { return v.size; } }];
+
     var table = el("table");
     var thead = el("tr");
-    ["Naziv varijante", "Veličina", "Boja", "Košta tebe", "Cena u Printfulu", "ID varijante", "Dostupno"]
+    ["Naziv varijante", pair[0].head, pair[1].head, "Košta tebe", "Cena u Printfulu", "ID varijante", "Dostupno"]
       .forEach(function (label) { thead.appendChild(el("th", null, label)); });
     table.appendChild(thead);
 
@@ -120,8 +130,8 @@
       /* Printful's own name for the variant, always shown — it is the one
          field that is never empty, whatever kind of product this is. */
       tr.appendChild(el("td", "vname", v.name || "—"));
-      tr.appendChild(el("td", null, v.size || "—"));
-      tr.appendChild(el("td", null, v.color || "—"));
+      tr.appendChild(el("td", null, pair[0].read(v) || "—"));
+      tr.appendChild(el("td", null, pair[1].read(v) || "—"));
       tr.appendChild(el("td", "num", money(v.cost, v.currency)));
       tr.appendChild(el("td", "num", money(v.retail, v.currency)));
       tr.appendChild(el("td", "num id", String(v.variant_id)));
