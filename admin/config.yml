@@ -141,28 +141,37 @@ collections:
                 name: "ship_note"
                 widget: "string"
                 required: false
-              - label: "Slike po materijalu (Print / Canvas)"
+              - label: "Slike po tipu (Canvas / Poster)"
                 name: "media"
                 widget: "list"
                 summary: "{{fields.group}}"
-                hint: "Jedna slika po materijalu — dele je sve veličine tog materijala. Naziv grupe mora da se poklopi sa Grupom kod opcija ispod."
+                hint: "Jedna slika po tipu — dele je sve veličine tog tipa. Kad kupac prebaci sa Canvas na Poster, slika se menja. Naziv grupe mora da se poklopi sa poljem Tip kod kombinacija ispod, ili sa Grupom kod boja za majice."
                 fields:
                   - { label: "Grupa", name: "group", widget: "string" }
                   - { label: "Slika", name: "image", widget: "image", required: false }
                   - { label: "Opis slike", name: "alt", widget: "string", required: false }
-              - label: "Veličine i cene — SAMO za Art"
+              - label: "Tip i veličine — SAMO za Art"
                 name: "variants"
                 widget: "list"
-                summary: "{{fields.label}} — {{fields.price}}"
-                hint: "Svaka opcija ima svoju cenu. Kvačicu Podrazumevano stavi na SAMO JEDNU opciju — na njoj se strana otvara i njena cena se vidi na kartici."
+                summary: "{{fields.type}} {{fields.size}} — {{fields.price}}"
+                label_singular: "Kombinacija"
+                hint: "Jedan red za svaku kombinaciju tipa i veličine. Npr. Canvas 16x20, Canvas 24x36, Poster 16x20… Na strani proizvoda kupac prvo bira tip pa onda veličinu, a nude mu se samo one veličine koje taj tip stvarno ima. Kvačicu Podrazumevano stavi na SAMO JEDAN red — na njemu se strana otvara i njegova cena se vidi na kartici."
                 fields:
-                  - { label: "Naziv opcije", name: "label", widget: "string" }
+                  - label: "Tip"
+                    name: "type"
+                    widget: "select"
+                    options: ["Canvas", "Poster"]
+                    default: "Canvas"
+                    hint: "Mora se poklapati sa Grupom u \"Slike po tipu\" iznad, da bi se slika menjala sa izborom tipa."
+                  - label: "Veličina"
+                    name: "size"
+                    widget: "string"
+                    hint: "Samo dimenzija, bez tipa. Npr: 16x20"
                   - label: "Cena (USD)"
                     name: "price"
                     widget: "number"
                     value_type: "float"
                     min: 0
-                  - { label: "Grupa", name: "group", widget: "string" }
                   - { label: "Napomena", name: "note", widget: "string", required: false }
                   - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
               - label: "Veličine majica — SAMO za Apparel"

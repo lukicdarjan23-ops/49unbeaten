@@ -18,14 +18,14 @@
     /* One image per material, shared by every size of that material. A
        variant points at one of these by its group name. */
     media: [
-      { group: "Print", image: "", alt: "" },
-      { group: "Canvas", image: "", alt: "" }
+      { group: "Canvas", image: "", alt: "" },
+      { group: "Poster", image: "", alt: "" }
     ],
     variants: [
-      { label: "Print 8x10", price: 49, group: "Print", note: "Printed on thick matte paper. Frame not included." },
-      { label: "Print 16x20", price: 89, group: "Print", note: "Printed on thick matte paper. Frame not included." },
-      { label: "Canvas 8x10", price: 89, group: "Canvas", note: "Stretched over a wood frame, ready to hang, no framing needed.", selected: true },
-      { label: "Canvas 16x20", price: 149, group: "Canvas", note: "Stretched over a wood frame, ready to hang, no framing needed." }
+      { type: "Canvas", size: "8x10", price: 89, note: "Stretched over a wood frame, ready to hang, no framing needed.", selected: true },
+      { type: "Canvas", size: "16x20", price: 149, note: "Stretched over a wood frame, ready to hang, no framing needed." },
+      { type: "Poster", size: "8x10", price: 49, note: "Printed on thick matte paper. Frame not included." },
+      { type: "Poster", size: "16x20", price: 89, note: "Printed on thick matte paper. Frame not included." }
     ],
     notes: [
       "Ships in 2 business days",
@@ -40,8 +40,16 @@
   };
 
   var product = DEFAULTS;
+
+  /* Art is a matrix: every entry in variants[] is one material in one size.
+     The page shows it as two choices — material first, then the sizes that
+     material comes in — so these are derived from that one list rather
+     than kept as a second copy of it. */
   var variants = [];
-  var selected = 0;
+  var artTypes = [];
+  var artSizes = [];
+  var selectedType = 0;
+  var selectedArtSize = 0;
 
   /* Apparel products pick a size and a colour separately rather than
      one flat list of variants. Which layout a product uses follows its
@@ -64,6 +72,35 @@
     var match = /\/products\/([^\/]+)\/?$/.exec(window.location.pathname);
     if (match) return decodeURIComponent(match[1]);
     return new URLSearchParams(window.location.search).get("p");
+  }
+
+  /* One row of the art matrix: a material in a size, at a price.
+
+     Entries written before the page split the choice in two carry a single
+     "Canvas 16x20" label and a separate group instead, so those are read
+     apart here rather than needing every existing product re-entered. */
+  function readArtRow(raw) {
+    var row = raw || {};
+    var type = String(row.type || row.group || "").trim();
+    var size = String(row.size || "").trim();
+
+    if (!size && row.label) {
+      var label = String(row.label).trim();
+      /* "Canvas 16x20" — the material is the part the group already named,
+         so what is left is the size. */
+      size = type && label.toLowerCase().indexOf(type.toLowerCase()) === 0
+        ? label.slice(type.length).trim()
+        : label;
+    }
+    if (!type && row.label) type = String(row.label).trim().split(/\s+/)[0];
+
+    return {
+      type: type,
+      size: size,
+      price: Number(row.price) || 0,
+      note: row.note || "",
+      selected: !!row.selected
+    };
   }
 
   /* ------------------------------------------------------------------
@@ -123,24 +160,34 @@
     return match || product.media[0] || { image: "", alt: "", group: "" };
   }
 
-  function renderVariants() {
-    var wrap = document.querySelector("[data-variants]");
+  /* One button per option, with radio semantics: one of the set is always
+     chosen, and only the chosen one stays in the tab order. */
+  function renderChoices(hook, attr, labels) {
+    var wrap = document.querySelector(hook);
     if (!wrap) return;
 
     wrap.textContent = "";
-    variants.forEach(function (variant, index) {
+    labels.forEach(function (label, index) {
       var btn = document.createElement("button");
-      btn.className = "variant";
+      btn.className = "variant variant--size";
       btn.type = "button";
-      btn.textContent = variant.label;
-      btn.dataset.variant = String(index);
-      /* Radio semantics: one of the set is always chosen, and only the
-         selected one stays in the tab order. */
+      btn.textContent = label;
+      btn.setAttribute(attr, String(index));
       btn.setAttribute("role", "radio");
       btn.setAttribute("aria-checked", "false");
       btn.tabIndex = -1;
       wrap.appendChild(btn);
     });
+  }
+
+  function renderArtTypes() {
+    renderChoices("[data-art-types]", "data-art-type", artTypes);
+  }
+
+  function renderArtSizes() {
+    renderChoices("[data-art-sizes]", "data-art-size", artSizes.map(function (row) {
+      return row.size;
+    }));
   }
 
   function renderSizes() {
@@ -460,35 +507,64 @@
      Selection
      ------------------------------------------------------------------ */
 
-  function select(index) {
-    if (index < 0 || index >= variants.length) return;
-    selected = index;
-
-    var variant = variants[selected];
-
-    document.querySelectorAll("[data-variant]").forEach(function (btn) {
-      var on = Number(btn.dataset.variant) === selected;
-      btn.classList.toggle("variant--selected", on);
+  function paintChoice(attr, className, index) {
+    document.querySelectorAll("[" + attr + "]").forEach(function (btn) {
+      var on = Number(btn.getAttribute(attr)) === index;
+      btn.classList.toggle(className, on);
       btn.setAttribute("aria-checked", String(on));
       btn.tabIndex = on ? 0 : -1;
     });
+  }
 
-    var price = document.querySelector("[data-product-price]");
-    if (price) price.textContent = money.format(variant.price);
+  /* Choosing a material swaps the picture and rebuilds the size row, since
+     a canvas and a poster need not come in the same sizes. The size already
+     chosen is kept if the new material also offers it. */
+  function selectType(index) {
+    if (index < 0 || index >= artTypes.length) return;
 
-    var note = document.querySelector("[data-variant-note]");
-    if (note) {
-      note.textContent = variant.note || "";
-      note.hidden = !variant.note;
+    var wanted = artSizes[selectedArtSize] && artSizes[selectedArtSize].size;
+    selectedType = index;
+    paintChoice("data-art-type", "variant--selected", selectedType);
+
+    var type = artTypes[selectedType];
+    artSizes = variants.filter(function (row) { return row.type === type; });
+    renderArtSizes();
+
+    var keep = 0;
+    artSizes.forEach(function (row, i) {
+      if (row.size === wanted) keep = i;
+    });
+    /* Nothing carried over, so fall back to whichever row the shop marked
+       as the one to open on. */
+    if (!wanted || !artSizes.some(function (row) { return row.size === wanted; })) {
+      artSizes.forEach(function (row, i) { if (row.selected) keep = i; });
     }
+    selectArtSize(keep);
 
-    var media = mediaFor(variant);
+    var media = mediaFor({ group: type });
     renderMedia(
       "[data-product-media]", media.image, media.alt, "ph--product",
       /* Name the group while the real photo is still a placeholder, so
          the swap is visible before any image is uploaded. */
       media.group ? media.group.toLowerCase() + " img" : "img"
     );
+  }
+
+  function selectArtSize(index) {
+    if (index < 0 || index >= artSizes.length) return;
+    selectedArtSize = index;
+    paintChoice("data-art-size", "variant--selected", selectedArtSize);
+
+    var row = artSizes[selectedArtSize];
+
+    var price = document.querySelector("[data-product-price]");
+    if (price) price.textContent = money.format(row.price);
+
+    var note = document.querySelector("[data-variant-note]");
+    if (note) {
+      note.textContent = row.note || "";
+      note.hidden = !row.note;
+    }
   }
 
   function selectSize(index) {
@@ -548,33 +624,8 @@
      Wiring
      ------------------------------------------------------------------ */
 
-  function initVariants() {
-    var wrap = document.querySelector("[data-variants]");
-    if (!wrap) return;
-
-    wrap.addEventListener("click", function (event) {
-      var btn = event.target.closest("[data-variant]");
-      if (!btn) return;
-      select(Number(btn.dataset.variant));
-    });
-
-    /* Arrow keys move between options, as a radio group should. */
-    wrap.addEventListener("keydown", function (event) {
-      var keys = ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"];
-      if (keys.indexOf(event.key) === -1) return;
-      event.preventDefault();
-
-      var step = (event.key === "ArrowRight" || event.key === "ArrowDown") ? 1 : -1;
-      var next = (selected + step + variants.length) % variants.length;
-      select(next);
-
-      var btn = wrap.querySelector('[data-variant="' + next + '"]');
-      if (btn) btn.focus();
-    });
-  }
-
-  /* Same radio-group behaviour as the art variants: click to choose,
-     arrow keys to move, only the chosen one in the tab order. */
+  /* Click to choose, arrow keys to move, only the chosen one in the tab
+     order. Every option row on the page uses it. */
   function initGroup(hook, attr, choose, count) {
     var wrap = document.querySelector(hook);
     if (!wrap) return;
@@ -635,12 +686,12 @@
           variant: size.label + " / " + color.label
         };
       } else {
-        var variant = variants[selected];
-        if (!variant) return;
+        var row = artSizes[selectedArtSize];
+        if (!row) return;
         line = {
-          key: base + "::" + slug(variant.label),
-          price: variant.price,
-          variant: variant.label
+          key: base + "::" + slug(row.type) + "::" + slug(row.size),
+          price: row.price,
+          variant: row.type + " " + row.size
         };
       }
 
@@ -650,7 +701,9 @@
         qty: qty,
         title: product.title,
         variant: line.variant,
-        image: mediaFor(isApparel ? colors[selectedColor] : variants[selected]).image
+        image: mediaFor(isApparel
+          ? colors[selectedColor]
+          : { group: artTypes[selectedType] }).image
       });
 
       var status = document.querySelector("[data-cart-status]");
@@ -701,24 +754,28 @@
       .filter(function (color) { return color.label; });
 
     variants = (Array.isArray(product.variants) ? product.variants : [])
-      .map(function (variant) {
-        return {
-          label: String(variant.label || "").trim(),
-          price: Number(variant.price) || 0,
-          group: variant.group || "",
-          note: variant.note || "",
-          selected: !!variant.selected
-        };
-      })
-      .filter(function (variant) { return variant.label; });
+      .map(readArtRow)
+      .filter(function (row) { return row.type && row.size; });
 
-    if (!variants.length && !isApparel) variants = DEFAULTS.variants.slice();
+    if (!variants.length && !isApparel) variants = DEFAULTS.variants.map(readArtRow);
+
+    /* The material choices, in the order the shop listed them. */
+    artTypes = [];
+    variants.forEach(function (row) {
+      if (artTypes.indexOf(row.type) === -1) artTypes.push(row.type);
+    });
     /* An apparel product with no sizes or colours entered yet would have
        nothing to buy, so fall back to the art layout rather than showing
        an empty panel. */
     if (isApparel && (!sizes.length || !colors.length)) {
       isApparel = false;
-      if (!variants.length) variants = DEFAULTS.variants.slice();
+      if (!variants.length) {
+        variants = DEFAULTS.variants.map(readArtRow);
+        artTypes = [];
+        variants.forEach(function (row) {
+          if (artTypes.indexOf(row.type) === -1) artTypes.push(row.type);
+        });
+      }
     }
 
     var title = document.querySelector("[data-product-title]");
@@ -761,15 +818,21 @@
       selectSize(preferredIndex(sizes));
       selectColor(preferredIndex(colors));
     } else {
-      renderVariants();
-      select(preferredIndex(variants));
+      renderArtTypes();
+      /* Opens on the material carrying the shop's default row. */
+      var openOn = 0;
+      variants.forEach(function (row) {
+        if (row.selected) openOn = Math.max(0, artTypes.indexOf(row.type));
+      });
+      selectType(openOn);
     }
   }
 
   function init() {
-    if (!document.querySelector("[data-variants]")) return;
+    if (!document.querySelector("[data-art-types]")) return;
 
-    initVariants();
+    initGroup("[data-art-types]", "data-art-type", selectType, function () { return artTypes.length; });
+    initGroup("[data-art-sizes]", "data-art-size", selectArtSize, function () { return artSizes.length; });
     initGroup("[data-sizes]", "data-size", selectSize, function () { return sizes.length; });
     initGroup("[data-colors]", "data-color", selectColor, function () { return colors.length; });
     initQuantity();

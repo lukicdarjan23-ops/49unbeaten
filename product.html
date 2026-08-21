@@ -95,10 +95,14 @@
         <p class="product__price" data-product-price>$89.00</p>
         <p class="product__ship" data-product-ship>Ships worldwide</p>
 
-        <!-- Art products: one flat list of size + material combinations. -->
+        <!-- Art products: material first, then the sizes that material
+             comes in. The picture follows the material. -->
         <div data-art-options>
-          <h2 class="product__label" id="variant-label">Size and Type</h2>
-          <div class="variants" role="radiogroup" aria-labelledby="variant-label" data-variants></div>
+          <h2 class="product__label" id="type-label">Type</h2>
+          <div class="sizes-row" role="radiogroup" aria-labelledby="type-label" data-art-types></div>
+
+          <h2 class="product__label" id="variant-label">Size</h2>
+          <div class="sizes-row" role="radiogroup" aria-labelledby="variant-label" data-art-sizes></div>
           <p class="note" data-variant-note hidden></p>
           <button class="guide-link" type="button" data-guide-open hidden>
             <svg class="guide-link__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">

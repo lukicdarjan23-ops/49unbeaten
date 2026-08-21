@@ -7,12 +7,12 @@
       ],
       "media": [
         {
-          "group": "Print",
+          "group": "Canvas",
           "image": "",
           "alt": ""
         },
         {
-          "group": "Canvas",
+          "group": "Poster",
           "image": "",
           "alt": ""
         }
@@ -23,31 +23,31 @@
       "featured": true,
       "variants": [
         {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
+          "type": "Canvas",
+          "size": "8x10",
           "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
-          "label": "Canvas 16x20",
+          "type": "Canvas",
+          "size": "16x20",
           "price": 149,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "8x10",
+          "price": 49,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "16x20",
+          "price": 89,
+          "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
       ],
@@ -77,12 +77,12 @@
       ],
       "media": [
         {
-          "group": "Print",
+          "group": "Canvas",
           "image": "",
           "alt": ""
         },
         {
-          "group": "Canvas",
+          "group": "Poster",
           "image": "",
           "alt": ""
         }
@@ -93,31 +93,31 @@
       "featured": true,
       "variants": [
         {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
+          "type": "Canvas",
+          "size": "8x10",
           "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
-          "label": "Canvas 16x20",
+          "type": "Canvas",
+          "size": "16x20",
           "price": 149,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "8x10",
+          "price": 49,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "16x20",
+          "price": 89,
+          "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
       ],
@@ -147,12 +147,12 @@
       ],
       "media": [
         {
-          "group": "Print",
+          "group": "Canvas",
           "image": "",
           "alt": ""
         },
         {
-          "group": "Canvas",
+          "group": "Poster",
           "image": "",
           "alt": ""
         }
@@ -163,31 +163,31 @@
       "featured": true,
       "variants": [
         {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
+          "type": "Canvas",
+          "size": "8x10",
           "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
-          "label": "Canvas 16x20",
+          "type": "Canvas",
+          "size": "16x20",
           "price": 149,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "8x10",
+          "price": 49,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "16x20",
+          "price": 89,
+          "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
       ],
@@ -217,12 +217,12 @@
       ],
       "media": [
         {
-          "group": "Print",
+          "group": "Canvas",
           "image": "",
           "alt": ""
         },
         {
-          "group": "Canvas",
+          "group": "Poster",
           "image": "",
           "alt": ""
         }
@@ -233,31 +233,31 @@
       "featured": true,
       "variants": [
         {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
+          "type": "Canvas",
+          "size": "8x10",
           "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
-          "label": "Canvas 16x20",
+          "type": "Canvas",
+          "size": "16x20",
           "price": 149,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "8x10",
+          "price": 49,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "16x20",
+          "price": 89,
+          "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
       ],
@@ -287,12 +287,12 @@
       ],
       "media": [
         {
-          "group": "Print",
+          "group": "Canvas",
           "image": "",
           "alt": ""
         },
         {
-          "group": "Canvas",
+          "group": "Poster",
           "image": "",
           "alt": ""
         }
@@ -303,31 +303,31 @@
       "featured": false,
       "variants": [
         {
-          "label": "Print 8x10",
-          "price": 49,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Print 16x20",
+          "type": "Canvas",
+          "size": "8x10",
           "price": 89,
-          "group": "Print",
-          "note": "Printed on thick matte paper. Frame not included.",
-          "selected": false
-        },
-        {
-          "label": "Canvas 8x10",
-          "price": 89,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
-          "label": "Canvas 16x20",
+          "type": "Canvas",
+          "size": "16x20",
           "price": 149,
-          "group": "Canvas",
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "8x10",
+          "price": 49,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "16x20",
+          "price": 89,
+          "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
       ],
