@@ -24,29 +24,43 @@
       "variants": [
         {
           "type": "Canvas",
-          "size": "8x10",
-          "price": 89,
+          "size": "50x70",
+          "price": 199,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
           "type": "Canvas",
-          "size": "16x20",
+          "size": "40x50",
           "price": 149,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": false
         },
         {
+          "type": "Canvas",
+          "size": "30x40",
+          "price": 109,
+          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
           "type": "Poster",
-          "size": "8x10",
-          "price": 49,
+          "size": "A2",
+          "price": 89,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         },
         {
           "type": "Poster",
-          "size": "16x20",
-          "price": 89,
+          "size": "A3",
+          "price": 63,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "A4",
+          "price": 49,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
@@ -94,29 +108,43 @@
       "variants": [
         {
           "type": "Canvas",
-          "size": "8x10",
-          "price": 89,
+          "size": "50x70",
+          "price": 199,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
           "type": "Canvas",
-          "size": "16x20",
+          "size": "40x50",
           "price": 149,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": false
         },
         {
+          "type": "Canvas",
+          "size": "30x40",
+          "price": 109,
+          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
           "type": "Poster",
-          "size": "8x10",
-          "price": 49,
+          "size": "A2",
+          "price": 89,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         },
         {
           "type": "Poster",
-          "size": "16x20",
-          "price": 89,
+          "size": "A3",
+          "price": 63,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "A4",
+          "price": 49,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
@@ -164,29 +192,43 @@
       "variants": [
         {
           "type": "Canvas",
-          "size": "8x10",
-          "price": 89,
+          "size": "50x70",
+          "price": 199,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
           "type": "Canvas",
-          "size": "16x20",
+          "size": "40x50",
           "price": 149,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": false
         },
         {
+          "type": "Canvas",
+          "size": "30x40",
+          "price": 109,
+          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
           "type": "Poster",
-          "size": "8x10",
-          "price": 49,
+          "size": "A2",
+          "price": 89,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         },
         {
           "type": "Poster",
-          "size": "16x20",
-          "price": 89,
+          "size": "A3",
+          "price": 63,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "A4",
+          "price": 49,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
@@ -234,29 +276,43 @@
       "variants": [
         {
           "type": "Canvas",
-          "size": "8x10",
-          "price": 89,
+          "size": "50x70",
+          "price": 199,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
           "type": "Canvas",
-          "size": "16x20",
+          "size": "40x50",
           "price": 149,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": false
         },
         {
+          "type": "Canvas",
+          "size": "30x40",
+          "price": 109,
+          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
           "type": "Poster",
-          "size": "8x10",
-          "price": 49,
+          "size": "A2",
+          "price": 89,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         },
         {
           "type": "Poster",
-          "size": "16x20",
-          "price": 89,
+          "size": "A3",
+          "price": 63,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "A4",
+          "price": 49,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }
@@ -304,29 +360,43 @@
       "variants": [
         {
           "type": "Canvas",
-          "size": "8x10",
-          "price": 89,
+          "size": "50x70",
+          "price": 199,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": true
         },
         {
           "type": "Canvas",
-          "size": "16x20",
+          "size": "40x50",
           "price": 149,
           "note": "Stretched over a wood frame, ready to hang, no framing needed.",
           "selected": false
         },
         {
+          "type": "Canvas",
+          "size": "30x40",
+          "price": 109,
+          "note": "Stretched over a wood frame, ready to hang, no framing needed.",
+          "selected": false
+        },
+        {
           "type": "Poster",
-          "size": "8x10",
-          "price": 49,
+          "size": "A2",
+          "price": 89,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         },
         {
           "type": "Poster",
-          "size": "16x20",
-          "price": 89,
+          "size": "A3",
+          "price": 63,
+          "note": "Printed on thick matte paper. Frame not included.",
+          "selected": false
+        },
+        {
+          "type": "Poster",
+          "size": "A4",
+          "price": 49,
           "note": "Printed on thick matte paper. Frame not included.",
           "selected": false
         }

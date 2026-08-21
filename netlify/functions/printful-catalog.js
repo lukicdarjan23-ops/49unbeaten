@@ -15,9 +15,9 @@ const { storeProducts, catalogLookup, readOption, PrintfulError } = require("./_
 /* Printful's raw classification is shouted — POSTER, CANVAS, T_SHIRT.
    Turn it into the wording the shop actually uses on the site. */
 const TYPE_WORDS = {
-  POSTER: "Print",
+  POSTER: "Poster",
   CANVAS: "Canvas",
-  FRAMED_POSTER: "Framed print",
+  FRAMED_POSTER: "Framed poster",
   "T-SHIRT": "T-shirt",
   T_SHIRT: "T-shirt"
 };
