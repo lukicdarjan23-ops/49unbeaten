@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom Order — Forty Nine Unbeaten</title>
+<meta name="description" content="Send a photograph and have it painted to order — on canvas or as a poster, in the size you choose.">
+<link rel="canonical" href="https://49unbeaten.com/custom/">
+
+<!-- What Instagram, WhatsApp and the rest show when the link is shared. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Forty Nine Unbeaten">
+<meta property="og:title" content="Custom Order — Forty Nine Unbeaten">
+<meta property="og:description" content="Send a photograph and have it painted to order — on canvas or as a poster, in the size you choose.">
+<meta property="og:url" content="https://49unbeaten.com/custom/">
+<meta property="og:image" content="https://49unbeaten.com/images/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script>
+  /* Marks the page as still waiting on content/settings.json. Text the CMS
+     fills is held invisible — space reserved, so nothing moves — until the
+     real value is in. Added from script rather than markup so the page is
+     readable with JavaScript switched off. */
+  document.documentElement.classList.add("cms-loading");
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="header__inner">
+
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
+      <a class="nav__custom" href="/custom/">Custom Order</a>
+    </nav>
+
+    <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
+      <img class="logo__img" data-logo-img src="/images/uploads/49-logo-black.svg" alt="Forty Nine Unbeaten">
+      <span class="logo__wordmark" data-logo-fallback hidden>
+        <span class="logo__mark" aria-hidden="true">49</span>
+        <span class="logo__type" aria-hidden="true">
+          <span>Forty Nine</span>
+          <span>Unbeaten</span>
+        </span>
+      </span>
+    </a>
+
+    <div class="header__right">
+
+      <a class="header__link header__link--custom" href="/custom/">Custom Order</a>
+
+      <button class="header__link header__search" type="button" data-search-open
+              aria-label="Search" aria-haspopup="dialog">
+        <svg class="header__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10.5" cy="10.5" r="6.6" fill="none" stroke="currentColor" stroke-width="1.9"/>
+          <path d="M15.4 15.4 20.5 20.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+        <span class="header__label">Search</span>
+      </button>
+
+      <a class="cart" href="/cart/">
+      <svg class="cart__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M2.2 3h2.3a1 1 0 0 1 1 .8L6 6m0 0 1.9 8.9a1.7 1.7 0 0 0 1.6 1.3h8.2a1.7 1.7 0 0 0 1.6-1.3L21 7.6a.7.7 0 0 0-.7-.9H6Z"
+              fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="10" cy="20" r="1.8"/>
+        <circle cx="17.6" cy="20" r="1.8"/>
+      </svg>
+      <span class="cart__meta">
+        <span data-cart-count>0</span> / <span data-cart-total>$0.00</span>
+      </span>
+        <span class="sr-only">items in cart</span>
+      </a>
+
+    </div>
+
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="custom">
+
+    <!-- 1. What this is. Nothing is asked for until it is clear what the
+         asking buys, so the promise and the timings come first. -->
+    <header class="custom__head">
+      <h1 class="custom__title" data-custom-title>Custom Order</h1>
+      <p class="custom__lede" data-custom-lede></p>
+      <ol class="steps" data-custom-steps></ol>
+      <p class="custom__timing" data-custom-timing></p>
+    </header>
+
+    <form class="custom__form" data-custom-form novalidate>
+
+      <!-- 2. The picture. Asked for first, while the reason they came is
+           still the thing on their mind. -->
+      <section class="field">
+        <h2 class="field__label" id="photo-label">Your photograph</h2>
+        <p class="field__help" data-custom-photo-help></p>
+
+        <label class="drop" for="custom-photo" data-drop>
+          <input class="sr-only" type="file" id="custom-photo" name="photo"
+                 accept="image/*" aria-labelledby="photo-label" data-photo-input>
+          <span class="drop__inner">
+            <span class="drop__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>
+              </svg>
+            </span>
+            <span class="drop__text" data-drop-text>Choose a photograph</span>
+            <span class="drop__hint">JPG or PNG, up to 25 MB. The bigger the better.</span>
+          </span>
+          <img class="drop__preview" data-photo-preview alt="" hidden>
+        </label>
+        <p class="field__error" data-error="photo" hidden></p>
+      </section>
+
+      <!-- 3. What it becomes, and what that costs. Same two-step choice as
+           a product page: material, then the sizes that material comes in. -->
+      <section class="field">
+        <h2 class="field__label" id="ctype-label">Type</h2>
+        <div class="sizes-row" role="radiogroup" aria-labelledby="ctype-label" data-custom-types></div>
+
+        <h2 class="field__label" id="csize-label">Size</h2>
+        <div class="sizes-row" role="radiogroup" aria-labelledby="csize-label" data-custom-sizes></div>
+        <p class="note" data-custom-note hidden></p>
+      </section>
+
+      <!-- 4. Exclusivity — a real decision, so it gets its own step rather
+           than a checkbox buried near the button. -->
+      <section class="field">
+        <h2 class="field__label" id="rights-label">Who else can have it</h2>
+        <div class="choices" role="radiogroup" aria-labelledby="rights-label" data-custom-rights></div>
+      </section>
+
+      <!-- 5. Anything else. Optional, and said to be. -->
+      <section class="field">
+        <label class="field__label" for="custom-message">
+          Anything we should know <span class="field__optional">optional</span>
+        </label>
+        <textarea class="input input--area" id="custom-message" name="message" rows="4"
+                  placeholder="Crop, colours, a date to hit — anything at all."></textarea>
+      </section>
+
+      <!-- 6. Delivery details last: the most tedious part, asked once the
+           piece is already configured and the price is known. -->
+      <section class="field">
+        <h2 class="field__label">Where it goes</h2>
+
+        <div class="grid-2">
+          <p class="input-wrap">
+            <label class="input__label" for="custom-name">Full name</label>
+            <input class="input" type="text" id="custom-name" name="name" autocomplete="name" required>
+            <span class="field__error" data-error="name" hidden></span>
+          </p>
+          <p class="input-wrap">
+            <label class="input__label" for="custom-email">Email</label>
+            <input class="input" type="email" id="custom-email" name="email" autocomplete="email" required>
+            <span class="field__error" data-error="email" hidden></span>
+          </p>
+        </div>
+
+        <p class="input-wrap">
+          <label class="input__label" for="custom-address">Street and number</label>
+          <input class="input" type="text" id="custom-address" name="address" autocomplete="address-line1" required>
+          <span class="field__error" data-error="address" hidden></span>
+        </p>
+
+        <p class="input-wrap">
+          <label class="input__label" for="custom-address2">
+            Flat, floor, company <span class="field__optional">optional</span>
+          </label>
+          <input class="input" type="text" id="custom-address2" name="address2" autocomplete="address-line2">
+        </p>
+
+        <div class="grid-3">
+          <p class="input-wrap">
+            <label class="input__label" for="custom-city">City</label>
+            <input class="input" type="text" id="custom-city" name="city" autocomplete="address-level2" required>
+            <span class="field__error" data-error="city" hidden></span>
+          </p>
+          <p class="input-wrap">
+            <label class="input__label" for="custom-zip">Postcode</label>
+            <input class="input" type="text" id="custom-zip" name="zip" autocomplete="postal-code" required>
+            <span class="field__error" data-error="zip" hidden></span>
+          </p>
+          <p class="input-wrap">
+            <label class="input__label" for="custom-country">Country</label>
+            <input class="input" type="text" id="custom-country" name="country" autocomplete="country-name" required>
+            <span class="field__error" data-error="country" hidden></span>
+          </p>
+        </div>
+
+        <p class="input-wrap">
+          <label class="input__label" for="custom-phone">
+            Phone <span class="field__optional">for the courier</span>
+          </label>
+          <input class="input" type="tel" id="custom-phone" name="phone" autocomplete="tel">
+        </p>
+      </section>
+
+      <!-- 7. The price in full, immediately above the button, so nothing
+           about the cost is a surprise after the click. -->
+      <section class="summary" data-custom-summary>
+        <div class="summary__row">
+          <span data-summary-what>Custom piece</span>
+          <span data-summary-price>—</span>
+        </div>
+        <div class="summary__row summary__row--muted">
+          <span data-summary-shipping-label>Shipping</span>
+          <span data-summary-shipping>—</span>
+        </div>
+        <div class="summary__row summary__row--total">
+          <span>Total</span>
+          <span data-summary-total>—</span>
+        </div>
+      </section>
+
+      <button class="btn-cart" type="submit" data-custom-submit>Pay and order</button>
+      <p class="custom__reassure" data-custom-reassure></p>
+      <p class="field__error field__error--form" data-form-error hidden></p>
+      <p class="sr-only" role="status" data-custom-status></p>
+
+    </form>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+
+    <div class="footer__brand">
+      <img class="seal seal--img" data-seal-img src="/images/uploads/49-logo-white.svg" alt="Forty Nine Unbeaten">
+      <svg class="seal" data-seal-fallback hidden viewBox="0 0 200 200" role="img" aria-label="Forty Nine Unbeaten">
+        <defs>
+          <path id="sealTop" d="M 22 100 A 78 78 0 0 1 178 100"/>
+          <path id="sealBottom" d="M 27 100 A 73 73 0 0 0 173 100"/>
+        </defs>
+        <text class="seal__text"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">FORTY NINE</textPath></text>
+        <text class="seal__text"><textPath href="#sealBottom" startOffset="50%" text-anchor="middle">UNBEATEN</textPath></text>
+        <circle class="seal__dot" cx="19" cy="100" r="3.6"/>
+        <circle class="seal__dot" cx="181" cy="100" r="3.6"/>
+        <text class="seal__num" x="100" y="103" text-anchor="middle" dominant-baseline="central">49</text>
+      </svg>
+    </div>
+
+    <nav class="footer__col" aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/contact/">Contact</a>
+      <div class="social">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-social="instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/>
+            <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
+            <circle cx="17.4" cy="6.7" r="1.3"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-social="whatsapp">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 3a9 9 0 0 0-7.7 13.7L3.1 21l4.4-1.2A9 9 0 1 0 12 3Z"
+                  fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+            <path d="M9.1 7.9c.3 0 .5.1.6.4l.7 1.5c.1.3 0 .5-.1.7l-.5.5c-.2.2-.2.4-.1.6a6.9 6.9 0 0 0 2.9 2.9c.2.1.4.1.6-.1l.5-.6c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6 0 1-.8 1.7-1.7 1.7-3.6 0-7.3-3.7-7.3-7.3 0-1 .8-1.7 1.8-1.7Z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <nav class="footer__col" aria-label="Shop">
+      <a href="/art/" data-nav="art">Art</a>
+      <a href="/apparel/" data-nav="apparel">Apparel</a>
+      <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Legal">
+      <a href="/shipping/">Shipping &amp; Returns</a>
+      <a href="/terms/">Terms &amp; Conditions</a>
+      <a href="/privacy/">Privacy Policy</a>
+    </nav>
+
+  </div>
+
+  <div class="footer__bar">
+    <p data-sales-notice data-cms-fill>All sales final. No returns. Refund only in the event item not delivered or delivered damaged.</p>
+  </div>
+</footer>
+
+<script src="/script.js"></script>
+<script src="/cart.js"></script>
+<script src="/search.js"></script>
+<script src="/custom.js"></script>
+</body>
+</html>

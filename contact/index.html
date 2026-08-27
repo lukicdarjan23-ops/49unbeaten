@@ -48,6 +48,7 @@
       <a href="/art/" data-nav="art">Art</a>
       <a href="/apparel/" data-nav="apparel">Apparel</a>
       <a href="/gifts/" data-nav="gifts" hidden>Gifts</a>
+      <a class="nav__custom" href="/custom/">Custom Order</a>
     </nav>
 
     <a class="logo" href="/" aria-label="Forty Nine Unbeaten — home">
@@ -61,7 +62,20 @@
       </span>
     </a>
 
-    <a class="cart" href="/cart/">
+    <div class="header__right">
+
+      <a class="header__link header__link--custom" href="/custom/">Custom Order</a>
+
+      <button class="header__link header__search" type="button" data-search-open
+              aria-label="Search" aria-haspopup="dialog">
+        <svg class="header__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10.5" cy="10.5" r="6.6" fill="none" stroke="currentColor" stroke-width="1.9"/>
+          <path d="M15.4 15.4 20.5 20.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+        <span class="header__label">Search</span>
+      </button>
+
+      <a class="cart" href="/cart/">
       <svg class="cart__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M2.2 3h2.3a1 1 0 0 1 1 .8L6 6m0 0 1.9 8.9a1.7 1.7 0 0 0 1.6 1.3h8.2a1.7 1.7 0 0 0 1.6-1.3L21 7.6a.7.7 0 0 0-.7-.9H6Z"
               fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -71,8 +85,10 @@
       <span class="cart__meta">
         <span data-cart-count>0</span> / <span data-cart-total>$0.00</span>
       </span>
-      <span class="sr-only">items in cart</span>
-    </a>
+        <span class="sr-only">items in cart</span>
+      </a>
+
+    </div>
 
   </div>
 </header>
@@ -145,6 +161,7 @@
 
 <script src="/script.js"></script>
 <script src="/cart.js"></script>
+<script src="/search.js"></script>
 <script src="/page.js"></script>
 </body>
 </html>

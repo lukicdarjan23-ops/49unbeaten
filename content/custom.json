@@ -1,0 +1,36 @@
+{
+  "title": "Custom Order",
+  "lede": "Send a photograph and get it back as a painting — on canvas or as a poster, in the size you choose.",
+  "steps": [
+    "Upload your photograph.",
+    "Choose canvas or poster, and the size.",
+    "Pay, and it goes into production."
+  ],
+  "timing": "Painting takes [7–14] days. Delivery is [3–7] business days in the region and [7–20] worldwide, tracked. You get a photograph of the finished piece before it ships.",
+  "photo_help": "The sharper the photograph, the better the painting. Faces should be clearly lit and in focus.",
+  "rights": [
+    {
+      "label": "One of one",
+      "note": "Painted for you and nobody else. Never listed in the shop.",
+      "surcharge": 0,
+      "selected": true
+    },
+    {
+      "label": "May be listed in the shop",
+      "note": "We may offer prints of it later. You still get the original piece.",
+      "surcharge": -20
+    }
+  ],
+  "variants": [
+    { "type": "Canvas", "size": "50x70", "price": 399, "note": "Stretched over a wood frame, ready to hang.", "selected": true },
+    { "type": "Canvas", "size": "40x50", "price": 329, "note": "Stretched over a wood frame, ready to hang." },
+    { "type": "Canvas", "size": "30x40", "price": 269, "note": "Stretched over a wood frame, ready to hang." },
+    { "type": "Poster", "size": "A2", "price": 199, "note": "Printed on thick matte paper. Frame not included." },
+    { "type": "Poster", "size": "A3", "price": 159, "note": "Printed on thick matte paper. Frame not included." },
+    { "type": "Poster", "size": "A4", "price": 129, "note": "Printed on thick matte paper. Frame not included." }
+  ],
+  "shipping_label": "Shipping",
+  "shipping_text": "Included",
+  "submit": "Pay and order",
+  "reassure": "Payment is taken before painting begins. If the photograph turns out to be unusable, you are refunded in full."
+}

@@ -63,6 +63,7 @@ const STANDING = [
   { file: "art/index.html", url: "/art/", priority: "0.8", freq: "weekly" },
   { file: "apparel/index.html", url: "/apparel/", priority: "0.8", freq: "weekly" },
   { file: "gifts/index.html", url: "/gifts/", priority: "0.8", freq: "weekly" },
+  { file: "custom/index.html", url: "/custom/", priority: "0.9", freq: "monthly" },
   { file: "contact/index.html", url: "/contact/", priority: "0.5", freq: "yearly" },
   { file: "shipping/index.html", url: "/shipping/", priority: "0.5", freq: "yearly" },
   { file: "terms/index.html", url: "/terms/", priority: "0.3", freq: "yearly" },

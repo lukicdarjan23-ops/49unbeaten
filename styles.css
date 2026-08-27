@@ -221,6 +221,10 @@ img.ph--card {
 
 .nav a:hover { border-bottom-color: var(--ink); }
 
+/* Custom Order sits in the header on wide screens and inside the burger
+   menu on narrow ones, so each version hides where the other shows. */
+.nav__custom { display: none; }
+
 /* Centred wordmark */
 .logo {
   position: absolute;
@@ -263,6 +267,33 @@ img.ph--card {
   line-height: 1.06;
   letter-spacing: -0.01em;
   text-transform: uppercase;
+}
+
+/* Custom Order, Search and the cart, in that order, to the right. */
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.5vw, 28px);
+}
+
+.header__link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: clamp(13px, 0.8333vw, 16px);
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  padding: 4px 0;
+  transition: border-color 0.15s ease;
+}
+
+.header__link:hover { border-bottom-color: var(--ink); }
+
+.header__icon {
+  width: 17px;
+  height: 17px;
+  flex: none;
 }
 
 .cart {
@@ -393,6 +424,453 @@ img.ph--card {
   border-top: 1px solid var(--rule);
   font-size: 15px;
   color: var(--muted);
+}
+
+/* Promo band — a full-bleed picture with words over it
+   ========================================================================== */
+
+.promo {
+  position: relative;
+  height: 380px;
+  border-top: 1px solid var(--rule);
+  overflow: hidden;
+  color: var(--paper);
+}
+
+.promo__media,
+.promo__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Everything sits against the band's own edges: words bottom left, button
+   bottom right, both 48px in. */
+.promo__inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 2.5vw, 48px);
+}
+
+.promo__text { max-width: 46ch; }
+
+.promo__title {
+  margin: 0;
+  font-size: var(--fs-heading);
+  line-height: var(--lh-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.promo__body {
+  margin: 12px 0 0;
+  font-size: clamp(13px, 0.94vw, 18px);
+  line-height: 1.55;
+}
+
+.promo__btn {
+  flex: none;
+  padding: 14px clamp(20px, 1.6vw, 30px);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: clamp(13px, 0.8333vw, 16px);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.promo__btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Custom order page
+   ========================================================================== */
+
+.custom {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: clamp(28px, 3.4vw, 64px) var(--pad) clamp(48px, 5vw, 96px);
+}
+
+.custom__title {
+  margin: 0;
+  font-size: var(--fs-heading);
+  line-height: var(--lh-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.custom__lede {
+  margin: 14px 0 0;
+  font-size: clamp(14px, 0.94vw, 18px);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.steps {
+  margin: clamp(20px, 2vw, 30px) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 8px;
+}
+
+.steps__item {
+  counter-increment: step;
+  position: relative;
+  padding-left: 34px;
+  font-size: clamp(13px, 0.83vw, 16px);
+}
+
+.steps__item::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -1px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.custom__timing {
+  margin: clamp(18px, 1.8vw, 26px) 0 0;
+  padding: 14px 16px;
+  background: #f4f4f4;
+  font-size: clamp(12px, 0.78vw, 15px);
+  line-height: 1.55;
+}
+
+.custom__form { margin-top: clamp(28px, 3vw, 52px); }
+
+.field {
+  padding-top: clamp(22px, 2.2vw, 36px);
+  margin-top: clamp(22px, 2.2vw, 36px);
+  border-top: 1px solid var(--rule);
+}
+
+.field:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+
+.field__label {
+  display: block;
+  margin: 0 0 10px;
+  font-size: clamp(13px, 0.83vw, 16px);
+  font-weight: 500;
+}
+
+.field .field__label + .sizes-row,
+.field .field__label + .choices { margin-bottom: clamp(18px, 1.6vw, 24px); }
+
+.field__optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.field__help {
+  margin: -4px 0 14px;
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.field__error {
+  margin: 8px 0 0;
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: #b3261e;
+}
+
+.field__error--form {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid #b3261e;
+}
+
+/* Photograph */
+.drop {
+  position: relative;
+  display: block;
+  border: 1px dashed var(--rule);
+  padding: clamp(24px, 2.6vw, 42px) 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.drop:hover { background: #fafafa; }
+.drop:focus-within { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.drop__inner {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.drop__icon { width: 26px; height: 26px; }
+.drop__icon svg { width: 100%; height: 100%; }
+
+.drop__text {
+  font-size: clamp(13px, 0.83vw, 16px);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.drop__hint {
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+}
+
+.drop__preview {
+  max-height: 260px;
+  margin: 18px auto 0;
+  object-fit: contain;
+}
+
+/* Exclusivity */
+.choices {
+  display: grid;
+  gap: 12px;
+}
+
+.choice {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.choice__label {
+  font-size: clamp(13px, 0.83vw, 16px);
+  font-weight: 500;
+}
+
+.choice__note {
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+}
+
+.choice--selected {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.choice--selected .choice__note { color: #cfcfcf; }
+
+/* Text fields */
+.input-wrap { margin: 0 0 14px; }
+
+.input__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+}
+
+.input {
+  width: 100%;
+  font: inherit;
+  font-size: clamp(14px, 0.88vw, 16px);
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: inherit;
+}
+
+.input:focus { outline: 2px solid var(--ink); outline-offset: -1px; }
+.input[aria-invalid="true"] { border-color: #b3261e; }
+
+.input--area {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.grid-2,
+.grid-3 {
+  display: grid;
+  gap: 0 14px;
+}
+
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Price, immediately above the button */
+.summary {
+  margin-top: clamp(24px, 2.4vw, 40px);
+  padding: clamp(16px, 1.6vw, 24px);
+  border: 1px solid var(--rule);
+}
+
+.summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: clamp(13px, 0.83vw, 16px);
+  font-variant-numeric: tabular-nums;
+}
+
+.summary__row + .summary__row { margin-top: 8px; }
+.summary__row--muted { color: var(--muted); }
+
+.summary__row--total {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: clamp(15px, 1.0417vw, 20px);
+  font-weight: 500;
+}
+
+.custom__form .btn-cart { margin-top: clamp(16px, 1.6vw, 24px); }
+
+.custom__reassure {
+  margin: 12px 0 0;
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Search
+   ========================================================================== */
+
+.search {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+}
+
+.search__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.search.is-open .search__scrim { opacity: 1; }
+
+.search__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--paper);
+  padding: clamp(16px, 1.6vw, 26px) var(--edge) clamp(18px, 1.8vw, 30px);
+  transform: translateY(-14px);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.search.is-open .search__panel {
+  transform: none;
+  opacity: 1;
+}
+
+.search__field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 940px;
+  margin: 0 auto;
+  border: 1px solid var(--rule);
+  padding: 0 14px;
+}
+
+.search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  font: inherit;
+  font-size: clamp(15px, 1.0417vw, 20px);
+  padding: 16px 0;
+  background: none;
+  color: inherit;
+}
+
+.search__input::placeholder { color: var(--muted); }
+
+/* The panel has its own close control; the browser's built-in clear cross
+   would sit right beside it as a second, differently-styled ×. */
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+
+.search__close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.search__close:hover { color: var(--ink); }
+
+.search__results {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.search__results:not(:empty) { margin-top: clamp(14px, 1.4vw, 22px); }
+
+.search__hit {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.search__hit:hover { background: #fafafa; }
+
+.search__thumb {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  object-fit: cover;
+  background: var(--ph);
+}
+
+.search__name {
+  font-size: clamp(13px, 0.94vw, 17px);
+  font-weight: 500;
+}
+
+.search__meta {
+  font-size: clamp(12px, 0.73vw, 14px);
+  color: var(--muted);
+}
+
+.search__price {
+  margin-left: auto;
+  font-size: clamp(13px, 0.83vw, 16px);
+  font-variant-numeric: tabular-nums;
+}
+
+.search__empty {
+  max-width: 940px;
+  margin: clamp(14px, 1.4vw, 22px) auto 0;
+  color: var(--muted);
+  font-size: clamp(13px, 0.83vw, 16px);
 }
 
 /* Product grid — hairlines between cells, flush to the page edges
@@ -1390,6 +1868,13 @@ body.has-drawer { overflow: hidden; }
     justify-content: space-between;
   }
 
+  /* Room runs out fast on a phone: Custom Order moves into the burger menu
+     and Search keeps its icon without the word. */
+  .header__link--custom { display: none; }
+  .nav__custom { display: block; }
+  .header__search .header__label { display: none; }
+  .header__right { gap: 16px; }
+
   .nav {
     position: absolute;
     left: 0;
@@ -1435,12 +1920,35 @@ body.has-drawer { overflow: hidden; }
   .logo__mark { font-size: 23px; }
   .logo__type { font-size: 11px; }
 
-  /* The burger and the cart are fixed widths, so the room left for a
-     centred logo runs out faster than the screen narrows — on a 320px
-     phone the wordmark was printing over the cart icon. Cap it at what
-     actually fits between the two. */
-  .logo__img { max-width: calc(100vw - 236px); }
+  /* Centring the logo absolutely means it takes no notice of what is
+     beside it, and on a phone there is now a burger on one side and a
+     search icon plus the cart on the other. Below this width it becomes an
+     ordinary item in the row instead, centred in whatever space the two
+     leave — which is never none, so it can no longer print over anything. */
+  .logo {
+    position: static;
+    transform: none;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+  }
 
+  .logo__img { max-width: 100%; }
+
+
+  /* Words above, button below — side by side they would each be a column
+     of two words. */
+  .grid-2,
+  .grid-3 { grid-template-columns: minmax(0, 1fr); }
+
+  .promo__inner {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+  .promo__btn { align-self: flex-start; }
+  .promo { height: auto; min-height: 380px; }
 
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid > .card:nth-child(3n),

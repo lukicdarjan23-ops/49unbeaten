@@ -328,6 +328,101 @@ collections:
         file: "content/notfound.json"
         fields: *linked_page_fields
 
+  - name: "promo"
+    label: "Traka iznad futera"
+    files:
+      - name: "promo"
+        label: "Custom Order traka"
+        file: "content/promo.json"
+        fields:
+          - label: "Slika preko cele trake"
+            name: "image"
+            widget: "image"
+            required: false
+            hint: "Traka je visine 380px i slika je preko cele. Ostavi prazno za tamnu podlogu. Prikazuje se na naslovnoj i na strani Art."
+          - { label: "Opis slike", name: "alt", widget: "string", required: false }
+          - { label: "Naslov", name: "title", widget: "string" }
+          - { label: "Tekst ispod naslova", name: "body", widget: "text", required: false }
+          - { label: "Tekst na dugmetu", name: "button", widget: "string" }
+          - label: "Gde vodi dugme"
+            name: "button_link"
+            widget: "string"
+            hint: "Npr: /custom/"
+
+  - name: "custom"
+    label: "Strana Custom Order"
+    files:
+      - name: "custom"
+        label: "Custom Order"
+        file: "content/custom.json"
+        fields:
+          - { label: "Naslov strane", name: "title", widget: "string" }
+          - { label: "Uvodna rečenica", name: "lede", widget: "text", required: false }
+          - label: "Koraci (1, 2, 3)"
+            name: "steps"
+            widget: "list"
+            required: false
+            field: { label: "Korak", name: "step", widget: "string" }
+            hint: "Kratko, po jedna rečenica. Stoje odmah ispod uvoda."
+          - label: "Rokovi izrade i isporuke"
+            name: "timing"
+            widget: "text"
+            required: false
+            hint: "Sivo polje na vrhu forme. Ovde ide koliko traje izrada i koliko slanje."
+          - label: "Objašnjenje uz sliku"
+            name: "photo_help"
+            widget: "text"
+            required: false
+            hint: "Savet kupcu kakva fotografija treba."
+          - label: "Izbor ekskluzivnosti"
+            name: "rights"
+            widget: "list"
+            summary: "{{fields.label}}"
+            label_singular: "Opcija"
+            hint: "Kupac bira da li je rad samo njegov ili sme da se pojavi u ponudi. Doplata može biti i minus (popust) ako pristane da se pojavi."
+            fields:
+              - { label: "Naziv opcije", name: "label", widget: "string" }
+              - { label: "Objašnjenje", name: "note", widget: "string", required: false }
+              - label: "Doplata (USD)"
+                name: "surcharge"
+                widget: "number"
+                value_type: "float"
+                default: 0
+                hint: "0 za bez promene. Negativan broj je popust, npr -20."
+              - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+          - label: "Tip, veličine i cene"
+            name: "variants"
+            widget: "list"
+            summary: "{{fields.type}} {{fields.size}} — {{fields.price}}"
+            label_singular: "Kombinacija"
+            hint: "Isto kao kod proizvoda: jedan red po kombinaciji. Kupac prvo bira tip pa veličinu. Kvačicu Podrazumevano stavi na SAMO JEDAN red."
+            fields:
+              - label: "Tip"
+                name: "type"
+                widget: "select"
+                options: ["Canvas", "Poster"]
+                default: "Canvas"
+              - { label: "Veličina", name: "size", widget: "string" }
+              - label: "Cena (USD)"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+                min: 0
+              - { label: "Napomena", name: "note", widget: "string", required: false }
+              - { label: "Podrazumevano", name: "selected", widget: "boolean", default: false, required: false }
+          - { label: "Naziv reda za poštarinu", name: "shipping_label", widget: "string", required: false }
+          - label: "Poštarina"
+            name: "shipping_text"
+            widget: "string"
+            required: false
+            hint: "Npr: Included, ili konkretan iznos."
+          - { label: "Tekst na dugmetu", name: "submit", widget: "string" }
+          - label: "Tekst ispod dugmeta"
+            name: "reassure"
+            widget: "text"
+            required: false
+            hint: "Umiruje kupca pred plaćanje — šta se dešava sa novcem i šta ako nešto pođe naopako."
+
   - name: "contact"
     label: "Strana Kontakt"
     files:
