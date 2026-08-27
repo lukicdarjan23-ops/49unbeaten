@@ -761,6 +761,8 @@ img.ph--card {
 
 .search.is-open .search__scrim { opacity: 1; }
 
+/* No surface of its own — the field and the results float on the dimmed
+   page, and everything between them shows the site through. */
 .search__panel {
   position: absolute;
   top: 0;
@@ -768,7 +770,6 @@ img.ph--card {
   right: 0;
   max-height: 100%;
   overflow-y: auto;
-  background: var(--paper);
   padding: clamp(16px, 1.6vw, 26px) var(--edge) clamp(18px, 1.8vw, 30px);
   transform: translateY(-14px);
   opacity: 0;
@@ -788,6 +789,9 @@ img.ph--card {
   margin: 0 auto;
   border: 1px solid var(--rule);
   padding: 0 14px;
+  /* The one thing that carries its own white, since the words typed into
+     it have to be readable. */
+  background: var(--paper);
 }
 
 .search__input {
@@ -830,7 +834,13 @@ img.ph--card {
   list-style: none;
 }
 
-.search__results:not(:empty) { margin-top: clamp(14px, 1.4vw, 22px); }
+/* Results are their own floating block under the field, not a white bar
+   running the width of the screen. */
+.search__results:not(:empty) {
+  margin-top: clamp(10px, 1vw, 14px);
+  padding: 4px clamp(12px, 1vw, 16px);
+  background: var(--paper);
+}
 
 .search__hit {
   display: flex;
@@ -840,7 +850,9 @@ img.ph--card {
   border-bottom: 1px solid #e6e6e6;
 }
 
-.search__hit:hover { background: #fafafa; }
+.search__hit:hover { background: #f2f2f2; }
+
+.search__results li:last-child .search__hit { border-bottom: 0; }
 
 .search__thumb {
   width: 52px;
@@ -868,7 +880,9 @@ img.ph--card {
 
 .search__empty {
   max-width: 940px;
-  margin: clamp(14px, 1.4vw, 22px) auto 0;
+  margin: clamp(10px, 1vw, 14px) auto 0;
+  padding: 14px clamp(12px, 1vw, 16px);
+  background: var(--paper);
   color: var(--muted);
   font-size: clamp(13px, 0.83vw, 16px);
 }
